@@ -1,0 +1,28 @@
+# MATLAB / Simulink / xPC Target build products
+*.dlm
+*.mldatx
+*.asv
+*.autosave
+*.mex*
+slprj/
+*_rtw/
+*_xpc_rtw/
+*_slrt_rtw/
+*.slxc
+codegen/
+
+# Kinarm data (keep raw data out of git; use a data share)
+data/
+*.c3d
+*.kinarm
+*.zip
+
+# Installers and licenses: never commit
+*.iso
+*.lic
+license.dat
+setup/windows/installer_input.local.txt
+
+# OS / editor
+.DS_Store
+Thumbs.db

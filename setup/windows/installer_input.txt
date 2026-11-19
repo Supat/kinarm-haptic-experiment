@@ -1,0 +1,30 @@
+## MATLAB R2013a silent install template for the Kinarm task build machine.
+## Copy to installer_input.local.txt (git-ignored), fill in the two values marked
+## REQUIRED, then run Install-MatlabR2013a.ps1.  Format follows the R2013a installer.
+
+destinationFolder=C:\Program Files\MATLAB\R2013a
+
+## REQUIRED: File Installation Key from the MathWorks License Center for R2013a.
+fileInstallationKey=
+
+agreeToLicense=yes
+outputFile=C:\MATLAB_R2013a_install.log
+mode=silent
+automatedModeTimeout=
+
+## REQUIRED: path to the license.lic generated in the License Center for THIS
+## machine's host ID (MAC address) and Windows user name. For a network licence,
+## point at the network.lic that names your licence server instead.
+licensePath=C:\kinarm-setup\license.lic
+
+## Leave the FlexNet service off for standalone licences.
+lmgrFiles=false
+lmgrService=false
+
+## Products required for Kinarm Dexterit-E 3.5 task development.
+product.MATLAB
+product.Simulink
+product.Stateflow
+product.MATLAB_Coder
+product.Simulink_Coder
+product.xPC_Target
