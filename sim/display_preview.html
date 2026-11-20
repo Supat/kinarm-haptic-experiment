@@ -84,14 +84,16 @@ hr{border:0;border-top:1px solid var(--line);margin:2px 0}
       <input type="range" id="sLs" min="10" max="30" step="1" value="20"></div>
     <div><label><b>Ball radius</b><span class="v" id="vRb">3.0 cm</span></label>
       <input type="range" id="sRb" min="2" max="4" step="0.5" value="3"></div>
-    <div><label><b>Ball mass</b><span class="v" id="vMb">0.20 kg</span></label>
-      <input type="range" id="sMb" min="0.05" max="0.5" step="0.05" value="0.2"></div>
+    <div><label><b>Ball mass</b><span class="v" id="vMb">varies per trial</span></label>
+      <input type="range" id="sMb" min="0.05" max="0.5" step="0.05" value="0.2" disabled></div>
+    <label class="check"><input type="checkbox" id="cVaryM" checked> vary mass per trial (0.10 / 0.20 / 0.30 / 0.40 kg)</label>
     <div><label><b>Contact stiffness k_c</b><span class="v" id="vKc">2000 N/m</span></label>
       <input type="range" id="sKc" min="1000" max="4000" step="250" value="2000"></div>
   </fieldset>
   <hr>
   <fieldset><legend>Impact (this trial)</legend>
     <div class="readouts">
+      <div class="ro"><div class="k">ball mass</div><div class="n" id="rM">—</div></div>
       <div class="ro"><div class="k">v impact</div><div class="n" id="rV">—</div></div>
       <div class="ro"><div class="k">peak force</div><div class="n" id="rF">—</div></div>
       <div class="ro"><div class="k">contact</div><div class="n" id="rT">—</div></div>
@@ -110,7 +112,8 @@ const L_FLAT=5, STRIP_W=3, R_HOME=1.5, R_CUR=0.5;             // cm, display geo
 const XL=[-20,20], YL=[-15,15];                               // workspace cm
 const DT=0.001;                                               // 1 kHz physics
 
-const P={orient:'lateral', theta:25, Ls:20, rb:3, mb:0.2, kc:2000, paddle:false, hz60:true};
+const P={orient:'lateral', theta:25, Ls:20, rb:3, mb:0.2, kc:2000, varyMass:true, paddle:false, hz60:true};
+const MASS_LEVELS=[0.10,0.20,0.30,0.40];                      // per-trial mass set, like the protocol's TP rows
 
 function geom(){
   if(P.orient==='diagonal'){ const a=25*Math.PI/180;
@@ -121,7 +124,8 @@ function geom(){
 let st;
 function newTrial(){
   const g=geom();
-  st={g, phase:'WAIT_HOME', t:0, tPhase:0,
+  const mb=P.varyMass ? MASS_LEVELS[Math.floor(Math.random()*MASS_LEVELS.length)] : P.mb;
+  st={g, mb, phase:'WAIT_HOME', t:0, tPhase:0,
       holdDur:0.5+Math.random(),                               // HOLD 0.5–1.5 s
       s:L_FLAT+P.Ls,                                           // ball centre dist from home (cm)
       v:0,                                                     // m/s along travel (toward home)
@@ -130,6 +134,7 @@ function newTrial(){
       vImp:null, Fpk:0, tc0:null, tc1:null, xMax:0, F:0,
       ballVis:false, ringGreen:false, frame60s:null};
   ui.rV.textContent=ui.rF.textContent=ui.rT.textContent=ui.rX.textContent='—';
+  ui.rM.textContent=mb.toFixed(2)+' kg';
 }
 function stepPhysics(){
   const aSlope=(5/7)*G*Math.sin(P.theta*Math.PI/180);
@@ -156,7 +161,7 @@ function stepPhysics(){
       st.penPrev=Math.max(p,0);
       st.F=F;
       // integrate ball (v in m/s toward home; s in cm)
-      st.v += (a - F/P.mb)*DT;
+      st.v += (a - F/st.mb)*DT;
       st.s -= st.v*DT*100;
       // hand on arm impedance, displaced along -s (away from ball)
       const ah=(F - K_H*st.hx - B_H*st.hv)/M_H;
@@ -239,13 +244,16 @@ function loop(ts){
 
 // ---- UI ----
 const $=id=>document.getElementById(id);
-const ui={phname:$('phname'),phase2:$('phase2'),rV:$('rV'),rF:$('rF'),rT:$('rT'),rX:$('rX')};
+const ui={phname:$('phname'),phase2:$('phase2'),rM:$('rM'),rV:$('rV'),rF:$('rF'),rT:$('rT'),rX:$('rX')};
 function bind(slider,val,key,fmt){ $(slider).addEventListener('input',e=>{
   P[key]=+e.target.value; $(val).textContent=fmt(P[key]); }); }
 bind('sTheta','vTheta','theta',v=>v+'°');
 bind('sLs','vLs','Ls',v=>v+' cm');
 bind('sRb','vRb','rb',v=>v.toFixed(1)+' cm');
 bind('sMb','vMb','mb',v=>v.toFixed(2)+' kg');
+$('cVaryM').addEventListener('change',e=>{ P.varyMass=e.target.checked;
+  $('sMb').disabled=P.varyMass;
+  $('vMb').textContent=P.varyMass?'varies per trial':P.mb.toFixed(2)+' kg'; });
 bind('sKc','vKc','kc',v=>v+' N/m');
 $('cPaddle').addEventListener('change',e=>P.paddle=e.target.checked);
 $('c60').addEventListener('change',e=>P.hz60=e.target.checked);
