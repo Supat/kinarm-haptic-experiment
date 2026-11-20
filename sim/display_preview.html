@@ -128,7 +128,7 @@ function newTrial(){
       hx:0, hv:0,                                              // hand displacement (m, along travel)
       penPrev:0, inContact:false, contactEnded:false,
       vImp:null, Fpk:0, tc0:null, tc1:null, xMax:0, F:0,
-      ballVis:false, ringGreen:false, feedback:'', frame60s:null};
+      ballVis:false, ringGreen:false, frame60s:null};
   ui.rV.textContent=ui.rF.textContent=ui.rT.textContent=ui.rX.textContent='—';
 }
 function stepPhysics(){
@@ -163,7 +163,7 @@ function stepPhysics(){
       st.hv+=ah*DT; st.hx+=st.hv*DT; st.xMax=Math.max(st.xMax,st.hx);
       if(st.tc0!==null && st.tc1===null){ st.Fpk=Math.max(st.Fpk,F); }
       if(st.phase==='POST' && (st.v<0.02 && Math.abs(st.hv)<0.005 || st.tPhase>1.2)){
-        st.feedback='Good'; st.ballVis=false; nextPhase('FEEDBACK');
+        st.ballVis=false; nextPhase('FEEDBACK');
         ui.rV.textContent=st.vImp.toFixed(2)+' m/s';
         ui.rF.textContent=st.Fpk.toFixed(0)+' N';
         ui.rT.textContent=((st.tc1??st.t)-st.tc0>0? (((st.tc1??st.t)-st.tc0)*1000).toFixed(0):'—')+' ms';
@@ -171,7 +171,7 @@ function stepPhysics(){
       }
       if(st.phase==='ROLLING' && st.s < -(10)) nextPhase('FEEDBACK'); // safety: left workspace
       break; }
-    case 'FEEDBACK': if(st.tPhase>0.5){st.feedback=''; nextPhase('ITI');} break;
+    case 'FEEDBACK': if(st.tPhase>0.5){nextPhase('ITI');} break;
     case 'ITI': if(st.tPhase>0.8){newTrial();} break;
   }
 }
@@ -221,9 +221,6 @@ function draw(){
     circle(c[0],c[1],P.rb, flash?'#ffffff':'#ffcc33');
     circle(c[0]-P.rb*0.35, c[1]+P.rb*0.35, P.rb*0.28, flash?'#ffffff':'#fff2b3');
   }
-  if(st.feedback){ const [px,py]=toPx(g.home[0],g.home[1]+5);
-    cx.fillStyle='#fff'; cx.font=`${1.6*SX}px ${getComputedStyle(document.body).getPropertyValue('--sans')}`;
-    cx.textAlign='center'; cx.fillText(st.feedback,px,py); }
 }
 
 // ---- loop: fixed-step physics, rAF render ----
