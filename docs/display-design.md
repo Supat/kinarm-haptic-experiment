@@ -42,6 +42,18 @@ the visible area before the trial ends.
    +---------------------------------------+ -> x
 ```
 
+Orientation is undecided. The user's current leaning (2026-11-20) is a **lateral** slope
+running right to left across the front of the subject, so the ball strikes the hand on
+its side (`docs/mockups/display_storyboard_lateral.png`). The diagonal layout below is
+the alternative (`docs/mockups/display_storyboard.png`). Render either with
+`sim/mock_display.py --orientation lateral|diagonal`.
+
+Lateral notes: the impact is across the forearm, the arm's low-stiffness direction, so
+hand displacement is larger for the same ball; the right hand is struck on its outer
+side and the left hand on its inner side unless the direction is mirrored per hand;
+home sits ~8 cm left of centre so the 25 cm path fits; "downhill" is conveyed only by
+the strip's brightness gradient, since a horizontal strip has no implied tilt top-down.
+
 Rationale for a diagonal, not straight-at-the-body, approach: the impact force then has
 components the arm can absorb at the elbow and shoulder, and a diagonal keeps the ball's
 whole path inside the display. Mirror the direction across subjects or blocks if

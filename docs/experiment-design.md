@@ -147,3 +147,7 @@ response, EMG onset relative to CONTACT_START if EMG is recorded.
 3. Must the hand stay still until impact, or may the subject catch or dodge?
 4. Is EMG or eye tracking recorded? This affects the analog input table.
 5. Does the ball bounce back up the slope after impact (full physics) or stop?
+6. Which hand, and who decides: subject's choice, dominant hand assigned by the
+   experimenter, or both hands in counterbalanced blocks? The task will take a `hand`
+   parameter and mirrored Left/Right protocols either way; geometry mirrors across the
+   midline with the home position ~8 cm to the chosen side.

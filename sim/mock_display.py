@@ -3,6 +3,7 @@
 Output: docs/mockups/display_storyboard.png
 Run:    .venv/bin/python sim/mock_display.py
 """
+import argparse
 import math
 import os
 
@@ -13,8 +14,16 @@ from matplotlib.patches import Circle, Polygon
 
 # workspace (cm), origin at Kinarm centre, x right, y away from subject
 XLIM, YLIM = (-20, 20), (-15, 15)
-HOME = (0.0, -8.0)
-ANG = math.radians(25)                     # slope tilt from +y toward -x
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--orientation", choices=["diagonal", "lateral"], default="diagonal",
+                 help="diagonal: ball from upper-left toward the body; lateral: ball from the right, travelling left")
+ORIENT = _ap.parse_args().orientation
+if ORIENT == "diagonal":
+    HOME = (0.0, -8.0)
+    ANG = math.radians(25)                 # slope tilt from +y toward -x
+else:
+    HOME = (-8.0, -6.0)                    # hand left of centre so the 25 cm path fits to the right
+    ANG = math.radians(-90)                # slope runs along +x: ball starts at the right
 U = (-math.sin(ANG), math.cos(ANG))        # unit vector up the slope from home
 L_FLAT, L_SLOPE, STRIP_W = 5.0, 20.0, 3.0
 R_BALL, R_HOME, R_CURSOR = 2.5, 1.5, 0.5
@@ -75,8 +84,9 @@ ax = axes[1, 1]; draw_static(ax, "white"); ax.text(HOME[0], HOME[1] + 5, "Good",
 
 for ax, t in zip(axes.flat, titles):
     ax.set_title(t, color="#ddd", fontsize=10, loc="left", pad=6)
-fig.suptitle("Subject display mock (top-down view through the Kinarm mirror, 40 x 30 cm workspace, subject sits below the bottom edge)",
+fig.suptitle(f"Subject display mock, {ORIENT} slope (top-down view through the Kinarm mirror, 40 x 30 cm workspace, subject sits below the bottom edge)",
              color="#eee", fontsize=11)
-out = os.path.join(os.path.dirname(__file__), "..", "docs", "mockups", "display_storyboard.png")
+suffix = "" if ORIENT == "diagonal" else "_lateral"
+out = os.path.join(os.path.dirname(__file__), "..", "docs", "mockups", f"display_storyboard{suffix}.png")
 fig.savefig(out, dpi=140, facecolor=fig.get_facecolor())
 print("wrote", os.path.abspath(out))
