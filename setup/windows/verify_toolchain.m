@@ -11,19 +11,40 @@ if ~strcmp(v.Release, '(R2013a)'), warning('Expected R2013a. Dexterit-E 3.5 will
 if ~strcmp(computer('arch'), 'win64'), warning('Expected win64. Kinarm requires 64-bit R2013a on Windows.'); ok = false; end
 
 need = {'Simulink','Stateflow','MATLAB Coder','Simulink Coder','xPC Target'};
-have = {ver().Name};
+allvers = ver;
+have = {allvers.Name};
 for i = 1:numel(need)
     if any(strcmp(have, need{i})), fprintf('  [ok] %s\n', need{i});
     else fprintf('  [MISSING] %s\n', need{i}); ok = false; end
 end
 
 % Compiler: mex -setup must have selected Windows SDK 7.1.
+% (R2013a reports the name as just 'Microsoft SDK'; the release is in .Version.)
 try
     cc = mex.getCompilerConfigurations('C', 'Selected');
-    fprintf('C compiler: %s\n', cc.Name);
-    if isempty(strfind(cc.Name, 'SDK 7.1')), warning('Selected compiler is not Windows SDK 7.1. Run: mex -setup'); ok = false; end
+    fprintf('C compiler: %s %s\n', cc.Name, cc.Version);
+    if isempty(strfind(cc.Name, 'SDK')) || isempty(strfind(cc.Version, '7.1'))
+        warning('Selected compiler is not Windows SDK 7.1. Run: mex -setup'); ok = false;
+    end
 catch
     warning('No C compiler selected. Run: mex -setup'); ok = false;
+end
+
+% Prove the compiler actually works: build a sample MEX in a temp folder.
+try
+    tdir = fullfile(tempdir, 'mexsmoketest');
+    if ~exist(tdir, 'dir'), mkdir(tdir); end
+    copyfile(fullfile(matlabroot,'extern','examples','mex','yprime.c'), tdir);
+    olddir = cd(tdir);
+    mex('-largeArrayDims', 'yprime.c');
+    cd(olddir);
+    if exist(fullfile(tdir, ['yprime.' mexext]), 'file')
+        fprintf('  [ok] test MEX compile (yprime.c -> %s)\n', mexext);
+    else
+        warning('Test MEX compile produced no output.'); ok = false;
+    end
+catch e
+    warning('Test MEX compile failed: %s', e.message); ok = false;
 end
 
 if nargin >= 1

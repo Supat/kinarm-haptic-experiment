@@ -18,7 +18,9 @@ New-Item -ItemType Directory -Force -Path $WorkDir | Out-Null
 $sdkIso   = Join-Path $WorkDir 'GRMSDKX_EN_DVD.iso'
 $sdkUrl   = 'https://download.microsoft.com/download/F/1/0/F10113F5-B750-4969-A255-274341AC6BCE/GRMSDKX_EN_DVD.iso'
 $patchExe = Join-Path $WorkDir 'VC-Compiler-KB2519277.exe'
-$patchUrl = 'https://download.microsoft.com/download/7/5/0/75040801-126C-4591-BCE4-4D4C0A9A1D30/VC-Compiler-KB2519277.exe'
+# URL current as of 2026-11-19 (from https://www.microsoft.com/en-us/download/details.aspx?id=4422);
+# the exe is Authenticode-signed by Microsoft Corporation - verify with Get-AuthenticodeSignature.
+$patchUrl = 'https://download.microsoft.com/download/7/5/0/75040801-126c-4591-bce4-4cd1fd1499aa/VC-Compiler-KB2519277.exe'
 
 foreach ($pair in @(@($sdkIso,$sdkUrl), @($patchExe,$patchUrl))) {
     if (-not (Test-Path $pair[0])) {
@@ -43,7 +45,12 @@ $img = Mount-DiskImage -ImagePath $sdkIso -PassThru
 $drive = ($img | Get-Volume).DriveLetter + ':'
 try {
     Write-Host "SDK setup starting. In the feature list keep ONLY: Windows Headers and Libraries, Visual C++ Compilers."
-    Start-Process (Join-Path $drive 'setup.exe') -Wait
+    Write-Host "On Windows 10 the installer misreads .NET 4.5+ as 'pre-release .NET 4': OK past the warning, and if"
+    Write-Host "'Visual C++ Compilers' is greyed out, install WITHOUT it - the KB2519277 step below installs the compilers."
+    # setup.exe spawns a child installer and exits immediately, so -Wait returns too
+    # early and the KB2519277 step below would run before the SDK exists. Ask instead.
+    Start-Process (Join-Path $drive 'setup.exe')
+    Read-Host "When the SDK installer has finished and you clicked Finish, press Enter here to continue"
 } finally { Dismount-DiskImage -ImagePath $sdkIso | Out-Null }
 
 # 3. Apply the x64 compiler update.
