@@ -1,0 +1,265 @@
+<title>Kinarm Subject View</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: instrument panel left, true-scale subject screen right; stacks at phone width. */
+:root{
+  --bg:#f2f3f1; --fg:#20242a; --muted:#6a7076; --panel:#ffffff; --line:#d8dbd6;
+  --accent:#0f766e; --accent-soft:#0f766e22; --good:#1a7f37;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#16181c; --fg:#e8eae6; --muted:#9aa09a; --panel:#1f2227; --line:#32363c;
+  --accent:#2dd4bf; --accent-soft:#2dd4bf22; --good:#3ddc84; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#16181c; --fg:#e8eae6; --muted:#9aa09a; --panel:#1f2227; --line:#32363c;
+  --accent:#2dd4bf; --accent-soft:#2dd4bf22; --good:#3ddc84; color-scheme:dark;
+}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:20px;}
+h1{font-size:19px;margin:0 0 2px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 16px;max-width:70ch}
+.wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;max-width:1200px;margin:0 auto}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;
+  flex:0 1 300px;min-width:260px;display:flex;flex-direction:column;gap:12px}
+.screenbox{flex:1 1 560px;min-width:0}
+.screen-outer{background:#000;border-radius:6px;padding:2.2%;border:1px solid var(--line)}
+canvas{display:block;width:100%;height:auto;background:#000;border-radius:2px}
+.caption{color:var(--muted);font-size:12px;margin-top:8px;font-family:var(--mono)}
+label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;gap:8px}
+label b{font-weight:600}
+label .v{font-family:var(--mono);font-size:12px;color:var(--accent)}
+input[type=range]{width:100%;accent-color:var(--accent);margin:2px 0 0}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-size:13px;padding:6px 14px;border-radius:6px;border:1px solid var(--line);
+  background:var(--panel);color:var(--fg);cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] button.primary,button.primary{color:#06302c}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;border-radius:0;flex:1}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.check{display:flex;align-items:center;gap:8px;font-size:13px}
+.readouts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ro{border:1px solid var(--line);border-radius:6px;padding:7px 9px}
+.ro .k{font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.ro .n{font-family:var(--mono);font-size:16px;font-variant-numeric:tabular-nums}
+.phase{font-family:var(--mono);font-size:13px;color:var(--accent);min-height:1.2em}
+fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+legend{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:0;margin-bottom:2px}
+hr{border:0;border-top:1px solid var(--line);margin:2px 0}
+</style>
+
+<div class="wrap">
+<div class="screenbox">
+  <h1>Kinarm Subject View</h1>
+  <p class="sub">What the subject sees through the mirror: top-down, 40 × 30 cm workspace, subject seated below
+  the bottom edge. Physics and geometry follow <code>docs/experiment-design.md</code>; one full trial loops.</p>
+  <div class="screen-outer"><canvas id="cv" width="1200" height="900" aria-label="Animated subject display preview"></canvas></div>
+  <div class="caption" id="cap">1 px = real display scale · phase: <span id="phname">—</span></div>
+</div>
+
+<div class="panel">
+  <div class="phase" id="phase2">&nbsp;</div>
+  <div class="row">
+    <button class="primary" id="btnRestart">Restart trial</button>
+    <button id="btnPause" aria-pressed="false">Pause</button>
+  </div>
+  <hr>
+  <fieldset><legend>Layout</legend>
+    <div class="seg" role="group" aria-label="Slope orientation">
+      <button id="oLat" aria-pressed="true">Lateral</button>
+      <button id="oDia" aria-pressed="false">Diagonal</button>
+    </div>
+    <label class="check"><input type="checkbox" id="cPaddle"> show hand paddle ring (r = 2 cm)</label>
+    <label class="check"><input type="checkbox" id="c60" checked> simulate 60 Hz display sampling</label>
+  </fieldset>
+  <hr>
+  <fieldset><legend>Trial parameters</legend>
+    <div><label><b>Slope angle</b><span class="v" id="vTheta">25°</span></label>
+      <input type="range" id="sTheta" min="10" max="40" step="1" value="25"></div>
+    <div><label><b>Slope length</b><span class="v" id="vLs">20 cm</span></label>
+      <input type="range" id="sLs" min="10" max="30" step="1" value="20"></div>
+    <div><label><b>Ball radius</b><span class="v" id="vRb">3.0 cm</span></label>
+      <input type="range" id="sRb" min="2" max="4" step="0.5" value="3"></div>
+    <div><label><b>Ball mass</b><span class="v" id="vMb">0.20 kg</span></label>
+      <input type="range" id="sMb" min="0.05" max="0.5" step="0.05" value="0.2"></div>
+    <div><label><b>Contact stiffness k_c</b><span class="v" id="vKc">2000 N/m</span></label>
+      <input type="range" id="sKc" min="1000" max="4000" step="250" value="2000"></div>
+  </fieldset>
+  <hr>
+  <fieldset><legend>Impact (this trial)</legend>
+    <div class="readouts">
+      <div class="ro"><div class="k">v impact</div><div class="n" id="rV">—</div></div>
+      <div class="ro"><div class="k">peak force</div><div class="n" id="rF">—</div></div>
+      <div class="ro"><div class="k">contact</div><div class="n" id="rT">—</div></div>
+      <div class="ro"><div class="k">hand moved</div><div class="n" id="rX">—</div></div>
+    </div>
+  </fieldset>
+</div>
+</div>
+
+<script>
+'use strict';
+// ---- constants from docs/experiment-design.md & sim/ball_impact_sim.py ----
+const G=9.81, C_RR=0.02, B_C=10, F_MAX=45, R_H=2.0/100;      // SI where it matters
+const M_H=1.5, K_H=300, B_H=15;                               // arm impedance
+const L_FLAT=5, STRIP_W=3, R_HOME=1.5, R_CUR=0.5;             // cm, display geometry
+const XL=[-20,20], YL=[-15,15];                               // workspace cm
+const DT=0.001;                                               // 1 kHz physics
+
+const P={orient:'lateral', theta:25, Ls:20, rb:3, mb:0.2, kc:2000, paddle:false, hz60:true};
+
+function geom(){
+  if(P.orient==='diagonal'){ const a=25*Math.PI/180;
+    return {home:[0,-8], U:[-Math.sin(a),Math.cos(a)]}; }
+  return {home:[-8,-6], U:[1,0]};                              // lateral: ball comes from the right
+}
+// ---- trial state ----
+let st;
+function newTrial(){
+  const g=geom();
+  st={g, phase:'WAIT_HOME', t:0, tPhase:0,
+      holdDur:0.5+Math.random(),                               // HOLD 0.5–1.5 s
+      s:L_FLAT+P.Ls,                                           // ball centre dist from home (cm)
+      v:0,                                                     // m/s along travel (toward home)
+      hx:0, hv:0,                                              // hand displacement (m, along travel)
+      penPrev:0, inContact:false, contactEnded:false,
+      vImp:null, Fpk:0, tc0:null, tc1:null, xMax:0, F:0,
+      ballVis:false, ringGreen:false, feedback:'', frame60s:null};
+  ui.rV.textContent=ui.rF.textContent=ui.rT.textContent=ui.rX.textContent='—';
+}
+function stepPhysics(){
+  const aSlope=(5/7)*G*Math.sin(P.theta*Math.PI/180);
+  st.t+=DT; st.tPhase+=DT;
+  switch(st.phase){
+    case 'WAIT_HOME': if(st.tPhase>0.8){st.ringGreen=true; nextPhase('HOLD');} break;
+    case 'HOLD': if(st.tPhase>st.holdDur){st.ballVis=true; nextPhase('ROLLING');} break;
+    case 'ROLLING': case 'CONTACT': case 'POST': {
+      // ball free dynamics along travel axis (s decreases toward home)
+      const onSlope = st.s > L_FLAT;
+      let a = onSlope ? aSlope : (st.v>0 ? -C_RR*G : 0);
+      // contact (SI): penetration of ball surface into hand surface; the hand
+      // retreats along the travel direction, so its displacement adds to the gap
+      const sM=st.s/100;
+      let F=0;
+      const p=(P.rb/100 + R_H) - (sM + st.hx);
+      if(p>0){
+        if(!st.inContact){ st.inContact=true;
+          if(st.tc0===null){ st.tc0=st.t; st.vImp=st.v; nextPhase('CONTACT'); } }
+        const dpen=(p-st.penPrev)/DT;
+        F=Math.max(0, Math.min(P.kc*p + B_C*dpen, F_MAX));
+      } else if(st.inContact){ st.inContact=false;
+        if(st.tc1===null){ st.tc1=st.t; nextPhase('POST'); } }
+      st.penPrev=Math.max(p,0);
+      st.F=F;
+      // integrate ball (v in m/s toward home; s in cm)
+      st.v += (a - F/P.mb)*DT;
+      st.s -= st.v*DT*100;
+      // hand on arm impedance, displaced along -s (away from ball)
+      const ah=(F - K_H*st.hx - B_H*st.hv)/M_H;
+      st.hv+=ah*DT; st.hx+=st.hv*DT; st.xMax=Math.max(st.xMax,st.hx);
+      if(st.tc0!==null && st.tc1===null){ st.Fpk=Math.max(st.Fpk,F); }
+      if(st.phase==='POST' && (st.v<0.02 && Math.abs(st.hv)<0.005 || st.tPhase>1.2)){
+        st.feedback='Good'; st.ballVis=false; nextPhase('FEEDBACK');
+        ui.rV.textContent=st.vImp.toFixed(2)+' m/s';
+        ui.rF.textContent=st.Fpk.toFixed(0)+' N';
+        ui.rT.textContent=((st.tc1??st.t)-st.tc0>0? (((st.tc1??st.t)-st.tc0)*1000).toFixed(0):'—')+' ms';
+        ui.rX.textContent=(st.xMax*1000).toFixed(0)+' mm';
+      }
+      if(st.phase==='ROLLING' && st.s < -(10)) nextPhase('FEEDBACK'); // safety: left workspace
+      break; }
+    case 'FEEDBACK': if(st.tPhase>0.5){st.feedback=''; nextPhase('ITI');} break;
+    case 'ITI': if(st.tPhase>0.8){newTrial();} break;
+  }
+}
+function nextPhase(p){ st.phase=p; st.tPhase=0; }
+
+// ---- drawing (canvas in cm coordinates) ----
+const cv=document.getElementById('cv'), cx=cv.getContext('2d');
+const SX=cv.width/(XL[1]-XL[0]), SY=cv.height/(YL[1]-YL[0]);
+function toPx(x,y){ return [(x-XL[0])*SX, (YL[1]-y)*SY]; }
+function circle(x,y,r,fill,stroke,lw){ const [px,py]=toPx(x,y);
+  cx.beginPath(); cx.arc(px,py,r*SX,0,7);
+  if(fill){cx.fillStyle=fill;cx.fill();}
+  if(stroke){cx.strokeStyle=stroke;cx.lineWidth=lw||2;cx.stroke();} }
+function pt(d){ const g=st.g; return [g.home[0]+g.U[0]*d, g.home[1]+g.U[1]*d]; }
+function stripQuad(d0,d1,w,fill,stroke){
+  const g=st.g, n=[-g.U[1],g.U[0]], a=pt(d0), b=pt(d1);
+  const q=[[a[0]+n[0]*w/2,a[1]+n[1]*w/2],[b[0]+n[0]*w/2,b[1]+n[1]*w/2],
+           [b[0]-n[0]*w/2,b[1]-n[1]*w/2],[a[0]-n[0]*w/2,a[1]-n[1]*w/2]];
+  cx.beginPath(); q.forEach((p,i)=>{const[px,py]=toPx(p[0],p[1]); i?cx.lineTo(px,py):cx.moveTo(px,py);});
+  cx.closePath();
+  if(fill){cx.fillStyle=fill;cx.fill();}
+  if(stroke){cx.strokeStyle=stroke;cx.lineWidth=1.5;cx.stroke();}
+}
+function draw(){
+  cx.fillStyle='#000'; cx.fillRect(0,0,cv.width,cv.height);
+  // slope strip, brightness gradient implying "downhill toward the hand"
+  for(let i=0;i<12;i++){
+    const d0=L_FLAT+P.Ls*i/12, d1=L_FLAT+P.Ls*(i+1)/12, g2=0.18+0.22*i/12;
+    stripQuad(d0,d1,STRIP_W,`rgb(${g2*255|0},${g2*255|0},${g2*255|0})`);
+  }
+  stripQuad(L_FLAT,L_FLAT+P.Ls,STRIP_W,null,'rgba(153,153,153,1)');
+  stripQuad(0,L_FLAT,STRIP_W,'rgb(31,31,31)');
+  { const g=st.g,n=[-g.U[1],g.U[0]],f=pt(L_FLAT);                  // foot marker
+    const [ax,ay]=toPx(f[0]-n[0]*STRIP_W/2,f[1]-n[1]*STRIP_W/2),[bx,by]=toPx(f[0]+n[0]*STRIP_W/2,f[1]+n[1]*STRIP_W/2);
+    cx.strokeStyle='#ccc';cx.lineWidth=3;cx.beginPath();cx.moveTo(ax,ay);cx.lineTo(bx,by);cx.stroke(); }
+  // hand: cursor follows home + impact displacement along -U
+  const g=st.g, hxCm=st.hx*100;
+  const hand=[g.home[0]-g.U[0]*hxCm, g.home[1]-g.U[1]*hxCm];
+  circle(g.home[0],g.home[1],R_HOME,null, st.ringGreen?'#3ddc84':'#ffffff',3);
+  if(P.paddle) circle(hand[0],hand[1],R_H*100,null,'rgba(255,255,255,.55)',1.5);
+  circle(hand[0],hand[1],R_CUR,'#fff');
+  // ball, optionally frame-locked to 60 Hz samples
+  if(st.ballVis){
+    let s=st.s;
+    if(P.hz60){ if(st.frame60s===null || st.t-st.frame60t>=1/60){st.frame60s=st.s;st.frame60t=st.t;} s=st.frame60s; }
+    const c=pt(s), flash=st.phase==='CONTACT';
+    circle(c[0],c[1],P.rb, flash?'#ffffff':'#ffcc33');
+    circle(c[0]-P.rb*0.35, c[1]+P.rb*0.35, P.rb*0.28, flash?'#ffffff':'#fff2b3');
+  }
+  if(st.feedback){ const [px,py]=toPx(g.home[0],g.home[1]+5);
+    cx.fillStyle='#fff'; cx.font=`${1.6*SX}px ${getComputedStyle(document.body).getPropertyValue('--sans')}`;
+    cx.textAlign='center'; cx.fillText(st.feedback,px,py); }
+}
+
+// ---- loop: fixed-step physics, rAF render ----
+let paused=false, last=null, acc=0;
+function loop(ts){
+  if(!paused){
+    if(last===null) last=ts;
+    acc+=Math.min((ts-last)/1000, 0.1); last=ts;
+    while(acc>DT){ stepPhysics(); acc-=DT; }
+    draw();
+    const ph=st.phase;
+    ui.phname.textContent=ph; ui.phase2.textContent='phase: '+ph;
+  } else last=ts;
+  requestAnimationFrame(loop);
+}
+
+// ---- UI ----
+const $=id=>document.getElementById(id);
+const ui={phname:$('phname'),phase2:$('phase2'),rV:$('rV'),rF:$('rF'),rT:$('rT'),rX:$('rX')};
+function bind(slider,val,key,fmt){ $(slider).addEventListener('input',e=>{
+  P[key]=+e.target.value; $(val).textContent=fmt(P[key]); }); }
+bind('sTheta','vTheta','theta',v=>v+'°');
+bind('sLs','vLs','Ls',v=>v+' cm');
+bind('sRb','vRb','rb',v=>v.toFixed(1)+' cm');
+bind('sMb','vMb','mb',v=>v.toFixed(2)+' kg');
+bind('sKc','vKc','kc',v=>v+' N/m');
+$('cPaddle').addEventListener('change',e=>P.paddle=e.target.checked);
+$('c60').addEventListener('change',e=>P.hz60=e.target.checked);
+$('btnRestart').addEventListener('click',()=>newTrial());
+$('btnPause').addEventListener('click',e=>{paused=!paused;
+  e.currentTarget.textContent=paused?'Resume':'Pause'; e.currentTarget.setAttribute('aria-pressed',paused);});
+function setOrient(o){ P.orient=o;
+  $('oLat').setAttribute('aria-pressed',o==='lateral'); $('oDia').setAttribute('aria-pressed',o==='diagonal');
+  newTrial(); }
+$('oLat').addEventListener('click',()=>setOrient('lateral'));
+$('oDia').addEventListener('click',()=>setOrient('diagonal'));
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){ paused=true; $('btnPause').textContent='Resume'; }
+newTrial(); draw(); requestAnimationFrame(loop);
+</script>
