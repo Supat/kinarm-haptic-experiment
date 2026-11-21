@@ -1,6 +1,6 @@
 # MATLAB / Simulink / xPC Target build products
 *.dlm
-# ...except the deployable task binary, which the lab PC pulls from GitHub
+# ...except the deployable task binary, so every clone has the exact build; the lab PC is offline and gets it by USB
 !task/*.dlm
 *.mldatx
 *.asv
