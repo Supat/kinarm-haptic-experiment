@@ -32,6 +32,16 @@ MATLAB R2013a 64-bit + Windows SDK 7.1 + xPC 5.4 robot image. Patch releases
 share a TDK, so TDK 3.5 covers 3.5.2. No kinarm.com download is needed for the
 TDK; the Learning+Support account is optional (forum, future updates).
 
+## Dexterit-E internals (decompiled 2026-11-22)
+
+`BKIN Dexterit-E 3.5\library.zip` is py2exe Python 2.7 bytecode.
+`UI_Data_Management.pyo` and `EditTaskProtocolDlg.pyo` were decompiled with
+uncompyle6 to `E:\Supat\Kinarm PC\Dexterit-E 3.5 decompiled\` (BKIN
+proprietary — reference only, not in git). This is the code that parses the
+Parameter Table Defn constants out of a loaded `.dlm` and builds the protocol
+editor; it verified our serialization (incl. task buttons) and the full column
+type vocabulary. See `task/README.md` gotcha 9.
+
 ## Remaining on the next lab visit
 
 1. ~~Copy `C:\C3D_load_v2.18` and `KINARM_C3D_load`~~ — done 2026-11-21.

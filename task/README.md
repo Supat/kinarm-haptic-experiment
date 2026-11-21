@@ -74,6 +74,20 @@ the Dexterit-E custom tasks folder on the lab PC. Do not rename the `.dlm`.
    zero-based by default — but the BKIN convention `Trial_Protocol[COL]` uses
    1-based column constants. Set `Props.Array.FirstIndex = '1'` on the
    `Trial_Protocol` and `HandInTarget` chart inputs (BKIN's own library
-   charts do the same). The button-row serialization (slots for
-   enable/disable/group) is inferred, not verified — confirm the Mark
-   event/Repeat trial buttons render in Dexterit-E.
+   charts do the same).
+9. **Serialization verified against Dexterit-E's own parser** (2026-11-22):
+   `library.zip` in the lab's Dexterit-E 3.5 install is Python 2.7 bytecode;
+   `UI_Data_Management.pyo` decompiles cleanly (saved to
+   `E:\Supat\Kinarm PC\Dexterit-E 3.5 decompiled\` — proprietary, keep out of
+   git). Its `load_cfg_from_model` reads block paths starting
+   `parameter table defn/` from the running target and splits the last path
+   segment on `;`: parts[1]=name, [2]=type (`integer`→`int`), [3]=desc;
+   buttons additionally use [4]/[5]=comma-separated enable/disable event
+   codes and [7]=group (`groupID,RxC,gridLocation`; empty = plain button),
+   with the Constant's value as Btn#. Our button rows match exactly — no
+   longer inferred. Full editor type vocabulary (exact, lowercase):
+   `float`, `int`/`integer`, `target`, `load`, `colour`/`color`, `bool`,
+   `string`, `label`; anything else raises "An invalid column type".
+   Colour cells hold a 9-digit `RRRGGGBBB` string (e.g. `255255255` white).
+   Optional extras supported: `task_definition/INSTRUCTIONS=...` and
+   `task_definition/LOAD_FOR=right|left` blocks.
