@@ -140,14 +140,15 @@ response, EMG onset relative to CONTACT_START if EMG is recorded.
 
 ## 8. Open questions
 
-1. End-Point or Exoskeleton lab? Determines force vs. joint-torque rendering and the
-   TDK blocks used.
+1. ~~End-Point or Exoskeleton lab?~~ **Exoskeleton** (observed in Dexterit-E on
+   2026-11-21: both arms drawn as two-link linkages). Forces are rendered as joint torques
+   via the `KINARM_loads` library; limits 5.1 Nm continuous / 15.3 Nm intermittent per joint.
 2. What is manipulated: ball mass, speed, visual-haptic congruence, predictability of
    release timing, haptics on/off catch trials?
 3. Must the hand stay still until impact, or may the subject catch or dodge?
 4. Is EMG or eye tracking recorded? This affects the analog input table.
 5. Does the ball bounce back up the slope after impact (full physics) or stop?
 6. Which hand, and who decides: subject's choice, dominant hand assigned by the
-   experimenter, or both hands in counterbalanced blocks? The task will take a `hand`
-   parameter and mirrored Left/Right protocols either way; geometry mirrors across the
-   midline with the home position ~8 cm to the chosen side.
+   experimenter, or both hands in counterbalanced blocks? Dexterit-E 3.5 selects the
+   active arm at run time and its Target Table option "Invert X values when active arm is
+   left arm" mirrors the geometry automatically, so one protocol serves both hands.

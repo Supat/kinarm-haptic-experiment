@@ -8,6 +8,9 @@ two-state placeholder trial. The real trial logic is specified in
 decided. `build_task_model.m` generated the skeleton; once the model is
 hand-edited in Simulink, the .mdl is the source of truth — do not regenerate.
 
+**Next build: see `REBUILD-SPEC.md`** (Parameter Table Defn columns; the first lab test
+ran but exposed that the TP/Load tables have no columns).
+
 ## Building the .dlm (on this build machine)
 
 In MATLAB (launched from **E:\matlabR2013a**, see gotchas):
