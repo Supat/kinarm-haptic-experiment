@@ -9,6 +9,8 @@
 | Dexterit-E 3.8 install | `BKIN Technologies\Dexterit-E 3.8` and `Kinarm\Dexterit-E 3.8` | Two byte-identical copies (Dex.exe MD5 match), files dated Dec 2019. Robot targets: xPC 5.4 / SLRT 6.2 / 6.8. Only stock Kinarm tasks, each shipped as `*54.dlm` + `*62.dlm`; no custom tasks. No exact 3.8.x patch marker found in the files. |
 | User guides | `BKIN User Guides` | Includes *Creating Task Programs for Dexterit-E 3.5.pdf* and *Dexterit-E 3.5 User Guide.pdf*. |
 | `pathdef.m` | copy root | Lab MATLAB path adds: `C:\C3D_load_v2.18`, `...\Documents\MATLAB\KINARM_C3D_load`, TDK 3.5, TDK 3.5\PMAC-PCI. |
+| C3D analysis scripts (added 2026-11-21) | `C3D_load_v2.18` and `KINARM_C3D_load` | Both folders copied; identical contents (`c3d_load.m` v2.18 + helpers + sample `.c3d` files). `KINARM_C3D_load` is the lab's working copy of `C3D_load_v2.18`. |
+| Sample custom task (added 2026-11-21) | `Victor_Bimanual_Carving_Modified` | A custom task that ran on this robot: plain-named `BimanualCarvingModified.dlm` + 5 `.dtp` protocols. Confirms plain `.dlm` naming for custom tasks and the 3.5 protocol XML format; its `.dtp` defs show the live type keywords (`float`, `int`, `integer`, `colour`, `label`, `target`, `load`). No `.mdl` source included. |
 
 ## Resolved: the lab runs Dexterit-E 3.5.2; the 3.8 install is unused
 
@@ -32,6 +34,10 @@ TDK; the Learning+Support account is optional (forum, future updates).
 
 ## Remaining on the next lab visit
 
-1. Copy the two analysis folders still missing: `C:\C3D_load_v2.18` and
-   `C:\Users\BKIN TECHNOLOGIES\Documents\MATLAB\KINARM_C3D_load`.
-2. Sanity-check Help > About in Dexterit-E (expect 3.5.2).
+1. ~~Copy `C:\C3D_load_v2.18` and `KINARM_C3D_load`~~ — done 2026-11-21.
+2. Sanity-check Help > About in Dexterit-E (expect 3.5.2) — first lab test
+   2026-11-21 confirmed the skeleton `.dlm` loads and runs, so the toolchain
+   match is proven (see `task/REBUILD-SPEC.md` for what was learned).
+3. If available, copy the Bimanual Carving task's Simulink source (`.mdl`)
+   from wherever it was developed — useful as a worked example of loads and
+   Parameter Table Defn on this exact system.

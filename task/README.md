@@ -1,15 +1,24 @@
 # Kinarm task: ball_impact
 
 `ball_impact.mdl` is the Dexterit-E 3.5 Task Program (MATLAB R2013a + TDK 3.5).
-It currently holds the required skeleton (GUI Control, Trial_Control chart,
-DataLogging, Parameter Table Defn, video chain, KINARM_HandInTarget) with a
-two-state placeholder trial. The real trial logic is specified in
+It holds the required skeleton (GUI Control, Trial_Control chart, DataLogging,
+Parameter Table Defn, video chain, KINARM_HandInTarget) with a two-state
+placeholder trial that shows the TP row's HomeTarget for HoldTime + 1500 ms.
+The full parameter tables (Target/Load/TP/task-wide + 2 task buttons) are
+defined per `task/REBUILD-SPEC.md`. The real trial logic is specified in
 `docs/experiment-design.md` section 5 and goes in once the event sequence is
-decided. `build_task_model.m` generated the skeleton; once the model is
-hand-edited in Simulink, the .mdl is the source of truth — do not regenerate.
+decided.
 
-**Next build: see `REBUILD-SPEC.md`** (Parameter Table Defn columns; the first lab test
-ran but exposed that the TP/Load tables have no columns).
+Scripts: `build_task_model.m` generated the original skeleton;
+`define_param_tables.m` added the parameter tables and the TP-aware chart
+(rerunnable — it rewrites the Parameter Table Defn contents from scratch).
+Once the model is hand-edited in Simulink, the .mdl is the source of truth —
+do not regenerate.
+
+**REBUILD-SPEC.md implemented 2026-11-21** by `define_param_tables.m` (the
+first lab test ran but exposed that the TP/Load tables had no columns). To
+check at the lab: protocol editor shows all tables' columns, and the two task
+buttons render (the button serialization is inferred, see gotcha 8).
 
 ## Building the .dlm (on this build machine)
 
@@ -48,3 +57,23 @@ the Dexterit-E custom tasks folder on the lab PC. Do not rename the `.dlm`.
 6. The Parameter Table Defn block keeps its definition in block `UserData`
    with an `apply` flag; headless diagram updates need `apply=false` first
    (see `build_task_model.m`).
+7. **How the definitions embed** (learned 2026-11-21): the mask init, when
+   `apply` is set, materializes each parameter as a Constant block inside the
+   masked subsystem whose NAME is the serialized definition
+   (`constant;label;type;desc;enable;disable;option;group;`) and whose VALUE
+   is the column number — that is what Dexterit-E reads out of the `.dlm`.
+   The mask init never fires under `-nodesktop` (`load_system` draws nothing)
+   and structural edits are locked during compile, so `define_param_tables.m`
+   replicates the apply branch directly. The block must NOT be a library link
+   (`set_param(...,'LinkStatus','none')` first) — a linked block is why the
+   skeleton shipped with only X/Y columns. Column types verified in use on
+   the lab robot: `float`, `int`, `integer`, `colour`, `label`, `target`,
+   `load`. Labels/descriptions must avoid `/` (block-name separator) and `;`
+   (field delimiter).
+8. **Chart indexing**: the chart is C-action-language, so array indexing is
+   zero-based by default — but the BKIN convention `Trial_Protocol[COL]` uses
+   1-based column constants. Set `Props.Array.FirstIndex = '1'` on the
+   `Trial_Protocol` and `HandInTarget` chart inputs (BKIN's own library
+   charts do the same). The button-row serialization (slots for
+   enable/disable/group) is inferred, not verified — confirm the Mark
+   event/Repeat trial buttons render in Dexterit-E.
