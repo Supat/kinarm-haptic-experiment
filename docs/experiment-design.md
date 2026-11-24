@@ -103,7 +103,7 @@ the peak force stays at or below 45 N and only the single hardest case (0.5 kg, 
 4000 N/m) touches the clamp. The whole design space fits the End-Point envelope.
 See `sim/out/peak_force_map.png` and `sim/out/impact_timeseries.png`.
 
-## 5. Trial state machine (Stateflow) (PLACEHOLDER: event sequence not yet decided)
+## 5. Trial state machine (Stateflow) (DECIDED 2026-11-24: stillness required; ball bounces)
 
     WAIT_HOME      hand inside home target for hold_time (random 0.5 to 1.5 s optional)
       -> RELEASE   ball drawn at slope top, event BALL_RELEASE
@@ -145,9 +145,15 @@ response, EMG onset relative to CONTACT_START if EMG is recorded.
    via the `KINARM_loads` library; limits 5.1 Nm continuous / 15.3 Nm intermittent per joint.
 2. What is manipulated: ball mass, speed, visual-haptic congruence, predictability of
    release timing, haptics on/off catch trials?
-3. Must the hand stay still until impact, or may the subject catch or dodge?
+3. ~~Must the hand stay still until impact, or may the subject catch or dodge?~~
+   **Stay still** (decided 2026-11-24): hand leaving the home target before contact
+   aborts the trial with HAND_LEFT_HOME.
 4. Is EMG or eye tracking recorded? This affects the analog input table.
-5. Does the ball bounce back up the slope after impact (full physics) or stop?
+5. ~~Does the ball bounce back up the slope after impact (full physics) or stop?~~
+   **Bounce** (decided 2026-11-24): full physics after impact — the ball rebounds
+   off the hand (restitution set by b_c), can roll back up the slope and return;
+   contact force stays live for repeat contacts. Trial ends on |v| < v_stop or a
+   fixed post-impact window, whichever comes first.
 6. Which hand, and who decides: subject's choice, dominant hand assigned by the
    experimenter, or both hands in counterbalanced blocks? Dexterit-E 3.5 selects the
    active arm at run time and its Target Table option "Invert X values when active arm is
