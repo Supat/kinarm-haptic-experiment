@@ -18,6 +18,8 @@ data/
 *.c3d
 *.kinarm
 *.zip
+# Exception: the small smoke-test exams from the lab are tracked as a reference
+!smoke/*.zip
 
 # Installers and licenses: never commit
 *.iso
