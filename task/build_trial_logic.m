@@ -32,6 +32,50 @@ for p = {'SimCustomSourceCode', 'CustomSourceCode'}
     end
 end
 
+%% 0.5 Robot torque path (lives in DataLogging/Poll KINARM). The General-
+% library mask init rewires the torque adder when a KINARMTorqueCMD Goto
+% exists in the model: it replaces the internal ZeroTorque constant
+% [0 0 0 0] with a From 'KINARMTorqueCMD'. Mask inits never run under
+% headless load_system, so after Apply_Loads was added programmatically the
+% model still fed zeros to the motors - commanded torque stayed 0 despite
+% Ball_Engine outputting force (lab data 2026-11-24 18:06: Fy -17 N,
+% M1/M2TorCMD flat 0). Replicate the mask's branch here.
+zt = find_system(name, 'LookUnderMasks', 'all', 'FollowLinks', 'on', ...
+    'BlockType', 'Constant', 'Name', 'ZeroTorque');
+if ~isempty(zt)
+    set_param([name '/GUI Control'], 'LinkStatus', 'none');
+    zt = find_system(name, 'LookUnderMasks', 'all', 'FollowLinks', 'on', ...
+        'BlockType', 'Constant', 'Name', 'ZeroTorque');
+    ztb = zt{1};
+    parent = get_param(ztb, 'Parent');
+    % Break every linked ancestor, outermost first, so the edit is allowed.
+    chain = {};
+    p = parent;
+    while ~strcmp(p, name)
+        chain{end+1} = p; %#ok<AGROW>
+        p = get_param(p, 'Parent');
+    end
+    for k = numel(chain):-1:1
+        try
+            ls = get_param(chain{k}, 'LinkStatus');
+            if strcmp(ls, 'resolved') || strcmp(ls, 'implicit')
+                set_param(chain{k}, 'LinkStatus', 'none');
+                fprintf('  broke link: %s (%s)\n', strrep(chain{k}, sprintf('\n'), ' '), ls);
+            end
+        catch
+        end %#ok<CTCH>
+    end
+    pos = get_param(ztb, 'Position');
+    delete_line(parent, 'ZeroTorque/1', 'AddTorques/1');
+    delete_block(ztb);
+    add_block('built-in/From', [parent '/TorqueCMD'], ...
+        'Position', mat2str(pos), 'GotoTag', 'KINARMTorqueCMD');
+    add_line(parent, 'TorqueCMD/1', 'AddTorques/1');
+    fprintf('GUI Control: ZeroTorque replaced with From KINARMTorqueCMD in %s\n', parent);
+else
+    fprintf('GUI Control: ZeroTorque not found (already rewired)\n');
+end
+
 %% 1. Block settings
 % Hand-in-target uses the logical radius column (4), not the drawn one (3)
 set_param([name '/KINARM_HandInTarget'], 'attribcol1', '[4]');

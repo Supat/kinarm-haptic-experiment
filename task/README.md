@@ -125,3 +125,15 @@ the Dexterit-E custom tasks folder on the lab PC. Do not rename the `.dlm`.
     `Load_Table`, `Target_Table` (global cm!), `Task_Wide_Parameters`,
     `TP_Table`, `TP_row`, `seed`, `task_control_button`. VCODE format (70
     doubles per target) documented in the Show_Target EML source.
+11. **Adding KINARM_Apply_Loads headlessly does NOT connect the motors**
+    (found via lab data 2026-11-24): the torque write lives in
+    `DataLogging/Poll KINARM`, whose mask init swaps an internal
+    `ZeroTorque` constant `[0 0 0 0]` for a `From KINARMTorqueCMD` only
+    when it runs — which it never does under `-nodesktop`. Symptom: task
+    physics and events perfect, `Fx/Fy` commanded (−17 N at impact), but
+    `M1/M2TorCMD` flat zero and no felt force. `build_trial_logic.m` now
+    replicates the mask branch (break the DataLogging link, delete
+    ZeroTorque, add the From). Also: Dexterit-E auto-names a task's first
+    four analog channels as measured motor torques — rename them in the
+    protocol's Analog Inputs tab and tick Save? on every channel, or they
+    are dropped from the .c3d.
