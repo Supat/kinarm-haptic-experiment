@@ -83,11 +83,20 @@ bt = [ ...
     mkbtn(2, 'BTN_MARK',   'Mark event',   'Marks a timestamp event in the data'), ...
     mkbtn(3, 'BTN_REPEAT', 'Repeat trial', 'Repeat the current trial')];
 
+% Task Events (Evt# = event_code the chart writes; parser reads parts[1]=label,
+% parts[3]=desc, parts[6]=='error' marks the event as an error in the GUI)
+ev = [ ...
+    mkevt(1, 'E_BALL_RELEASE',   'BALL_RELEASE',   'Ball released at the slope top', 'none'), ...
+    mkevt(2, 'E_CONTACT_START',  'CONTACT_START',  'Ball-hand contact started (pen greater than 0)', 'none'), ...
+    mkevt(3, 'E_CONTACT_END',    'CONTACT_END',    'Ball-hand contact ended', 'none'), ...
+    mkevt(4, 'E_HAND_LEFT_HOME', 'HAND_LEFT_HOME', 'Hand left home before impact - trial aborted', 'error')];
+
 ud(2).params = tt; ud(2).num_param = numel(tt);   % target_table
 ud(3).params = lt; ud(3).num_param = numel(lt);   % load_table
 ud(4).params = tp; ud(4).num_param = numel(tp);   % TP_table
 ud(5).params = tw; ud(5).num_param = numel(tw);   % task_wide
-ud(7).params = bt; ud(7).num_param = numel(bt);   % buttons; ud(6) events stays empty
+ud(6).params = ev; ud(6).num_param = numel(ev);   % events
+ud(7).params = bt; ud(7).num_param = numel(bt);   % buttons
 
 ud(1).apply = true;
 set_param(ptd, 'UserData', ud);
@@ -145,16 +154,18 @@ if isempty(ch.find('-isa', 'Stateflow.Data', 'Name', 'TimeInterval'))
 end
 
 sInit = ch.find('-isa', 'Stateflow.State', 'Name', 'Init');
-sInit.LabelString = sprintf(['Init\nentry:\n' ...
-    'logging_enable = 1;\n' ...
-    'target_row = Trial_Protocol[HomeTarget];\n' ...
-    'target_state = 1;\n' ...
-    'TimeInterval = Trial_Protocol[HoldTime] + 1500;']);
+if ~isempty(sInit)   % absent once build_trial_logic.m has installed the real chart
+    sInit.LabelString = sprintf(['Init\nentry:\n' ...
+        'logging_enable = 1;\n' ...
+        'target_row = Trial_Protocol[HomeTarget];\n' ...
+        'target_state = 1;\n' ...
+        'TimeInterval = Trial_Protocol[HoldTime] + 1500;']);
 
-trs = ch.find('-isa', 'Stateflow.Transition');
-for i = 1:numel(trs)
-    if strncmp(trs(i).LabelString, 'after(4000', 10)
-        trs(i).LabelString = 'after(TimeInterval, e_clk)';   % e_clk is 1 kHz -> ms
+    trs = ch.find('-isa', 'Stateflow.Transition');
+    for i = 1:numel(trs)
+        if strncmp(trs(i).LabelString, 'after(4000', 10)
+            trs(i).LabelString = 'after(TimeInterval, e_clk)';   % e_clk is 1 kHz -> ms
+        end
     end
 end
 
@@ -178,6 +189,10 @@ end
 
 function p = mkbtn(idx, cn, label, desc)
 p = mkparam(idx, cn, label, '', desc, '', '', '', '');
+end
+
+function p = mkevt(code, cn, label, desc, opt)
+p = mkparam(code, cn, label, '', desc, opt, '', '', '');
 end
 
 function p = mkparam(idx, cn, label, type, desc, opt, en, dis, grp)

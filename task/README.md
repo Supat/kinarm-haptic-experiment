@@ -1,24 +1,43 @@
 # Kinarm task: ball_impact
 
-`ball_impact.mdl` is the Dexterit-E 3.5 Task Program (MATLAB R2013a + TDK 3.5).
-It holds the required skeleton (GUI Control, Trial_Control chart, DataLogging,
-Parameter Table Defn, video chain, KINARM_HandInTarget) with a two-state
-placeholder trial that shows the TP row's HomeTarget for HoldTime + 1500 ms.
-The full parameter tables (Target/Load/TP/task-wide + 2 task buttons) are
-defined per `task/REBUILD-SPEC.md`. The real trial logic is specified in
-`docs/experiment-design.md` section 5 and goes in once the event sequence is
-decided.
+`ball_impact.mdl` is the Dexterit-E 3.5 Task Program (MATLAB R2013a + TDK 3.5)
+implementing the full experiment (built 2026-11-24, after the smoke test of the
+parameter tables passed at the lab):
 
-Scripts: `build_task_model.m` generated the original skeleton;
-`define_param_tables.m` added the parameter tables and the TP-aware chart
-(rerunnable — it rewrites the Parameter Table Defn contents from scratch).
-Once the model is hand-edited in Simulink, the .mdl is the source of truth —
-do not regenerate.
+- **Trial_Control chart**: WAIT_HOME -> HOLD -> RELEASE_WAIT -> ROLLING ->
+  CONTACT <-> POST_IMPACT -> EndOfTrial. Hand must stay in the home target
+  until impact (leave during ROLLING -> HAND_LEFT_HOME error event + abort);
+  repeated CONTACT/POST cycles log each bounce. Timeouts: TP TrialTimeout
+  (0 means 10 s), post-impact window 2.5 s or |v| < 2 cm/s.
+- **Ball_Engine** (MATLAB Function, source `ball_engine_eml.m`, 1 kHz):
+  rolls the ball from the BallTarget row toward the HomeTarget row —
+  a = (5/7)·g·sin(SlopeAngle) on the slope, −RollRes·g on the flat; penalty
+  contact `clamp(Kc·pen + Bc·dpen, 0, min(Fmax,45))` plus a decaying
+  TransientFreq burst per new contact; full bounce (reaction decelerates the
+  ball). Draws the slope line + ball circle as hand-built VCODEs. An all-zero
+  Load row falls back to safe defaults with **HapticsOn=0** (visual only).
+- **Forces** go out as `hand_forces -> Forces_to_Torques ->
+  KINARM_Apply_Loads` (Exoskeleton; torque limit 12 Nm, 500 ms ramps).
+- **Events** (defined in the PTD events tab): BALL_RELEASE, CONTACT_START,
+  CONTACT_END, HAND_LEFT_HOME (error). **Analog channels** logged per trial:
+  ball x, y, v, pen, Fx, Fy, phase, s.
 
-**REBUILD-SPEC.md implemented 2026-11-21** by `define_param_tables.m` (the
-first lab test ran but exposed that the TP/Load tables had no columns). To
-check at the lab: protocol editor shows all tables' columns, and the two task
-buttons render (the button serialization is inferred, see gotcha 8).
+Scripts, in build order (all rerunnable; run from `task/`):
+`build_task_model.m` (original skeleton — retired), then
+`define_param_tables.m` (embeds tables/buttons/events into Parameter Table
+Defn), then `build_trial_logic.m` (installs chart + Ball_Engine + loads chain
++ wiring), then `buildxpc('ball_impact.mdl')`.
+
+## First haptic test protocol (suggested `impact_v1`)
+
+Target 1 = home (0, 10, 1, 1.5, white); Target 2 = slope top, e.g. (0, 40).
+Load 1: BallMass 0.2, BallRadius 3, SlopeAngle 25, SlopeLength 20,
+FlatLength 10, RollRes 0.01, Kc 2000, Bc 10, Fmax 20, **HapticsOn 0 first**,
+TransientAmp 0, TransientFreq 150. TP 1: HomeTarget 1, BallTarget 2, Load 1,
+HoldTime 1000, ReleaseDelay 500–1500, TrialTimeout 8000. Watch a few visual
+trials, then set HapticsOn 1 (Fmax 20 keeps it gentle; safety ladder in
+`docs/lab-deployment.md`). Do NOT set BallTarget = HomeTarget — the ball
+would spawn on the hand.
 
 ## Building the .dlm (on this build machine)
 
@@ -91,3 +110,18 @@ the Dexterit-E custom tasks folder on the lab PC. Do not rename the `.dlm`.
    Colour cells hold a 9-digit `RRRGGGBBB` string (e.g. `255255255` white).
    Optional extras supported: `task_definition/INSTRUCTIONS=...` and
    `task_definition/LOAD_FOR=right|left` blocks.
+10. **R2013a chart codegen crashes on rand() and boolean arithmetic**
+    (2026-11-24): `rand()/RAND_MAX` (the guide 7.17 pattern) and expressions
+    like `x + 10000*(y == 0)` in state entry actions abort the xPC build with
+    a CGIR assertion (`FixptType::createFxpDtpProp ... wrong number of
+    bits`). Compute such values in a MATLAB Function block instead and let
+    the chart sample them at state entry (Ball_Engine outputs
+    `delay_ms`/`timeout_ms`; its LCG is seeded from the `seed` From tag so
+    the protocol's seed option still applies). Also: `Stateflow.EMChart` has
+    no sample-time property in R2013a — the block inherits its rate; the
+    generated `ball_impact.c` confirmed Ball_Engine runs in the 0.001 s
+    section (`TaskCounters.TID[2]`), so `dt = 0.001` is correct. Useful From
+    tags (guide 10.9): `KINdata` (hand pos m, global, row=arm, cols 23/24),
+    `Load_Table`, `Target_Table` (global cm!), `Task_Wide_Parameters`,
+    `TP_Table`, `TP_row`, `seed`, `task_control_button`. VCODE format (70
+    doubles per target) documented in the Show_Target EML source.

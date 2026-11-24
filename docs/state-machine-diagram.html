@@ -73,8 +73,8 @@ footer p{margin:4px 0}
 
 <section>
 <div class="fighead">
-  <h2><span class="n">1</span>Trial state machine (design)</h2>
-  <p>The full trial loop per <span style="font-family:var(--mono);font-size:12px">docs/experiment-design.md §5</span>, written against the parameter tables now embedded in the .dlm.</p>
+  <h2><span class="n">1</span>Trial state machine (implemented)</h2>
+  <p>The full trial loop, in the built .dlm since 2026-11-24 — installed by <span style="font-family:var(--mono);font-size:12px">build_trial_logic.m</span>, physics in <span style="font-family:var(--mono);font-size:12px">ball_engine_eml.m</span>.</p>
 </div>
 <figure>
 <div class="scroll">
@@ -111,7 +111,7 @@ footer p{margin:4px 0}
   <text class="bd" x="58" y="253">dwell = TP[HoldTime] ms</text>
 
   <rect class="box" x="40" y="340" width="320" height="100" rx="9"/>
-  <text class="st" x="58" y="364">RELEASE</text>
+  <text class="st" x="58" y="364">RELEASE_WAIT</text>
   <text class="bd" x="58" y="386">ball drawn at slope top</text>
   <text class="bd" x="58" y="403">unpredictable release delay</text>
 
@@ -130,7 +130,7 @@ footer p{margin:4px 0}
 
   <rect class="box" x="620" y="340" width="320" height="100" rx="9"/>
   <text class="st" x="638" y="364">POST_IMPACT</text>
-  <text class="bd" x="638" y="386">ball rebounds / rolls away (open: bounce?)</text>
+  <text class="bd" x="638" y="386">ball rebounds — re-contact loops to CONTACT</text>
   <text class="bd" x="638" y="403">commanded force back to 0</text>
 
   <rect class="box" x="620" y="190" width="320" height="100" rx="9"/>
@@ -170,14 +170,14 @@ footer p{margin:4px 0}
   <text class="tl dim" transform="rotate(-90 480 376)" x="480" y="376" text-anchor="middle">after(TP[TrialTimeout], e_clk) → abort</text>
 </svg>
 </div>
-<figcaption><b>One trial, clockwise.</b> Solid edges are the normal sequence; dashed edges are aborts, both ending the trial through END_OF_TRIAL. The orange edge is the event the experiment exists for: penetration of the hand disk starts the penalty-contact force. Open design questions mark two spots — whether POST_IMPACT lets the ball bounce back up the slope, and whether the hand must stay still through RELEASE (if catching/dodging is allowed, the left dashed abort disappears).</figcaption>
+<figcaption><b>One trial, clockwise.</b> Solid edges are the normal sequence; dashed edges are aborts, both ending the trial through END_OF_TRIAL. The orange edge is the event the experiment exists for: penetration of the hand disk starts the penalty-contact force. Both design decisions (2026-11-24) are in: the ball bounces — POST_IMPACT returns to CONTACT on re-penetration, logging CONTACT_START/END per bounce — and the hand must stay home until impact, so the dashed aborts are live behavior (HAND_LEFT_HOME is an error event).</figcaption>
 </figure>
 </section>
 
 <section>
 <div class="fighead">
   <h2><span class="n">2</span>Where the chart sits in the model</h2>
-  <p>Signal flow in <span style="font-family:var(--mono);font-size:12px">ball_impact.mdl</span>. Solid blocks are in the built .dlm; dashed blocks are the next iteration.</p>
+  <p>Signal flow in <span style="font-family:var(--mono);font-size:12px">ball_impact.mdl</span>. Every block shown is in the built .dlm.</p>
 </div>
 <figure>
 <div class="scroll">
@@ -255,34 +255,34 @@ footer p{margin:4px 0}
   <text class="tl" x="458" y="363" text-anchor="middle">block names + values, xPC TCP at load</text>
 
   <!-- planned physics row -->
-  <rect class="box plan" x="380" y="460" width="280" height="80" rx="9"/>
-  <text class="tag" x="588" y="480">PLANNED</text>
-  <text class="st dim" x="396" y="486">Ball physics + contact</text>
+  <rect class="box" x="380" y="460" width="280" height="80" rx="9"/>
+  <text class="tag" x="596" y="480">BUILT</text>
+  <text class="st" x="396" y="486">Ball_Engine (physics + contact)</text>
   <text class="bd" x="396" y="506">penalty force, Load-row params;</text>
   <text class="bd" x="396" y="523">hand pos from KINARM sensors</text>
 
-  <rect class="box plan" x="720" y="460" width="230" height="80" rx="9"/>
-  <text class="tag" x="878" y="480">PLANNED</text>
-  <text class="st dim" x="736" y="486">KINARM_loads</text>
+  <rect class="box" x="720" y="460" width="230" height="80" rx="9"/>
+  <text class="tag" x="886" y="480">BUILT</text>
+  <text class="st" x="736" y="486">Forces_to_Torques + Apply_Loads</text>
   <text class="bd" x="736" y="506">force → joint torques</text>
   <text class="bd" x="736" y="523">(Exoskeleton library)</text>
 
-  <path class="ed plan" d="M540 210 V456" marker-end="url(#ahm2)"/>
+  <path class="ed" d="M540 210 V456" marker-end="url(#ah2)"/>
   <text class="tl dim" x="552" y="300">trial phase,</text>
   <text class="tl dim" x="552" y="316">release command</text>
 
-  <path class="ed plan" d="M660 500 H716" marker-end="url(#ahm2)"/>
+  <path class="ed" d="M660 500 H716" marker-end="url(#ah2)"/>
   <text class="tl dim" x="688" y="491" text-anchor="middle">Fx, Fy</text>
 </svg>
 </div>
-<figcaption><b>The chart never touches hardware directly.</b> Dexterit-E's stock GUI Control block owns the trial sequence: it clocks the chart at 1&nbsp;kHz, hands it the current TP row, and advances to the next row when the chart sends <code style="font:11.5px var(--mono)">e_Trial_End</code>. The Parameter Table Defn block does nothing at run time — its 30 named constants are read once by Dexterit-E to build the protocol editor. Dashed blocks (ball dynamics, contact force, KINARM_loads) go in after the smoke test passes.</figcaption>
+<figcaption><b>The chart never touches hardware directly.</b> Dexterit-E's stock GUI Control block owns the trial sequence: it clocks the chart at 1&nbsp;kHz, hands it the current TP row, and advances to the next row when the chart sends <code style="font:11.5px var(--mono)">e_Trial_End</code>. The Parameter Table Defn block does nothing at run time — its 30 named constants are read once by Dexterit-E to build the protocol editor. Ball_Engine also precomputes the random release delay and timeout guards for the chart (R2013a chart codegen cannot lower rand() or boolean arithmetic), and its commanded force runs through a 12 Nm joint-torque limit with 500 ms ramps.</figcaption>
 </figure>
 </section>
 
 <section>
 <div class="fighead">
-  <h2><span class="n">3</span>What is in the .dlm today</h2>
-  <p>The placeholder chart shipped for the lab smoke test (commit 850b127) — it exercises the TP plumbing, not the experiment.</p>
+  <h2><span class="n">3</span>The earlier placeholder (superseded)</h2>
+  <p>The two-state chart used for the table smoke test (passed at the lab 2026-11-24, 3 runs × 5 trials) — replaced by fig. 1 in the current build.</p>
 </div>
 <figure>
 <div class="scroll">
@@ -315,7 +315,7 @@ footer p{margin:4px 0}
   <text class="tl" x="357" y="163" text-anchor="middle">after(10, e_clk) — next trial</text>
 </svg>
 </div>
-<figcaption><b>Two states, one target.</b> Each trial shows the TP row's home target for HoldTime&nbsp;+&nbsp;1500 ms and ends. If the smoke-test protocol (5 × TP&nbsp;1) runs 5 such trials with the target 10 cm ahead, the whole table/chart/TP pipeline is proven, and fig.&nbsp;1 replaces this chart.</figcaption>
+<figcaption><b>Two states, one target.</b> Each trial shows the TP row's home target for HoldTime&nbsp;+&nbsp;1500 ms and ends. If the smoke-test protocol (5 × TP&nbsp;1) runs 5 such trials with the target 10 cm ahead, the whole table/chart/TP pipeline is proven — which it was, on 2026-11-24 — and fig.&nbsp;1 replaced this chart the same day.</figcaption>
 </figure>
 </section>
 

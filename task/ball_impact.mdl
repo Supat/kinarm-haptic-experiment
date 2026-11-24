@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.3"
+    ComputedModelVersion    "1.8"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -68,9 +68,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Supat"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Sat Nov 21 16:47:44 2026"
-  RTWModifiedTimeStamp	  717180463
-  ModelVersionFormat	  "1.%<AutoIncrement:3>"
+  LastModifiedDate	  "Tue Nov 24 17:18:12 2026"
+  RTWModifiedTimeStamp	  717441492
+  ModelVersionFormat	  "1.%<AutoIncrement:8>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -441,6 +441,7 @@ Model {
 	Simulink.SFSimCC {
 	  $ObjectID		  14
 	  Version		  "1.13.0"
+	  SimCustomSourceCode	  "#include <stdlib.h>"
 	  SFSimEnableDebug	  on
 	  SFSimOverflowDetection  on
 	  SFSimEcho		  on
@@ -497,6 +498,7 @@ Model {
 	  ConfigAtBuild		  off
 	  RTWUseLocalCustomCode	  off
 	  RTWUseSimCustomCode	  off
+	  CustomSourceCode	  "#include <stdlib.h>"
 	  IncludeHyperlinkInReport off
 	  LaunchReport		  off
 	  PortableWordSizes	  off
@@ -560,7 +562,7 @@ Model {
 	      IgnoreCustomStorageClasses on
 	      IgnoreTestpoints	      off
 	      IncHierarchyInIds	      off
-	      MaxIdLength	      31
+	      MaxIdLength	      63
 	      PreserveName	      off
 	      PreserveNameWithParent  off
 	      ShowEliminatedStatement off
@@ -800,6 +802,12 @@ Model {
       BusSelectionMode	      off
     }
     Block {
+      BlockType		      From
+      GotoTag		      "A"
+      IconDisplay	      "Tag"
+      TagVisibility	      "local"
+    }
+    Block {
       BlockType		      Inport
       Port		      "1"
       OutputFunctionCall      off
@@ -885,6 +893,15 @@ Model {
       OutDataTypeStr	      "Inherit: auto"
       Interpolate	      on
     }
+    Block {
+      BlockType		      UnitDelay
+      InitialCondition	      "0"
+      InputProcessing	      "Inherited"
+      SampleTime	      "1"
+      StateMustResolveToSignalObject off
+      CodeGenStateStorageClass "Auto"
+      HasFrameUpgradeWarning  on
+    }
   }
   System {
     Name		    "ball_impact"
@@ -902,12 +919,413 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "9"
+    SIDHighWatermark	    "35"
+    Block {
+      BlockType		      SubSystem
+      Name		      "Ball_Engine"
+      SID		      "22"
+      Ports		      [11, 7]
+      Position		      [330, 428, 560, 632]
+      ZOrder		      22
+      LibraryVersion	      "1.32"
+      ErrorFcn		      "Stateflow.Translate.translate"
+      PermitHierarchicalResolution "ExplicitOnly"
+      TreatAsAtomicUnit	      on
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      SFBlockType	      "MATLAB Function"
+      System {
+	Name			"Ball_Engine"
+	Location		[223, 338, 826, 833]
+	Open			off
+	ModelBrowserVisibility	on
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	SIDHighWatermark	"36"
+	Block {
+	  BlockType		  Inport
+	  Name			  "phase"
+	  SID			  "22::1"
+	  Position		  [20, 101, 40, 119]
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "home_row"
+	  SID			  "22::21"
+	  Position		  [20, 136, 40, 154]
+	  ZOrder		  7
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "ball_row"
+	  SID			  "22::22"
+	  Position		  [20, 171, 40, 189]
+	  ZOrder		  8
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "load_row"
+	  SID			  "22::23"
+	  Position		  [20, 206, 40, 224]
+	  ZOrder		  9
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "KINdata"
+	  SID			  "22::24"
+	  Position		  [20, 246, 40, 264]
+	  ZOrder		  10
+	  Port			  "5"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Load_Table"
+	  SID			  "22::25"
+	  Position		  [20, 281, 40, 299]
+	  ZOrder		  11
+	  Port			  "6"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Target_Table"
+	  SID			  "22::26"
+	  Position		  [20, 316, 40, 334]
+	  ZOrder		  12
+	  Port			  "7"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Task_Wide"
+	  SID			  "22::27"
+	  Position		  [20, 351, 40, 369]
+	  ZOrder		  13
+	  Port			  "8"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "TP_Table"
+	  SID			  "22::28"
+	  Position		  [20, 386, 40, 404]
+	  ZOrder		  14
+	  Port			  "9"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "tp_row"
+	  SID			  "22::29"
+	  Position		  [20, 426, 40, 444]
+	  ZOrder		  15
+	  Port			  "10"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "seed"
+	  SID			  "22::30"
+	  Position		  [20, 461, 40, 479]
+	  ZOrder		  16
+	  Port			  "11"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  " Demux "
+	  SID			  "22::19"
+	  Ports			  [1, 1]
+	  Position		  [270, 390, 320, 430]
+	  ZOrder		  5
+	  Outputs		  "1"
+	}
+	Block {
+	  BlockType		  S-Function
+	  Name			  " SFunction "
+	  SID			  "22::18"
+	  Tag			  "Stateflow S-Function ball_impact 2"
+	  Ports			  [11, 8]
+	  Position		  [180, 110, 230, 350]
+	  ZOrder		  4
+	  FunctionName		  "sf_sfun"
+	  PortCounts		  "[11 8]"
+	  EnableBusSupport	  off
+	  Port {
+	    PortNumber		    2
+	    Name		    "vcodes"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    3
+	    Name		    "hand_forces"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    4
+	    Name		    "ball_log"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "pen_out"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    6
+	    Name		    "speed_out"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    7
+	    Name		    "delay_ms"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    8
+	    Name		    "timeout_ms"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  " Terminator "
+	  SID			  "22::20"
+	  Position		  [460, 401, 480, 419]
+	  ZOrder		  6
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "vcodes"
+	  SID			  "22::5"
+	  Position		  [460, 101, 480, 119]
+	  ZOrder		  -5
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "hand_forces"
+	  SID			  "22::31"
+	  Position		  [460, 136, 480, 154]
+	  ZOrder		  17
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "ball_log"
+	  SID			  "22::32"
+	  Position		  [460, 171, 480, 189]
+	  ZOrder		  18
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "pen_out"
+	  SID			  "22::33"
+	  Position		  [460, 206, 480, 224]
+	  ZOrder		  19
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "speed_out"
+	  SID			  "22::34"
+	  Position		  [460, 246, 480, 264]
+	  ZOrder		  20
+	  Port			  "5"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "delay_ms"
+	  SID			  "22::35"
+	  Position		  [460, 281, 480, 299]
+	  ZOrder		  21
+	  Port			  "6"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "timeout_ms"
+	  SID			  "22::36"
+	  Position		  [460, 316, 480, 334]
+	  ZOrder		  22
+	  Port			  "7"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "phase"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "home_row"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "ball_row"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "load_row"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "KINdata"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  5
+	}
+	Line {
+	  SrcBlock		  "Load_Table"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  6
+	}
+	Line {
+	  SrcBlock		  "Target_Table"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  7
+	}
+	Line {
+	  SrcBlock		  "Task_Wide"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  8
+	}
+	Line {
+	  SrcBlock		  "TP_Table"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  9
+	}
+	Line {
+	  SrcBlock		  "tp_row"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  10
+	}
+	Line {
+	  SrcBlock		  "seed"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  11
+	}
+	Line {
+	  Name			  "vcodes"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  2
+	  DstBlock		  "vcodes"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "hand_forces"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  3
+	  DstBlock		  "hand_forces"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "ball_log"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  4
+	  DstBlock		  "ball_log"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "pen_out"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  5
+	  DstBlock		  "pen_out"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "speed_out"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  6
+	  DstBlock		  "speed_out"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "delay_ms"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  7
+	  DstBlock		  "delay_ms"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "timeout_ms"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  8
+	  DstBlock		  "timeout_ms"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  " Demux "
+	  SrcPort		  1
+	  DstBlock		  " Terminator "
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  " SFunction "
+	  SrcPort		  1
+	  DstBlock		  " Demux "
+	  DstPort		  1
+	}
+      }
+    }
     Block {
       BlockType		      Reference
       Name		      "DataLogging"
       SID		      "3"
-      Ports		      [2]
+      Ports		      [3]
       Position		      [620, 60, 790, 120]
       ZOrder		      3
       BackgroundColor	      "[0.858820, 0.690190, 0.309800]"
@@ -915,7 +1333,75 @@ Model {
       SourceBlock	      "General/DataLogging"
       SourceType	      "DataLogging"
       log_event_codes	      on
-      log_analog_inputs	      off
+      log_analog_inputs	      on
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Forces_to_Torques"
+      SID		      "30"
+      Ports		      [1, 1]
+      Position		      [620, 480, 760, 530]
+      ZOrder		      30
+      BackgroundColor	      "[0.741176, 0.686275, 0.607843]"
+      LibraryVersion	      "1.280"
+      SourceBlock	      "KINARM_loads/Forces_to_Torques"
+      SourceType	      "Forces_to_Torques"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From_KINdata"
+      SID		      "23"
+      Position		      [180, 430, 280, 450]
+      ZOrder		      23
+      GotoTag		      "KINdata"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From_LoadTable"
+      SID		      "24"
+      Position		      [180, 470, 280, 490]
+      ZOrder		      24
+      GotoTag		      "Load_Table"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From_Seed"
+      SID		      "29"
+      Position		      [180, 670, 280, 690]
+      ZOrder		      29
+      GotoTag		      "seed"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From_TPRow"
+      SID		      "28"
+      Position		      [180, 630, 280, 650]
+      ZOrder		      28
+      GotoTag		      "TP_row"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From_TPTable"
+      SID		      "27"
+      Position		      [180, 590, 280, 610]
+      ZOrder		      27
+      GotoTag		      "TP_Table"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From_TargetTable"
+      SID		      "25"
+      Position		      [180, 510, 280, 530]
+      ZOrder		      25
+      GotoTag		      "Target_Table"
+    }
+    Block {
+      BlockType		      From
+      Name		      "From_TaskWide"
+      SID		      "26"
+      Position		      [180, 550, 280, 570]
+      ZOrder		      26
+      GotoTag		      "Task_Wide_Parameters"
     }
     Block {
       BlockType		      Reference
@@ -952,6 +1438,21 @@ Model {
     }
     Block {
       BlockType		      Reference
+      Name		      "KINARM_Apply_Loads"
+      SID		      "31"
+      Ports		      [1]
+      Position		      [800, 480, 920, 530]
+      ZOrder		      31
+      BackgroundColor	      "[0.741176, 0.686275, 0.607843]"
+      LibraryVersion	      "1.280"
+      SourceBlock	      "KINARM_loads/KINARM_Apply_Loads"
+      SourceType	      "KINARM_Apply_Loads"
+      up_duration	      "500"
+      down_duration	      "500"
+      max_torque	      "12"
+    }
+    Block {
+      BlockType		      Reference
       Name		      "KINARM_HandInTarget"
       SID		      "5"
       Ports		      [0, 1]
@@ -964,7 +1465,7 @@ Model {
       use_dominant_hand	      on
       target_type	      "Circle"
       num_states	      "1"
-      attribcol1	      "[3]"
+      attribcol1	      "[4]"
       attribcol2	      "[3]"
       attribcol3	      "[3]"
       attribcol4	      "[3]"
@@ -1070,14 +1571,14 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"155"
+	SIDHighWatermark	"522"
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "TP_table"
-	  SID			  "4:130"
+	  SID			  "4:489"
 	  Ports			  []
 	  Position		  [100, 200, 240, 240]
-	  ZOrder		  17
+	  ZOrder		  52
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -1104,7 +1605,7 @@ Model {
 	      BlockType		      Constant
 	      Name		      "BallTarget;BallTarget;target;Target Table row of the ball graphic (X and Y overridden each tick);;"
 	      ";none;;"
-	      SID		      "4:133"
+	      SID		      "4:492"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -1112,7 +1613,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "HoldTime;HoldTime;int;Required hold at home before release (ms);;;none;;"
-	      SID		      "4:137"
+	      SID		      "4:496"
 	      Position		      [200, 200, 240, 240]
 	      ZOrder		      7
 	      Value		      "4"
@@ -1120,14 +1621,14 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "HomeTarget;HomeTarget;target;Target Table row of the home target;;;none;;"
-	      SID		      "4:131"
+	      SID		      "4:490"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Load;Load;load;Load Table row for this trial;;;none;;"
-	      SID		      "4:135"
+	      SID		      "4:494"
 	      Position		      [200, 140, 240, 180]
 	      ZOrder		      5
 	      Value		      "3"
@@ -1135,7 +1636,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "ReleaseDelayMax;ReleaseDelayMax;int;Maximum random delay before ball release (ms);;;none;;"
-	      SID		      "4:141"
+	      SID		      "4:500"
 	      Position		      [200, 320, 240, 360]
 	      ZOrder		      11
 	      Value		      "6"
@@ -1143,7 +1644,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "ReleaseDelayMin;ReleaseDelayMin;int;Minimum random delay before ball release (ms);;;none;;"
-	      SID		      "4:139"
+	      SID		      "4:498"
 	      Position		      [200, 260, 240, 300]
 	      ZOrder		      9
 	      Value		      "5"
@@ -1151,56 +1652,56 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:132"
+	      SID		      "4:491"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:134"
+	      SID		      "4:493"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator3"
-	      SID		      "4:136"
+	      SID		      "4:495"
 	      Position		      [300, 150, 340, 170]
 	      ZOrder		      6
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator4"
-	      SID		      "4:138"
+	      SID		      "4:497"
 	      Position		      [300, 210, 340, 230]
 	      ZOrder		      8
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator5"
-	      SID		      "4:140"
+	      SID		      "4:499"
 	      Position		      [300, 270, 340, 290]
 	      ZOrder		      10
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator6"
-	      SID		      "4:142"
+	      SID		      "4:501"
 	      Position		      [300, 330, 340, 350]
 	      ZOrder		      12
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator7"
-	      SID		      "4:144"
+	      SID		      "4:503"
 	      Position		      [300, 390, 340, 410]
 	      ZOrder		      14
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "TrialTimeout;TrialTimeout;int;Maximum trial duration (ms);;;none;;"
-	      SID		      "4:143"
+	      SID		      "4:502"
 	      Position		      [200, 380, 240, 420]
 	      ZOrder		      13
 	      Value		      "7"
@@ -1253,10 +1754,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "buttons"
-	  SID			  "4:151"
+	  SID			  "4:518"
 	  Ports			  []
 	  Position		  [100, 380, 240, 420]
-	  ZOrder		  20
+	  ZOrder		  55
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -1282,7 +1783,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "BTN_MARK;Mark event;;Marks a timestamp event in the data;;;;;"
-	      SID		      "4:152"
+	      SID		      "4:519"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	      Value		      "2"
@@ -1290,7 +1791,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "BTN_REPEAT;Repeat trial;;Repeat the current trial;;;;;"
-	      SID		      "4:154"
+	      SID		      "4:521"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "3"
@@ -1298,14 +1799,14 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:153"
+	      SID		      "4:520"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:155"
+	      SID		      "4:522"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
@@ -1326,10 +1827,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "events"
-	  SID			  "4:150"
+	  SID			  "4:509"
 	  Ports			  []
 	  Position		  [100, 320, 240, 360]
-	  ZOrder		  19
+	  ZOrder		  54
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -1352,15 +1853,98 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Constant
+	      Name		      "E_BALL_RELEASE;BALL_RELEASE;;Ball released at the slope top;;;none;;"
+	      SID		      "4:510"
+	      Position		      [200, 20, 240, 60]
+	      ZOrder		      1
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "E_CONTACT_END;CONTACT_END;;Ball-hand contact ended;;;none;;"
+	      SID		      "4:514"
+	      Position		      [200, 140, 240, 180]
+	      ZOrder		      5
+	      Value		      "3"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "E_CONTACT_START;CONTACT_START;;Ball-hand contact started (pen greater than 0);;;none;;"
+	      SID		      "4:512"
+	      Position		      [200, 80, 240, 120]
+	      ZOrder		      3
+	      Value		      "2"
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "E_HAND_LEFT_HOME;HAND_LEFT_HOME;;Hand left home before impact - trial aborted;;;error;;"
+	      SID		      "4:516"
+	      Position		      [200, 200, 240, 240]
+	      ZOrder		      7
+	      Value		      "4"
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator1"
+	      SID		      "4:511"
+	      Position		      [300, 30, 340, 50]
+	      ZOrder		      2
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator2"
+	      SID		      "4:513"
+	      Position		      [300, 90, 340, 110]
+	      ZOrder		      4
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator3"
+	      SID		      "4:515"
+	      Position		      [300, 150, 340, 170]
+	      ZOrder		      6
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      "Terminator4"
+	      SID		      "4:517"
+	      Position		      [300, 210, 340, 230]
+	      ZOrder		      8
+	    }
+	    Line {
+	      SrcBlock		      "E_BALL_RELEASE;BALL_RELEASE;;Ball released at the slope top;;;none;;"
+	      SrcPort		      1
+	      DstBlock		      "Terminator1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "E_CONTACT_START;CONTACT_START;;Ball-hand contact started (pen greater than 0);;;none;;"
+	      SrcPort		      1
+	      DstBlock		      "Terminator2"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "E_CONTACT_END;CONTACT_END;;Ball-hand contact ended;;;none;;"
+	      SrcPort		      1
+	      DstBlock		      "Terminator3"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "E_HAND_LEFT_HOME;HAND_LEFT_HOME;;Hand left home before impact - trial aborted;;;error;;"
+	      SrcPort		      1
+	      DstBlock		      "Terminator4"
+	      DstPort		      1
+	    }
 	  }
 	}
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "load_table"
-	  SID			  "4:105"
+	  SID			  "4:464"
 	  Ports			  []
 	  Position		  [100, 140, 240, 180]
-	  ZOrder		  16
+	  ZOrder		  51
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -1386,14 +1970,14 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "BallMass;BallMass;float;Ball mass (kg);;;none;;"
-	      SID		      "4:106"
+	      SID		      "4:465"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "BallRadius;BallRadius;float;Ball radius (cm);;;none;;"
-	      SID		      "4:108"
+	      SID		      "4:467"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -1401,7 +1985,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Bc;Bc;float;Contact damping (N s per m);;;none;;"
-	      SID		      "4:120"
+	      SID		      "4:479"
 	      Position		      [200, 440, 240, 480]
 	      ZOrder		      15
 	      Value		      "8"
@@ -1409,7 +1993,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "FlatLength;FlatLength;float;Flat run-out length (cm);;;none;;"
-	      SID		      "4:114"
+	      SID		      "4:473"
 	      Position		      [200, 260, 240, 300]
 	      ZOrder		      9
 	      Value		      "5"
@@ -1417,7 +2001,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Fmax;Fmax;float;Contact force clamp (N), also hard-clamped in the model;;;none;;"
-	      SID		      "4:122"
+	      SID		      "4:481"
 	      Position		      [200, 500, 240, 540]
 	      ZOrder		      17
 	      Value		      "9"
@@ -1425,7 +2009,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "HapticsOn;HapticsOn;int;Contact force on (1) or visual only (0);;;none;;"
-	      SID		      "4:124"
+	      SID		      "4:483"
 	      Position		      [200, 560, 240, 600]
 	      ZOrder		      19
 	      Value		      "10"
@@ -1433,7 +2017,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Kc;Kc;float;Contact stiffness (N per m);;;none;;"
-	      SID		      "4:118"
+	      SID		      "4:477"
 	      Position		      [200, 380, 240, 420]
 	      ZOrder		      13
 	      Value		      "7"
@@ -1441,7 +2025,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "RollRes;RollRes;float;Rolling resistance coefficient;;;none;;"
-	      SID		      "4:116"
+	      SID		      "4:475"
 	      Position		      [200, 320, 240, 360]
 	      ZOrder		      11
 	      Value		      "6"
@@ -1449,7 +2033,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "SlopeAngle;SlopeAngle;float;Slope angle (deg);;;none;;"
-	      SID		      "4:110"
+	      SID		      "4:469"
 	      Position		      [200, 140, 240, 180]
 	      ZOrder		      5
 	      Value		      "3"
@@ -1457,7 +2041,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "SlopeLength;SlopeLength;float;Slope length (cm);;;none;;"
-	      SID		      "4:112"
+	      SID		      "4:471"
 	      Position		      [200, 200, 240, 240]
 	      ZOrder		      7
 	      Value		      "4"
@@ -1465,91 +2049,91 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:107"
+	      SID		      "4:466"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator10"
-	      SID		      "4:125"
+	      SID		      "4:484"
 	      Position		      [300, 570, 340, 590]
 	      ZOrder		      20
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator11"
-	      SID		      "4:127"
+	      SID		      "4:486"
 	      Position		      [300, 630, 340, 650]
 	      ZOrder		      22
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator12"
-	      SID		      "4:129"
+	      SID		      "4:488"
 	      Position		      [300, 690, 340, 710]
 	      ZOrder		      24
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:109"
+	      SID		      "4:468"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator3"
-	      SID		      "4:111"
+	      SID		      "4:470"
 	      Position		      [300, 150, 340, 170]
 	      ZOrder		      6
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator4"
-	      SID		      "4:113"
+	      SID		      "4:472"
 	      Position		      [300, 210, 340, 230]
 	      ZOrder		      8
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator5"
-	      SID		      "4:115"
+	      SID		      "4:474"
 	      Position		      [300, 270, 340, 290]
 	      ZOrder		      10
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator6"
-	      SID		      "4:117"
+	      SID		      "4:476"
 	      Position		      [300, 330, 340, 350]
 	      ZOrder		      12
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator7"
-	      SID		      "4:119"
+	      SID		      "4:478"
 	      Position		      [300, 390, 340, 410]
 	      ZOrder		      14
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator8"
-	      SID		      "4:121"
+	      SID		      "4:480"
 	      Position		      [300, 450, 340, 470]
 	      ZOrder		      16
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator9"
-	      SID		      "4:123"
+	      SID		      "4:482"
 	      Position		      [300, 510, 340, 530]
 	      ZOrder		      18
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "TransientAmp;TransientAmp;float;Impact transient amplitude (N per unit impact speed);;;none;;"
-	      SID		      "4:126"
+	      SID		      "4:485"
 	      Position		      [200, 620, 240, 660]
 	      ZOrder		      21
 	      Value		      "11"
@@ -1557,7 +2141,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "TransientFreq;TransientFreq;float;Impact transient frequency (Hz);;;none;;"
-	      SID		      "4:128"
+	      SID		      "4:487"
 	      Position		      [200, 680, 240, 720]
 	      ZOrder		      23
 	      Value		      "12"
@@ -1639,10 +2223,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "target_table"
-	  SID			  "4:94"
+	  SID			  "4:453"
 	  Ports			  []
 	  Position		  [100, 80, 240, 120]
-	  ZOrder		  15
+	  ZOrder		  50
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -1668,7 +2252,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Colour;Colour;colour;Target colour;;;none;;"
-	      SID		      "4:103"
+	      SID		      "4:462"
 	      Position		      [200, 260, 240, 300]
 	      ZOrder		      9
 	      Value		      "5"
@@ -1676,7 +2260,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "LogRadius;LogRadius;float;Hand-in-target logical radius (cm);;;none;;"
-	      SID		      "4:101"
+	      SID		      "4:460"
 	      Position		      [200, 200, 240, 240]
 	      ZOrder		      7
 	      Value		      "4"
@@ -1684,42 +2268,42 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:96"
+	      SID		      "4:455"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:98"
+	      SID		      "4:457"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator3"
-	      SID		      "4:100"
+	      SID		      "4:459"
 	      Position		      [300, 150, 340, 170]
 	      ZOrder		      6
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator4"
-	      SID		      "4:102"
+	      SID		      "4:461"
 	      Position		      [300, 210, 340, 230]
 	      ZOrder		      8
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator5"
-	      SID		      "4:104"
+	      SID		      "4:463"
 	      Position		      [300, 270, 340, 290]
 	      ZOrder		      10
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "VisRadius;VisRadius;float;Drawn radius of the target circle (cm);;;none;;"
-	      SID		      "4:99"
+	      SID		      "4:458"
 	      Position		      [200, 140, 240, 180]
 	      ZOrder		      5
 	      Value		      "3"
@@ -1727,14 +2311,14 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "col_x;X;float;X Position (cm) of the target relative to  local (0,0);;;none;;"
-	      SID		      "4:95"
+	      SID		      "4:454"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "col_y;Y;float;Y Position (cm) of the target relative to  local (0,0);;;none;;"
-	      SID		      "4:97"
+	      SID		      "4:456"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -1774,10 +2358,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "task_definition"
-	  SID			  "4:89"
+	  SID			  "4:448"
 	  Ports			  []
 	  Position		  [100, 20, 240, 60]
-	  ZOrder		  14
+	  ZOrder		  49
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -1803,14 +2387,14 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "INSTRUCTIONS="
-	      SID		      "4:90"
+	      SID		      "4:449"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "LOAD_FOR=EITHER"
-	      SID		      "4:92"
+	      SID		      "4:451"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -1818,14 +2402,14 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:91"
+	      SID		      "4:450"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:93"
+	      SID		      "4:452"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
@@ -1846,10 +2430,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "task_wide"
-	  SID			  "4:145"
+	  SID			  "4:504"
 	  Ports			  []
 	  Position		  [100, 260, 240, 300]
-	  ZOrder		  18
+	  ZOrder		  53
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -1876,7 +2460,7 @@ Model {
 	      BlockType		      Constant
 	      Name		      "ApproachDir;ApproachDir;float;Ball approach direction (deg) with 90 = lateral from +X and 0 = towa"
 	      "rd body;;;none;;"
-	      SID		      "4:148"
+	      SID		      "4:507"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -1884,21 +2468,21 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "HandRadius;HandRadius;float;Hand contact (paddle) radius (cm);;;none;;"
-	      SID		      "4:146"
+	      SID		      "4:505"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:147"
+	      SID		      "4:506"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:149"
+	      SID		      "4:508"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
@@ -1959,8 +2543,8 @@ Model {
       BlockType		      SubSystem
       Name		      "Trial_Control"
       SID		      "2"
-      Ports		      [2, 4, 0, 1]
-      Position		      [330, 92, 510, 233]
+      Ports		      [6, 8, 0, 1]
+      Position		      [330, 98, 510, 242]
       ZOrder		      2
       LibraryVersion	      "1.262"
       ErrorFcn		      "Stateflow.Translate.translate"
@@ -1989,7 +2573,7 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"52"
+	SIDHighWatermark	"60"
 	Block {
 	  BlockType		  Inport
 	  Name			  "Trial_Protocol"
@@ -2008,11 +2592,47 @@ Model {
 	  IconDisplay		  "Port number"
 	}
 	Block {
+	  BlockType		  Inport
+	  Name			  "pen_fb"
+	  SID			  "2::53"
+	  Position		  [20, 171, 40, 189]
+	  ZOrder		  33
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "speed_fb"
+	  SID			  "2::54"
+	  Position		  [20, 206, 40, 224]
+	  ZOrder		  34
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "delay_fb"
+	  SID			  "2::59"
+	  Position		  [20, 246, 40, 264]
+	  ZOrder		  39
+	  Port			  "5"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "timeout_fb"
+	  SID			  "2::60"
+	  Position		  [20, 281, 40, 299]
+	  ZOrder		  40
+	  Port			  "6"
+	  IconDisplay		  "Port number"
+	}
+	Block {
 	  BlockType		  TriggerPort
 	  Name			  " input events "
 	  SID			  "2::45"
 	  Ports			  [0, 1]
-	  Position		  [20, 171, 40, 189]
+	  Position		  [20, 316, 40, 334]
 	  ZOrder		  25
 	  TriggerType		  "either"
 	  StatesWhenEnabling	  "held"
@@ -2023,7 +2643,7 @@ Model {
 	  Name			  " Demux "
 	  SID			  "2::42"
 	  Ports			  [1, 1]
-	  Position		  [270, 280, 320, 320]
+	  Position		  [270, 425, 320, 465]
 	  ZOrder		  22
 	  Outputs		  "1"
 	}
@@ -2032,11 +2652,11 @@ Model {
 	  Name			  " SFunction "
 	  SID			  "2::41"
 	  Tag			  "Stateflow S-Function ball_impact 1"
-	  Ports			  [3, 5]
-	  Position		  [180, 105, 230, 225]
+	  Ports			  [7, 9]
+	  Position		  [180, 110, 230, 310]
 	  ZOrder		  21
 	  FunctionName		  "sf_sfun"
-	  PortCounts		  "[3 5]"
+	  PortCounts		  "[7 9]"
 	  EnableBusSupport	  off
 	  Port {
 	    PortNumber		    2
@@ -2058,6 +2678,30 @@ Model {
 	  }
 	  Port {
 	    PortNumber		    5
+	    Name		    "event_code"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    6
+	    Name		    "phase"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    7
+	    Name		    "load_row"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    8
+	    Name		    "ball_row"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    9
 	    Name		    "e_Trial_End"
 	    RTWStorageClass	    "Auto"
 	    DataLoggingNameMode	    "SignalName"
@@ -2067,7 +2711,7 @@ Model {
 	  BlockType		  Terminator
 	  Name			  " Terminator "
 	  SID			  "2::47"
-	  Position		  [460, 291, 480, 309]
+	  Position		  [460, 436, 480, 454]
 	  ZOrder		  27
 	}
 	Block {
@@ -2098,11 +2742,47 @@ Model {
 	}
 	Block {
 	  BlockType		  Outport
+	  Name			  "event_code"
+	  SID			  "2::55"
+	  Position		  [460, 206, 480, 224]
+	  ZOrder		  35
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "phase"
+	  SID			  "2::56"
+	  Position		  [460, 246, 480, 264]
+	  ZOrder		  36
+	  Port			  "5"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "load_row"
+	  SID			  "2::57"
+	  Position		  [460, 281, 480, 299]
+	  ZOrder		  37
+	  Port			  "6"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "ball_row"
+	  SID			  "2::58"
+	  Position		  [460, 316, 480, 334]
+	  ZOrder		  38
+	  Port			  "7"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
 	  Name			  "e_Trial_End"
 	  SID			  "2::46"
-	  Position		  [460, 206, 480, 224]
+	  Position		  [460, 351, 480, 369]
 	  ZOrder		  26
-	  Port			  "4"
+	  Port			  "8"
 	  IconDisplay		  "Port number"
 	}
 	Line {
@@ -2116,6 +2796,30 @@ Model {
 	  SrcPort		  1
 	  DstBlock		  " SFunction "
 	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "pen_fb"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "speed_fb"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "delay_fb"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  5
+	}
+	Line {
+	  SrcBlock		  "timeout_fb"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  6
 	}
 	Line {
 	  Name			  "logging_enable"
@@ -2142,10 +2846,42 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  Name			  "e_Trial_End"
+	  Name			  "event_code"
 	  Labels		  [0, 0]
 	  SrcBlock		  " SFunction "
 	  SrcPort		  5
+	  DstBlock		  "event_code"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "phase"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  6
+	  DstBlock		  "phase"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "load_row"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  7
+	  DstBlock		  "load_row"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "ball_row"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  8
+	  DstBlock		  "ball_row"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "e_Trial_End"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  9
 	  DstBlock		  "e_Trial_End"
 	  DstPort		  1
 	}
@@ -2159,7 +2895,7 @@ Model {
 	  SrcBlock		  " input events "
 	  SrcPort		  1
 	  DstBlock		  " SFunction "
-	  DstPort		  3
+	  DstPort		  7
 	}
 	Line {
 	  SrcBlock		  " SFunction "
@@ -2170,18 +2906,51 @@ Model {
       }
     }
     Block {
+      BlockType		      UnitDelay
+      Name		      "UD_delay"
+      SID		      "34"
+      Position		      [620, 660, 660, 690]
+      ZOrder		      34
+      SampleTime	      "0.001"
+    }
+    Block {
+      BlockType		      UnitDelay
+      Name		      "UD_pen"
+      SID		      "32"
+      Position		      [620, 560, 660, 590]
+      ZOrder		      32
+      SampleTime	      "0.001"
+    }
+    Block {
+      BlockType		      UnitDelay
+      Name		      "UD_speed"
+      SID		      "33"
+      Position		      [620, 610, 660, 640]
+      ZOrder		      33
+      SampleTime	      "0.001"
+    }
+    Block {
+      BlockType		      UnitDelay
+      Name		      "UD_timeout"
+      SID		      "35"
+      Position		      [620, 710, 660, 740]
+      ZOrder		      35
+      SampleTime	      "0.001"
+    }
+    Block {
       BlockType		      Concatenate
       Name		      "VCODES"
       SID		      "8"
-      Ports		      [2, 1]
-      Position		      [840, 192, 870, 263]
+      Ports		      [3, 1]
+      Position		      [840, 198, 870, 272]
       ZOrder		      8
+      NumInputs		      "3"
       Mode		      "Multidimensional array"
     }
     Line {
       SrcBlock		      "GUI Control"
       SrcPort		      1
-      Points		      [85, 0; 0, -53]
+      Points		      [85, 0; 0, -47]
       DstBlock		      "Trial_Control"
       DstPort		      trigger
     }
@@ -2195,37 +2964,150 @@ Model {
     Line {
       SrcBlock		      "KINARM_HandInTarget"
       SrcPort		      1
-      Points		      [40, 0; 0, -65]
+      Points		      [80, 0]
       DstBlock		      "Trial_Control"
       DstPort		      2
     }
     Line {
+      SrcBlock		      "UD_pen"
+      SrcPort		      1
+      Points		      [0, -40; -95, 0; 0, -285; -255, 0]
+      DstBlock		      "Trial_Control"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "UD_speed"
+      SrcPort		      1
+      Points		      [0, -30; -95, 0; 0, -345; -255, 0]
+      DstBlock		      "Trial_Control"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "UD_delay"
+      SrcPort		      1
+      Points		      [0, -30; -350, 0]
+      DstBlock		      "Trial_Control"
+      DstPort		      5
+    }
+    Line {
+      SrcBlock		      "UD_timeout"
+      SrcPort		      1
+      Points		      [0, -30; -350, 0]
+      DstBlock		      "Trial_Control"
+      DstPort		      6
+    }
+    Line {
       SrcBlock		      "Trial_Control"
       SrcPort		      1
-      Points		      [45, 0; 0, -35]
+      Points		      [45, 0; 0, -30]
       DstBlock		      "DataLogging"
       DstPort		      1
     }
     Line {
       SrcBlock		      "Trial_Control"
       SrcPort		      2
-      Points		      [45, 0; 0, 20]
-      DstBlock		      "Show_Target"
-      DstPort		      1
+      Points		      [0, 0]
+      Branch {
+	Points			[45, 0; 0, 45]
+	DstBlock		"Show_Target"
+	DstPort			1
+      }
+      Branch {
+	Points			[5, 0; 0, 305; -205, 0]
+	DstBlock		"Ball_Engine"
+	DstPort			2
+      }
     }
     Line {
       SrcBlock		      "Trial_Control"
       SrcPort		      3
-      Points		      [45, 0; 0, 15]
+      Points		      [85, 0; 0, 55]
       DstBlock		      "Show_Target"
       DstPort		      2
     }
     Line {
       SrcBlock		      "Trial_Control"
       SrcPort		      4
-      Points		      [0, 80; -480, 0]
+      Points		      [85, 0; 0, -70]
+      DstBlock		      "DataLogging"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      5
+      Points		      [5, 0; 0, 245; -205, 0]
+      DstBlock		      "Ball_Engine"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      6
+      Points		      [5, 0; 0, 220; -210, 0; 0, 70]
+      DstBlock		      "Ball_Engine"
+      DstPort		      4
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      7
+      Points		      [5, 0; 0, 200; -210, 0; 0, 50]
+      DstBlock		      "Ball_Engine"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      8
+      Points		      [0, 10; -280, 0; 0, -25; -200, 0]
       DstBlock		      "GUI Control"
       DstPort		      1
+    }
+    Line {
+      SrcBlock		      "From_KINdata"
+      SrcPort		      1
+      Points		      [25, 0; 0, 70]
+      DstBlock		      "Ball_Engine"
+      DstPort		      5
+    }
+    Line {
+      SrcBlock		      "From_LoadTable"
+      SrcPort		      1
+      Points		      [25, 0; 0, 50]
+      DstBlock		      "Ball_Engine"
+      DstPort		      6
+    }
+    Line {
+      SrcBlock		      "From_TargetTable"
+      SrcPort		      1
+      Points		      [25, 0; 0, 30]
+      DstBlock		      "Ball_Engine"
+      DstPort		      7
+    }
+    Line {
+      SrcBlock		      "From_TaskWide"
+      SrcPort		      1
+      Points		      [30, 0]
+      DstBlock		      "Ball_Engine"
+      DstPort		      8
+    }
+    Line {
+      SrcBlock		      "From_TPTable"
+      SrcPort		      1
+      Points		      [30, 0]
+      DstBlock		      "Ball_Engine"
+      DstPort		      9
+    }
+    Line {
+      SrcBlock		      "From_TPRow"
+      SrcPort		      1
+      Points		      [30, 0]
+      DstBlock		      "Ball_Engine"
+      DstPort		      10
+    }
+    Line {
+      SrcBlock		      "From_Seed"
+      SrcPort		      1
+      Points		      [30, 0]
+      DstBlock		      "Ball_Engine"
+      DstPort		      11
     }
     Line {
       SrcBlock		      "Show_Target"
@@ -2237,15 +3119,70 @@ Model {
     Line {
       SrcBlock		      "Hand_Feedback"
       SrcPort		      1
-      Points		      [15, 0; 0, -30]
+      Points		      [15, 0; 0, -40]
       DstBlock		      "VCODES"
       DstPort		      2
     }
     Line {
+      SrcBlock		      "Ball_Engine"
+      SrcPort		      1
+      Points		      [260, 0]
+      DstBlock		      "VCODES"
+      DstPort		      3
+    }
+    Line {
       SrcBlock		      "VCODES"
       SrcPort		      1
-      Points		      [10, 0; 0, -5]
+      Points		      [10, 0; 0, -10]
       DstBlock		      "Process_Video_CMD"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Ball_Engine"
+      SrcPort		      2
+      Points		      [40, 0]
+      DstBlock		      "Forces_to_Torques"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Forces_to_Torques"
+      SrcPort		      1
+      DstBlock		      "KINARM_Apply_Loads"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Ball_Engine"
+      SrcPort		      3
+      Points		      [35, 0; 0, -390]
+      DstBlock		      "DataLogging"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "Ball_Engine"
+      SrcPort		      4
+      Points		      [40, 0]
+      DstBlock		      "UD_pen"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Ball_Engine"
+      SrcPort		      5
+      Points		      [35, 0; 0, 65]
+      DstBlock		      "UD_speed"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Ball_Engine"
+      SrcPort		      6
+      Points		      [35, 0; 0, 85]
+      DstBlock		      "UD_delay"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Ball_Engine"
+      SrcPort		      7
+      Points		      [35, 0; 0, 105]
+      DstBlock		      "UD_timeout"
       DstPort		      1
     }
   }
@@ -2263,7 +3200,7 @@ MatData {
   }
   DataRecord {
     Tag			    DataTag1
-    Data		    "  %)30     .    @%H   8    (     @         %    \"     $    '     0         %  0 #P    $    \\    <&%R8"
+    Data		    "  %)30     .    *&8   8    (     @         %    \"     $    '     0         %  0 #P    $    \\    <&%R8"
     "6US            ;G5M7W!A<F%M        <W5B7V)L;V-K7VYA;64 87!P;'D                   X   ! !0  !@    @    \"          "
     "4    (     0    (    !          4 !  -     0   ((   !P87)A;6EN9&5X    8V]N<W1A;G1N86UE '!A<F%M;&%B96P   !P87)A;71Y"
     "<&4     <&%R86UO<'1I;VX  '!A<F%M9&5S8P    !E;F%B;&5E=F5N=   9&ES86)L965V96YT &)U='1O;F=R;W5P  !B;&]C:VYA;64       "
@@ -2514,30 +3451,65 @@ MatData {
     "F]D>0      #@   *@    &    \"     0         !0    @    !    <@    $         $    '(   !!<'!R;V%C:$1I<CM!<'!R;V%C:$"
     "1I<CMF;&]A=#M\"86QL(&%P<')O86-H(&1I<F5C=&EO;B H9&5G*2!W:71H(#DP(#T@;&%T97)A;\"!F<F]M(\"M8(&%N9\" P(#T@=&]W87)D(&)O"
     "9'D[.SMN;VYE.SL        .    .     8    (    !@         %    \"     $    !     0         )    \"             ! #@  "
-    " $     &    \"     0         !0    @    !    \"0    $         $     D   !T87-K7W=I9&4         #@         .    ,   "
-    "  8    (    !@         %    \"                0         )          X    X    !@    @    &          4    (     0   "
-    " $    !          D    (               .    .     8    (    !          %    \"     $    &     0         0    !@   &"
-    "5V96YT<P  #@         .    $ 8   8    (     @         %    \"     $    \"     0         %  0 #0    $   \"\"    8V]N"
-    "<W1A;G1N86UE '!A<F%M:6YD97@   !P87)A;6QA8F5L    <&%R86UT>7!E     '!A<F%M;W!T:6]N  !E;F%B;&5E=F5N=   9&ES86)L965V96"
-    "YT &)U='1O;F=R;W5P  !P87)A;61E<V,     8FQO8VMN86UE              X    X    !@    @    $          4    (     0    @ "
-    "   !         !     (    0E1.7TU!4DL.    ,     8    (    !          %    \"     $    !     0         0  $ ,@    X  "
-    " !     !@    @    $          4    (     0    H    !         !     *    36%R:R!E=F5N=         X    P    !@    @    "
-    "$          4    (               !         !          #@   #     &    \"     0         !0    @               $     "
-    "    $          .    ,     8    (    !          %    \"                0         0          X    P    !@    @    $ "
-    "         4    (               !         !          #@   #     &    \"     0         !0    @               $       "
-    "  $          .    6     8    (    !          %    \"     $    C     0         0    (P   $UA<FMS(&$@=&EM97-T86UP(&5"
-    "V96YT(&EN('1H92!D871A       .    <     8    (    !          %    \"     $    ]     0         0    /0   $)43E]-05)+"
-    ".TUA<FL@979E;G0[.TUA<FMS(&$@=&EM97-T86UP(&5V96YT(&EN('1H92!D871A.SL[.SL    .    0     8    (    !          %    \""
-    "     $    *     0         0    \"@   $)43E]215!%050        .    ,     8    (    !          %    \"     $    !     "
-    "0         0  $ ,P    X   !     !@    @    $          4    (     0    P    !         !     ,    4F5P96%T('1R:6%L   "
-    "   X    P    !@    @    $          4    (               !         !          #@   #     &    \"     0         !0  "
-    "  @               $         $          .    ,     8    (    !          %    \"                0         0         "
-    " X    P    !@    @    $          4    (               !         !          #@   #     &    \"     0         !0    "
-    "@               $         $          .    2     8    (    !          %    \"     $    8     0         0    &    %)"
-    "E<&5A=\"!T:&4@8W5R<F5N=\"!T<FEA; X   !H    !@    @    $          4    (     0   #8    !         !     V    0E1.7U)"
-    "%4$5!5#M297!E870@=')I86P[.U)E<&5A=\"!T:&4@8W5R<F5N=\"!T<FEA;#L[.SL[   .    .     8    (    !@         %    \"     "
-    "$    !     0         )    \"             ! #@   #@    &    \"     0         !0    @    !    !P    $         $     "
-    "<   !B=71T;VYS  X         "
+    " $     &    \"     0         !0    @    !    \"0    $         $     D   !T87-K7W=I9&4         #@         .    V L "
+    "  8    (     @         %    \"     $    $     0         %  0 #0    $   \"\"    8V]N<W1A;G1N86UE '!A<F%M:6YD97@   !"
+    "P87)A;6QA8F5L    <&%R86UT>7!E     '!A<F%M;W!T:6]N  !E;F%B;&5E=F5N=   9&ES86)L965V96YT &)U='1O;F=R;W5P  !P87)A;61E<"
+    "V,     8FQO8VMN86UE              X   !     !@    @    $          4    (     0    X    !         !     .    15]\"04"
+    "Q,7U)%3$5!4T4   X    P    !@    @    $          4    (     0    $    !         !   0 Q    #@   $     &    \"     0"
+    "         !0    @    !    #     $         $     P   !\"04Q,7U)%3$5!4T4     #@   #     &    \"     0         !0    @"
+    "               $         $          .    ,     8    (    !          %    \"     $    $     0         0  0 ;F]N90X "
+    "   P    !@    @    $          4    (               !         !          #@   #     &    \"     0         !0    @  "
+    "             $         $          .    ,     8    (    !          %    \"                0         0          X   "
+    "!0    !@    @    $          4    (     0   !X    !         !     >    0F%L;\"!R96QE87-E9\"!A=\"!T:&4@<VQO<&4@=&]P "
+    "  .    >     8    (    !          %    \"     $   !$     0         0    1    $5?0D%,3%]214Q%05-%.T)!3$Q?4D5,14%313"
+    "L[0F%L;\"!R96QE87-E9\"!A=\"!T:&4@<VQO<&4@=&]P.SL[;F]N93L[      X   !     !@    @    $          4    (     0    \\ "
+    "   !         !     /    15]#3TY404-47U-405)4  X    P    !@    @    $          4    (     0    $    !         !   0"
+    " R    #@   $     &    \"     0         !0    @    !    #0    $         $     T   !#3TY404-47U-405)4    #@   #     "
+    "&    \"     0         !0    @               $         $          .    ,     8    (    !          %    \"     $    "
+    "$     0         0  0 ;F]N90X    P    !@    @    $          4    (               !         !          #@   #     & "
+    "   \"     0         !0    @               $         $          .    ,     8    (    !          %    \"            "
+    "    0         0          X   !@    !@    @    $          4    (     0   \"X    !         !     N    0F%L;\"UH86YD("
+    "&-O;G1A8W0@<W1A<G1E9\" H<&5N(&=R96%T97(@=&AA;B P*0  #@   (@    &    \"     0         !0    @    !    5@    $      "
+    "   $    %8   !%7T-/3E1!0U1?4U1!4E0[0T].5$%#5%]35$%25#L[0F%L;\"UH86YD(&-O;G1A8W0@<W1A<G1E9\" H<&5N(&=R96%T97(@=&AA;"
+    "B P*3L[.VYO;F4[.P  #@   $     &    \"     0         !0    @    !    #0    $         $     T   !%7T-/3E1!0U1?14Y$  "
+    "  #@   #     &    \"     0         !0    @    !     0    $         $  ! #,    .    0     8    (    !          %   "
+    " \"     $    +     0         0    \"P   $-/3E1!0U1?14Y$       .    ,     8    (    !          %    \"             "
+    "   0         0          X    P    !@    @    $          4    (     0    0    !         !  ! !N;VYE#@   #     &    "
+    "\"     0         !0    @               $         $          .    ,     8    (    !          %    \"               "
+    " 0         0          X    P    !@    @    $          4    (               !         !          #@   $@    &    \""
+    "     0         !0    @    !    %P    $         $    !<   !\"86QL+6AA;F0@8V]N=&%C=\"!E;F1E9  .    <     8    (    !"
+    "          %    \"     $    [     0         0    .P   $5?0T].5$%#5%]%3D0[0T].5$%#5%]%3D0[.T)A;&PM:&%N9\"!C;VYT86-T("
+    "&5N9&5D.SL[;F]N93L[       .    0     8    (    !          %    \"     $    0     0         0    $    $5?2$%.1%],14"
+    "947TA/344.    ,     8    (    !          %    \"     $    !     0         0  $ -     X   !     !@    @    $       "
+    "   4    (     0    X    !         !     .    2$%.1%],14947TA/344   X    P    !@    @    $          4    (         "
+    "      !         !          #@   #@    &    \"     0         !0    @    !    !0    $         $     4   !E<G)O<@    "
+    "X    P    !@    @    $          4    (               !         !          #@   #     &    \"     0         !0    @"
+    "               $         $          .    ,     8    (    !          %    \"                0         0          X "
+    "  !@    !@    @    $          4    (     0   \"P    !         !     L    2&%N9\"!L969T(&AO;64@8F5F;W)E(&EM<&%C=\" "
+    "M('1R:6%L(&%B;W)T960     #@   (@    &    \"     0         !0    @    !    5P    $         $    %<   !%7TA!3D1?3$5&"
+    "5%](3TU%.TA!3D1?3$5&5%](3TU%.SM(86YD(&QE9G0@:&]M92!B969O<F4@:6UP86-T(\"T@=')I86P@86)O<G1E9#L[.V5R<F]R.SL #@   #@  "
+    "  &    \"     8         !0    @    !     0    $         \"0    @            00 X    X    !@    @    $          4  "
+    "  (     0    8    !         !     &    979E;G1S   .          X    0!@  !@    @    \"          4    (     0    (   "
+    " !          4 !  -     0   ((   !C;VYS=&%N=&YA;64 <&%R86UI;F1E>    '!A<F%M;&%B96P   !P87)A;71Y<&4     <&%R86UO<'1I"
+    ";VX  &5N86)L965V96YT  !D:7-A8FQE979E;G0 8G5T=&]N9W)O=7   '!A<F%M9&5S8P    !B;&]C:VYA;64             #@   #@    &  "
+    "  \"     0         !0    @    !    \"     $         $     @   !\"5$Y?34%22PX    P    !@    @    $          4    ( "
+    "    0    $    !         !   0 R    #@   $     &    \"     0         !0    @    !    \"@    $         $     H   !-8"
+    "7)K(&5V96YT        #@   #     &    \"     0         !0    @               $         $          .    ,     8    (  "
+    "  !          %    \"                0         0          X    P    !@    @    $          4    (               !   "
+    "      !          #@   #     &    \"     0         !0    @               $         $          .    ,     8    (    "
+    "!          %    \"                0         0          X   !8    !@    @    $          4    (     0   \",    !    "
+    "     !     C    36%R:W,@82!T:6UE<W1A;7 @979E;G0@:6X@=&AE(&1A=&$       X   !P    !@    @    $          4    (     0"
+    "   #T    !         !     ]    0E1.7TU!4DL[36%R:R!E=F5N=#L[36%R:W,@82!T:6UE<W1A;7 @979E;G0@:6X@=&AE(&1A=&$[.SL[.P  "
+    "  X   !     !@    @    $          4    (     0    H    !         !     *    0E1.7U)%4$5!5         X    P    !@    "
+    "@    $          4    (     0    $    !         !   0 S    #@   $     &    \"     0         !0    @    !    #     $"
+    "         $     P   !297!E870@=')I86P     #@   #     &    \"     0         !0    @               $         $       "
+    "   .    ,     8    (    !          %    \"                0         0          X    P    !@    @    $          4  "
+    "  (               !         !          #@   #     &    \"     0         !0    @               $         $         "
+    " .    ,     8    (    !          %    \"                0         0          X   !(    !@    @    $          4    "
+    "(     0   !@    !         !     8    4F5P96%T('1H92!C=7)R96YT('1R:6%L#@   &@    &    \"     0         !0    @    !"
+    "    -@    $         $    #8   !\"5$Y?4D5014%4.U)E<&5A=\"!T<FEA;#L[4F5P96%T('1H92!C=7)R96YT('1R:6%L.SL[.SL   X    X"
+    "    !@    @    &          4    (     0    $    !          D    (             $ .    .     8    (    !          %  "
+    "  \"     $    '     0         0    !P   &)U='1O;G, #@         "
   }
 }
 # Finite State Machines
@@ -2552,8 +3524,8 @@ Stateflow {
     name		    "ball_impact"
     created		    "20-Nov-2026 16:44:01"
     isLibrary		    0
-    firstData		    18
-    firstTarget		    20
+    firstData		    67
+    firstTarget		    69
     sfVersion		    76014001.0015
   }
   chart {
@@ -2569,14 +3541,16 @@ Stateflow {
     chartColor		    [1 0.9882352941176471 0.9254901960784314]
     screen		    [1 1 1920 1200 1.333333333333333]
     treeNode		    [0 3 0 0]
-    firstTransition	    14
+    firstTransition	    28
     viewObj		    2
     machine		    1
     toolbarMode		    LIBRARY_TOOLBAR
-    ssIdHighWaterMark	    14
+    subviewS {
+    }
+    ssIdHighWaterMark	    68
     decomposition	    CLUSTER_CHART
-    firstEvent		    11
-    firstData		    5
+    firstEvent		    25
+    firstData		    11
     chartFileNumber	    1
     saturateOnIntegerOverflow 1
     userSpecifiedStateTransitionExecutionOrder 1
@@ -2584,36 +3558,114 @@ Stateflow {
   }
   state {
     id			    3
-    labelString		    "Init\nentry:\nlogging_enable = 1;\ntarget_row = Trial_Protocol[HomeTarget];\ntarget_state = 1;\n"
-    "TimeInterval = Trial_Protocol[HoldTime] + 1500;"
-    position		    [30 30 220 110]
+    labelString		    "WAIT_HOME\nentry:\nlogging_enable = 1;\ntarget_row = Trial_Protocol[HomeTarget];\ntarget_state ="
+    " 1;\nload_row = Trial_Protocol[Load];\nball_row = Trial_Protocol[BallTarget];\nphase = 0;\nevent_code = 0;"
+    position		    [40 125 300 130]
     fontSize		    12
     chart		    2
     treeNode		    [2 0 0 4]
     visible		    0
     subviewer		    2
-    ssIdNumber		    9
+    ssIdNumber		    46
     type		    OR_STATE
     decomposition	    CLUSTER_STATE
   }
   state {
     id			    4
-    labelString		    "EndOfTrial\nentry:\nlogging_enable = 0;\ntarget_state = 0;\nsend(e_Trial_End);"
-    position		    [320 30 220 110]
+    labelString		    "HOLD\nentry:\nTimeInterval = Trial_Protocol[HoldTime];"
+    position		    [420 125 300 130]
     fontSize		    12
     chart		    2
-    treeNode		    [2 0 3 0]
+    treeNode		    [2 0 3 5]
     visible		    0
     subviewer		    2
-    ssIdNumber		    10
+    ssIdNumber		    47
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    5
+    labelString		    "RELEASE_WAIT\nentry:\nphase = 1;\nTimeInterval = delay_fb;"
+    position		    [800 125 300 130]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 4 9]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    48
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    6
+    labelString		    "ROLLING\nentry:\nphase = 2;\nevent_code = E_BALL_RELEASE;\nTimeInterval = timeout_fb;"
+    position		    [800 325 300 130]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 9 8]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    49
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    7
+    labelString		    "CONTACT\nentry:\nevent_code = E_CONTACT_START;"
+    position		    [800 525 300 130]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 8 10]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    50
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    8
+    labelString		    "POST_IMPACT\nentry:\nevent_code = E_CONTACT_END;"
+    position		    [420 525 300 130]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 6 7]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    51
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    9
+    labelString		    "ABORT_LEAVE\nentry:\nevent_code = E_HAND_LEFT_HOME;"
+    position		    [420 325 300 130]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 5 6]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    52
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+  }
+  state {
+    id			    10
+    labelString		    "EndOfTrial\nentry:\nlogging_enable = 0;\ntarget_state = 0;\nphase = 0;\nsend(e_Trial_End);"
+    position		    [40 725 300 130]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 7 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    53
     type		    OR_STATE
     decomposition	    CLUSTER_STATE
   }
   data {
-    id			    5
+    id			    11
     ssIdNumber		    4
     name		    "Trial_Protocol"
-    linkNode		    [2 0 6]
+    linkNode		    [2 0 12]
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -2630,10 +3682,10 @@ Stateflow {
     dataType		    "double"
   }
   data {
-    id			    6
+    id			    12
     ssIdNumber		    5
     name		    "HandInTarget"
-    linkNode		    [2 5 7]
+    linkNode		    [2 11 13]
     scope		    INPUT_DATA
     machine		    1
     props {
@@ -2650,10 +3702,10 @@ Stateflow {
     dataType		    "double"
   }
   data {
-    id			    7
+    id			    13
     ssIdNumber		    6
     name		    "logging_enable"
-    linkNode		    [2 6 8]
+    linkNode		    [2 12 14]
     scope		    OUTPUT_DATA
     machine		    1
     props {
@@ -2667,10 +3719,10 @@ Stateflow {
     dataType		    "double"
   }
   data {
-    id			    8
+    id			    14
     ssIdNumber		    7
     name		    "target_row"
-    linkNode		    [2 7 9]
+    linkNode		    [2 13 15]
     scope		    OUTPUT_DATA
     machine		    1
     props {
@@ -2684,10 +3736,10 @@ Stateflow {
     dataType		    "double"
   }
   data {
-    id			    9
+    id			    15
     ssIdNumber		    8
     name		    "target_state"
-    linkNode		    [2 8 10]
+    linkNode		    [2 14 16]
     scope		    OUTPUT_DATA
     machine		    1
     props {
@@ -2701,10 +3753,10 @@ Stateflow {
     dataType		    "double"
   }
   data {
-    id			    10
+    id			    16
     ssIdNumber		    14
     name		    "TimeInterval"
-    linkNode		    [2 9 0]
+    linkNode		    [2 15 17]
     scope		    LOCAL_DATA
     machine		    1
     props {
@@ -2716,113 +3768,1064 @@ Stateflow {
     }
     dataType		    "double"
   }
+  data {
+    id			    17
+    ssIdNumber		    15
+    name		    "pen_fb"
+    linkNode		    [2 16 18]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    18
+    ssIdNumber		    16
+    name		    "speed_fb"
+    linkNode		    [2 17 19]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    19
+    ssIdNumber		    17
+    name		    "event_code"
+    linkNode		    [2 18 20]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    20
+    ssIdNumber		    18
+    name		    "phase"
+    linkNode		    [2 19 21]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    21
+    ssIdNumber		    19
+    name		    "load_row"
+    linkNode		    [2 20 22]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    22
+    ssIdNumber		    20
+    name		    "ball_row"
+    linkNode		    [2 21 23]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    23
+    ssIdNumber		    44
+    name		    "delay_fb"
+    linkNode		    [2 22 24]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    24
+    ssIdNumber		    45
+    name		    "timeout_fb"
+    linkNode		    [2 23 0]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
   event {
-    id			    11
+    id			    25
     ssIdNumber		    1
     name		    "e_clk"
-    linkNode		    [2 0 12]
+    linkNode		    [2 0 26]
     scope		    INPUT_EVENT
     trigger		    RISING_EDGE_EVENT
     machine		    1
   }
   event {
-    id			    12
+    id			    26
     ssIdNumber		    2
     name		    "e_ExitTrialNow"
-    linkNode		    [2 11 13]
+    linkNode		    [2 25 27]
     scope		    INPUT_EVENT
     trigger		    EITHER_EDGE_EVENT
     machine		    1
   }
   event {
-    id			    13
+    id			    27
     ssIdNumber		    3
     name		    "e_Trial_End"
-    linkNode		    [2 12 0]
+    linkNode		    [2 26 0]
     scope		    OUTPUT_EVENT
     trigger		    EITHER_EDGE_EVENT
     machine		    1
   }
   transition {
-    id			    14
-    labelPosition	    [52.625 0.93 0 0]
+    id			    28
+    labelString		    "[HandInTarget[target_row] == 0]"
+    labelPosition	    [1134.025 162.054 172 17]
     fontSize		    12
     src {
-      intersection	      [0 1.4142 1.4142 0 140 5 0 0]
+      id		      5
+      intersection	      [4 -1 0 0.6254 800 173.7025 0 0]
     }
     dst {
       id		      3
-      intersection	      [1 0 -1 0.5 140 30 0 0]
+      intersection	      [1 0 -1 0.0665 59.95 125 0 0]
     }
-    midPoint		    [140 15]
+    midPoint		    [337.1976 52.5739]
     chart		    2
-    linkNode		    [2 0 15]
-    dataLimits		    [137.6 142.4 5 30]
+    linkNode		    [2 0 29]
+    dataLimits		    [57.55 800 20.243 173.703]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    2
+    ssIdNumber		    59
+  }
+  transition {
+    id			    29
+    labelString		    "[HandInTarget[target_row] == 0]"
+    labelPosition	    [564.025 145.699 172 17]
+    fontSize		    12
+    src {
+      id		      4
+      intersection	      [4 -1 0 0.7092 420 162.7993 0 0]
+    }
+    dst {
+      id		      3
+      intersection	      [1 0 -1 0.0665 59.95 125 0 0]
+    }
+    midPoint		    [194.6061 94.5307]
+    chart		    2
+    linkNode		    [2 28 30]
+    dataLimits		    [57.55 420 72.998 162.799]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    2
+    ssIdNumber		    57
+  }
+  transition {
+    id			    30
+    labelString		    "[HandInTarget[target_row] == 1]"
+    labelPosition	    [292.462 106.588 172 17]
+    fontSize		    12
+    src {
+      id		      3
+      intersection	      [1 0 -1 0.1045 71.3592 125 0 0]
+    }
+    dst {
+      id		      4
+      intersection	      [4 -1 0 0.6415 420 171.6038 0 0]
+    }
+    midPoint		    [198.7029 105.3251]
+    chart		    2
+    linkNode		    [2 29 31]
+    dataLimits		    [71.359 420 83.861 174.004]
     subviewer		    2
     slide {
       sticky		      BOTH_STICK
     }
     executionOrder	    1
-    ssIdNumber		    11
+    ssIdNumber		    55
   }
   transition {
-    id			    15
+    id			    31
+    labelPosition	    [48.854 98.385 0 0]
+    fontSize		    12
+    src {
+      intersection	      [0 1.4142 1.4142 0 190 90 0 0]
+    }
+    dst {
+      id		      3
+      intersection	      [1 0 -1 0.5 190 125 0 0]
+    }
+    midPoint		    [190 107]
+    chart		    2
+    linkNode		    [2 30 32]
+    dataLimits		    [187.6 192.4 90 125]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    54
+  }
+  transition {
+    id			    32
+    labelString		    "after(1000, e_clk)"
+    labelPosition	    [192.951 989 95.5 17]
+    fontSize		    12
+    src {
+      id		      10
+      intersection	      [1 0 -1 0.4421 172.6174 725 0 0]
+    }
+    dst {
+      id		      3
+      intersection	      [1 0 -1 0.0665 59.95 125 0 0]
+    }
+    midPoint		    [116.2837 266.4123]
+    chart		    2
+    linkNode		    [2 31 33]
+    dataLimits		    [48.46 172.617 108.01 725]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    68
+  }
+  transition {
+    id			    33
     labelString		    "after(TimeInterval, e_clk)"
-    labelPosition	    [304.567 30.154 134.5 17]
+    labelPosition	    [693.786 159.874 134.5 17]
     fontSize		    12
     src {
-      id		      3
-      intersection	      [2 1 0 0.5 250 85 0 0]
+      id		      4
+      intersection	      [4 -1 0 0.7092 420 162.7993 0 0]
     }
     dst {
-      id		      4
-      intersection	      [4 -1 0 0.5 320 85 0 0]
+      id		      5
+      intersection	      [4 -1 0 0.5824 800 179.2857 0 0]
     }
-    midPoint		    [281 85]
+    midPoint		    [512.9087 171.0425]
     chart		    2
-    linkNode		    [2 14 16]
-    dataLimits		    [250 320 82.6 87.4]
+    linkNode		    [2 32 34]
+    dataLimits		    [395.102 800 162.799 181.686]
     subviewer		    2
     slide {
       sticky		      BOTH_STICK
     }
     executionOrder	    1
-    ssIdNumber		    12
+    ssIdNumber		    56
   }
   transition {
-    id			    16
-    labelString		    "after(10, e_clk)"
-    labelPosition	    [429 37.187 82 17]
+    id			    34
+    labelString		    "after(TimeInterval, e_clk)"
+    labelPosition	    [777.866 228.91 134.5 17]
     fontSize		    12
     src {
-      id		      4
-      intersection	      [3 0 1 0.8333 356.6667 140 0 0]
+      id		      5
+      intersection	      [4 -1 0 0.6254 800 173.7025 0 0]
     }
     dst {
-      id		      3
-      intersection	      [3 0 1 0.1667 213.3333 140 0 0]
+      id		      6
+      intersection	      [4 -1 0 0.836 800 346.3187 0 0]
     }
-    midPoint		    [285 179.8891]
+    midPoint		    [752.7996 260.0106]
     chart		    2
-    linkNode		    [2 15 0]
-    dataLimits		    [133.837 356.667 121.926 153.007]
+    linkNode		    [2 33 35]
+    dataLimits		    [752.621 800 173.703 348.719]
     subviewer		    2
     slide {
       sticky		      BOTH_STICK
     }
     executionOrder	    1
-    ssIdNumber		    13
+    ssIdNumber		    58
+  }
+  transition {
+    id			    35
+    labelString		    "[HandInTarget[target_row] == 0]"
+    labelPosition	    [944 318.925 172 17]
+    fontSize		    12
+    src {
+      id		      6
+      intersection	      [4 -1 0 0.8465 800 344.95 0 0]
+    }
+    dst {
+      id		      9
+      intersection	      [1 0 -1 0.0667 440 325 0 0]
+    }
+    midPoint		    [574.8646 285.8396]
+    chart		    2
+    linkNode		    [2 34 36]
+    dataLimits		    [437.6 800 270.009 344.95]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    2
+    ssIdNumber		    61
+  }
+  transition {
+    id			    36
+    labelString		    "after(10, e_clk)"
+    labelPosition	    [548.559 489 82 17]
+    fontSize		    12
+    src {
+      id		      9
+      intersection	      [1 0 -1 0.0938 448.1518 325 0 0]
+    }
+    dst {
+      id		      10
+      intersection	      [1 0 -1 0.4511 175.3383 725 0 0]
+    }
+    midPoint		    [311.7451 401.6028]
+    chart		    2
+    linkNode		    [2 35 37]
+    dataLimits		    [172.938 448.152 287.831 725]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    67
+  }
+  transition {
+    id			    37
+    labelString		    "after(TimeInterval, e_clk)"
+    labelPosition	    [1076.331 498.975 134.5 17]
+    fontSize		    12
+    src {
+      id		      6
+      intersection	      [4 -1 0 0.8465 800 344.95 0 0]
+    }
+    dst {
+      id		      10
+      intersection	      [1 0 -1 0.4511 175.3383 725 0 0]
+    }
+    midPoint		    [396.7861 440.0919]
+    chart		    2
+    linkNode		    [2 36 38]
+    dataLimits		    [172.938 800 344.95 725]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    3
+    ssIdNumber		    62
+  }
+  transition {
+    id			    38
+    labelString		    "[pen_fb > 0]"
+    labelPosition	    [775.398 398.975 65.75 17]
+    fontSize		    12
+    src {
+      id		      6
+      intersection	      [4 -1 0 0.8465 800 344.95 0 0]
+    }
+    dst {
+      id		      7
+      intersection	      [1 0 -1 0.076 822.7957 525 0 0]
+    }
+    midPoint		    [789.7037 409.2808]
+    chart		    2
+    linkNode		    [2 37 39]
+    dataLimits		    [779.11 825.196 344.95 525]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    60
+  }
+  transition {
+    id			    39
+    labelString		    "after(5, e_clk)[pen_fb <= 0]"
+    labelPosition	    [957.286 489 146 17]
+    fontSize		    12
+    src {
+      id		      7
+      intersection	      [1 0 -1 0.0917 827.495 525 0 0]
+    }
+    dst {
+      id		      8
+      intersection	      [1 0 -1 0.253 495.914 525 0 0]
+    }
+    midPoint		    [661.7045 438.0806]
+    chart		    2
+    linkNode		    [2 38 40]
+    dataLimits		    [493.514 827.495 437.977 525]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    63
+  }
+  transition {
+    id			    40
+    labelString		    "[pen_fb > 0]"
+    labelPosition	    [712.76 544.51 65.75 17]
+    fontSize		    12
+    src {
+      id		      8
+      intersection	      [1 0 -1 0.2553 496.6004 525 0 0]
+    }
+    dst {
+      id		      7
+      intersection	      [1 0 -1 0.076 822.7957 525 0 0]
+    }
+    midPoint		    [659.698 439.4267]
+    chart		    2
+    linkNode		    [2 39 41]
+    dataLimits		    [496.6 825.196 439.32 525]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    64
+  }
+  transition {
+    id			    41
+    labelString		    "after(2500, e_clk)"
+    labelPosition	    [621.231 589 95.5 17]
+    fontSize		    12
+    src {
+      id		      8
+      intersection	      [1 0 -1 0.2553 496.6004 525 0 0]
+    }
+    dst {
+      id		      10
+      intersection	      [1 0 -1 0.4511 175.3383 725 0 0]
+    }
+    midPoint		    [335.9694 527.4341]
+    chart		    2
+    linkNode		    [2 40 42]
+    dataLimits		    [172.938 496.6 484.602 725]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    3
+    ssIdNumber		    66
+  }
+  transition {
+    id			    42
+    labelString		    "after(300, e_clk)[speed_fb < 0.02]"
+    labelPosition	    [621.231 589 182 17]
+    fontSize		    12
+    src {
+      id		      8
+      intersection	      [1 0 -1 0.2553 496.6004 525 0 0]
+    }
+    dst {
+      id		      10
+      intersection	      [1 0 -1 0.4511 175.3383 725 0 0]
+    }
+    midPoint		    [335.9694 527.4341]
+    chart		    2
+    linkNode		    [2 41 0]
+    dataLimits		    [172.938 496.6 484.602 725]
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    2
+    ssIdNumber		    65
   }
   instance {
-    id			    17
+    id			    43
     name		    "Trial_Control"
     machine		    1
     chart		    2
   }
+  chart {
+    id			    44
+    name		    "Ball_Engine"
+    windowPosition	    [357.331 483.407 167 391]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 1280 1024 1.041050272174191]
+    treeNode		    [0 45 0 0]
+    firstTransition	    65
+    firstJunction	    64
+    viewObj		    44
+    machine		    1
+    toolbarMode		    LIBRARY_TOOLBAR
+    subviewS {
+    }
+    ssIdHighWaterMark	    21
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    46
+    chartFileNumber	    2
+    disableImplicitCasting  1
+    eml {
+      name		      "ball_engine"
+    }
+  }
+  state {
+    id			    45
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    44
+    treeNode		    [44 0 0 0]
+    superState		    SUBCHART
+    subviewer		    44
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [vcodes, hand_forces, ball_log, pen_out, speed_out, delay_ms, timeout_ms] = ball_engine("
+      "phase, home_row, ball_row, load_row, KINdata, Load_Table, Target_Table, Task_Wide, TP_Table, tp_row, seed) %#cod"
+      "egen\n%BALL_ENGINE Ball physics, penalty contact force, and ball/slope VCODEs.\n%\n% Runs every 1 ms. The Trial_"
+      "Control chart sequences the trial and sets:\n%   phase 0 = no ball (reset), 1 = ball parked at slope top, 2 = ph"
+      "ysics live.\n% The ball is constrained to the line from the slope top (Target Table row\n% ball_row) toward the "
+      "home target (row home_row): gravity component\n% (5/7)*g*sin(theta) acts along it while the path distance s < Sl"
+      "opeLength,\n% rolling resistance -RollRes*g*sign(v) always. Contact with the hand disk is\n% penalty-based: pen "
+      "= BallRadius + HandRadius - |p_hand - p_ball|, force\n% clamp(Kc*pen + Bc*dpen/dt, 0, Fmax) along the ball-to-ha"
+      "nd normal, plus a\n% decaying TransientFreq sinusoid for the first 30 ms of each new contact.\n% The reaction de"
+      "celerates the ball (bounce); HapticsOn=0 zeroes the commanded\n% force but keeps the visual bounce. Fmax is hard"
+      "-clamped at 45 N.\n%\n% Units: Target Table and lengths in the Load Table are cm (converted to m\n% here); KINda"
+      "ta hand position/velocity are m, m/s, global frame; forces N.\n\npersistent s v prev_pen t_contact have_contact "
+      "initd rngstate\nif isempty(initd)\n    s = 0; v = 0; prev_pen = 0; t_contact = 1e9; have_contact = 0; initd = 1;"
+      "\n    rngstate = mod(abs(seed), 4294967296);\n    if rngstate <= 0; rngstate = 12345; end\nend\n\ndt = 0.001;\ng"
+      "  = 9.81;\n\n% ---- per-trial timing for the chart (sampled by Stateflow at state entry).\n% R2013a chart codege"
+      "n cannot lower rand()/boolean arithmetic, so the random\n% release delay and the zero-timeout guard are computed"
+      " here instead. LCG\n% seeded from Dexterit-E's 'seed' tag, so the protocol seed option holds.\nrngstate = mod(16"
+      "64525 * rngstate + 1013904223, 4294967296);\nu = rngstate / 4294967296;\ntr = max(1, min(100, round(tp_row)));\n"
+      "dmin = TP_Table(tr, 5);\ndmax = TP_Table(tr, 6);\nif dmax > dmin\n    delay_ms = dmin + (dmax - dmin) * u;\nelse"
+      "\n    delay_ms = dmin;\nend\nif delay_ms < 0; delay_ms = 0; end\ntimeout_ms = TP_Table(tr, 7);\nif timeout_ms <="
+      " 0; timeout_ms = 10000; end\n\nvcodes      = zeros(2, 70);\nhand_forces = zeros(4, 1);\n\n% ---- parameters ----"
+      "--------------------------------------------------------\nhr = max(1, min(32, round(home_row)));\nbr = max(1, mi"
+      "n(32, round(ball_row)));\nlr = max(1, min(20, round(load_row)));\n\nm_b    = Load_Table(lr, 1);\nr_b    = Load_T"
+      "able(lr, 2) * 0.01;\ntheta  = Load_Table(lr, 3) * pi / 180;\nLslope = Load_Table(lr, 4) * 0.01;\ncrr    = Load_T"
+      "able(lr, 6);\nkc     = Load_Table(lr, 7);\nbc     = Load_Table(lr, 8);\nFmax   = Load_Table(lr, 9);\nhapt   = Lo"
+      "ad_Table(lr, 10);\ntamp   = Load_Table(lr, 11);\ntfreq  = Load_Table(lr, 12);\n\n% Defaults so an all-zero Load "
+      "row stays safe and visible\nif m_b <= 0;    m_b = 0.2;     end\nif r_b <= 0;    r_b = 0.03;    end\nif Lslope <="
+      " 0; Lslope = 0.20; end\nif kc <= 0;     kc = 2000;     end\nif Fmax <= 0;   Fmax = 20;     end\nif Fmax > 45;   "
+      "Fmax = 45;     end   % hardware envelope hard clamp\nif tfreq < 50;  tfreq = 150;   end\n\nr_h = Task_Wide(1) * "
+      "0.01;\nif r_h <= 0; r_h = 0.02; end\n\n% ---- geometry (global metres; Target_Table is global cm on the target) "
+      "-----\ntx  = Target_Table(br, 1) * 0.01;\nty  = Target_Table(br, 2) * 0.01;\nhx0 = Target_Table(hr, 1) * 0.01;\n"
+      "hy0 = Target_Table(hr, 2) * 0.01;\ndx = hx0 - tx; dy = hy0 - ty;\ndd = sqrt(dx*dx + dy*dy);\nif dd < 1e-6; dd = "
+      "1; end\nux = dx / dd; uy = dy / dd;\n\n% ---- hand state (active = dominant arm; row 1 = right on bilateral) ---"
+      "-----\narm = KINdata(3, 1);\nif arm ~= 2; arm = 1; end\nphx = KINdata(arm, 23);\nphy = KINdata(arm, 24);\n\n% --"
+      "-- physics ----------------------------------------------------------------\nFx = 0; Fy = 0; pen = 0;\nif phase "
+      "< 1.5\n    % phase 0: hidden/reset. phase 1: parked at slope top.\n    s = 0; v = 0; prev_pen = 0; have_contact "
+      "= 0; t_contact = 1e9;\nelse\n    a = 0;\n    if s < Lslope\n        a = a + (5/7) * g * sin(theta);   % downhill"
+      " along +u while on the slope\n    end\n    if v > 1e-4\n        a = a - crr * g;\n    elseif v < -1e-4\n        "
+      "a = a + crr * g;\n    end\n\n    bxp = tx + ux * s; byp = ty + uy * s;\n    rx = phx - bxp; ry = phy - byp;\n   "
+      " dist = sqrt(rx*rx + ry*ry);\n    if dist < 1e-6; dist = 1e-6; end\n    pen = (r_b + r_h) - dist;\n\n    if pen "
+      "> 0\n        dpen = (pen - prev_pen) / dt;\n        fmag = kc * pen + bc * dpen;\n        if fmag < 0; fmag = 0;"
+      " end\n        if have_contact == 0\n            have_contact = 1;\n            t_contact = 0;    % new contact: "
+      "restart transient\n        end\n        if t_contact < 0.03 && tamp > 0\n            fmag = fmag + tamp * exp(-t"
+      "_contact / 0.01) * sin(2 * pi * tfreq * t_contact);\n            if fmag < 0; fmag = 0; end\n        end\n      "
+      "  if fmag > Fmax; fmag = Fmax; end\n        nx = rx / dist; ny = ry / dist;\n        Fx = fmag * nx; Fy = fmag *"
+      " ny;\n        % equal and opposite on the ball, projected on the rail\n        a = a - (Fx * ux + Fy * uy) / m_b"
+      ";\n    else\n        have_contact = 0;\n    end\n    t_contact = t_contact + dt;\n    prev_pen = pen;\n\n    v ="
+      " v + a * dt;\n    s = s + v * dt;\n    if s < 0\n        s = 0; v = -0.2 * v;   % cannot leave the top of the sl"
+      "ope\n    end\nend\n\n% ---- haptics gate (visual bounce unaffected) --------------------------------\nif hapt < "
+      "0.5\n    Fx = 0; Fy = 0;\nend\nif arm == 1\n    hand_forces(1) = Fx; hand_forces(2) = Fy;\nelse\n    hand_forces"
+      "(3) = Fx; hand_forces(4) = Fy;\nend\n\n% ---- VCODEs: row 1 slope line, row 2 ball circle ----------------------"
+      "------\nshow = 0;\nif phase > 0.5; show = 1; end\n\nvcodes(1, 1)  = 4;                 % line\nvcodes(1, 2)  = s"
+      "how;\nvcodes(1, 3)  = tx;\nvcodes(1, 4)  = ty;\nvcodes(1, 5)  = 5921370;           % 0x5A5A5A grey\nvcodes(1, 6)"
+      "  = 5921370;\nvcodes(1, 7)  = 0.004;             % 4 mm stroke\nvcodes(1, 9)  = 100;\nvcodes(1, 10) = ux * Lslop"
+      "e;       % endpoint relative to start (m)\nvcodes(1, 11) = uy * Lslope;\n\nbx = tx + ux * s; by = ty + uy * s;\n"
+      "vcodes(2, 1)  = 1;                 % circle\nvcodes(2, 2)  = show;\nvcodes(2, 3)  = bx;\nvcodes(2, 4)  = by;\nvc"
+      "odes(2, 5)  = 16777215;          % 0xFFFFFF white fill\nvcodes(2, 6)  = -2147483648;       % no stroke colour\nv"
+      "codes(2, 7)  = 0;\nvcodes(2, 9)  = 100;\nvcodes(2, 10) = r_b;\nif s > dd + 0.6\n    vcodes(2, 2) = 0;           "
+      "   % rolled far out of the scene\nend\n\nball_log  = [bx; by; v; pen; Fx; Fy; phase; s];\npen_out   = pen;\nspee"
+      "d_out = v;\nif speed_out < 0; speed_out = -speed_out; end\n"
+      editorLayout	      "100 M4x1[205 227 1080 733]"
+    }
+  }
   data {
-    id			    18
+    id			    46
+    ssIdNumber		    4
+    name		    "phase"
+    linkNode		    [44 0 47]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    47
+    ssIdNumber		    5
+    name		    "vcodes"
+    linkNode		    [44 46 48]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    48
+    ssIdNumber		    6
+    name		    "home_row"
+    linkNode		    [44 47 49]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    49
+    ssIdNumber		    7
+    name		    "ball_row"
+    linkNode		    [44 48 50]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    50
+    ssIdNumber		    8
+    name		    "load_row"
+    linkNode		    [44 49 51]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    51
+    ssIdNumber		    9
+    name		    "KINdata"
+    linkNode		    [44 50 52]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    52
+    ssIdNumber		    10
+    name		    "Load_Table"
+    linkNode		    [44 51 53]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    53
+    ssIdNumber		    11
+    name		    "Target_Table"
+    linkNode		    [44 52 54]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    54
+    ssIdNumber		    12
+    name		    "Task_Wide"
+    linkNode		    [44 53 55]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    55
+    ssIdNumber		    13
+    name		    "TP_Table"
+    linkNode		    [44 54 56]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    56
+    ssIdNumber		    14
+    name		    "tp_row"
+    linkNode		    [44 55 57]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    57
+    ssIdNumber		    15
+    name		    "seed"
+    linkNode		    [44 56 58]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    58
+    ssIdNumber		    16
+    name		    "hand_forces"
+    linkNode		    [44 57 59]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    59
+    ssIdNumber		    17
+    name		    "ball_log"
+    linkNode		    [44 58 60]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    60
+    ssIdNumber		    18
+    name		    "pen_out"
+    linkNode		    [44 59 61]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    61
+    ssIdNumber		    19
+    name		    "speed_out"
+    linkNode		    [44 60 62]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    62
+    ssIdNumber		    20
+    name		    "delay_ms"
+    linkNode		    [44 61 63]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    63
+    ssIdNumber		    21
+    name		    "timeout_ms"
+    linkNode		    [44 62 0]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      complexity	      SF_COMPLEX_INHERITED
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    64
+    position		    [23.5747 49.5747 7]
+    chart		    44
+    linkNode		    [44 0 0]
+    subviewer		    44
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    65
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [32.125 19.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      64
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    44
+    linkNode		    [44 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    44
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    66
+    name		    "Ball_Engine"
+    machine		    1
+    chart		    44
+  }
+  data {
+    id			    67
     name		    "col_x"
-    linkNode		    [1 0 19]
+    linkNode		    [1 0 68]
     scope		    CONSTANT_DATA
     machine		    1
     props {
@@ -2836,9 +4839,9 @@ Stateflow {
     dataType		    "double"
   }
   data {
-    id			    19
+    id			    68
     name		    "col_y"
-    linkNode		    [1 18 0]
+    linkNode		    [1 67 0]
     scope		    CONSTANT_DATA
     machine		    1
     props {
@@ -2852,7 +4855,7 @@ Stateflow {
     dataType		    "double"
   }
   target {
-    id			    20
+    id			    69
     name		    "sfun"
     description		    "Default Simulink S-Function Target."
     machine		    1
