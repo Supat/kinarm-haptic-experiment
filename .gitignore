@@ -21,6 +21,7 @@ data/
 # Exception: the small smoke-test exams from the lab are tracked as a reference
 !smoke/*.zip
 !debug/*.zip
+!testrun/*.zip
 
 # Installers and licenses: never commit
 *.iso
