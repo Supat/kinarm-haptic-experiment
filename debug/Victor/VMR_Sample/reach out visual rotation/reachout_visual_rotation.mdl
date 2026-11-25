@@ -1,0 +1,4990 @@
+Model {
+  Name			  "reachout_visual_rotation"
+  Version		  8.1
+  MdlSubVersion		  0
+  GraphicalInterface {
+    NumRootInports	    0
+    NumRootOutports	    0
+    ParameterArgumentNames  ""
+    ComputedModelVersion    "1.2294"
+    NumModelReferences	    0
+    NumTestPointedSignals   0
+  }
+  SavedCharacterEncoding  "windows-1252"
+  SaveDefaultBlockParams  on
+  ScopeRefreshTime	  0.035000
+  OverrideScopeRefreshTime on
+  DisableAllScopes	  off
+  DataTypeOverride	  "UseLocalSettings"
+  DataTypeOverrideAppliesTo "AllNumericTypes"
+  MinMaxOverflowLogging	  "UseLocalSettings"
+  MinMaxOverflowArchiveMode "Overwrite"
+  FPTRunName		  "Run 1"
+  MaxMDLFileLineLength	  120
+  CloseFcn		  "rtwprivate ssgencode ModelCloseRequest b2lab2d"
+  StartFcn		  " warndlg('Dexterit-E models cannot run under simulation. Please compile your model and run it from with"
+  "in Dexterit-E.');set_param(bdroot,'SimulationCommand','stop')"
+  Object {
+    $PropName		    "BdWindowsInfo"
+    $ObjectID		    1
+    $ClassName		    "Simulink.BDWindowsInfo"
+    Object {
+      $PropName		      "WindowsInfo"
+      $ObjectID		      2
+      $ClassName	      "Simulink.WindowInfo"
+      IsActive		      [1]
+      Location		      [147.0, 34.0, 1572.0, 1071.0]
+      Object {
+	$PropName		"ModelBrowserInfo"
+	$ObjectID		3
+	$ClassName		"Simulink.ModelBrowserInfo"
+	Visible			[0]
+	DockPosition		"Left"
+	Width			[50]
+	Height			[50]
+	Filter			[9]
+      }
+      Object {
+	$PropName		"ExplorerBarInfo"
+	$ObjectID		4
+	$ClassName		"Simulink.ExplorerBarInfo"
+	Visible			[0]
+      }
+      Object {
+	$PropName		"EditorsInfo"
+	$ObjectID		5
+	$ClassName		"Simulink.EditorInfo"
+	IsActive		[1]
+	ViewObjType		"SimulinkTopLevel"
+	LoadSaveID		"0"
+	Extents			[1522.0, 927.0]
+	ZoomFactor		[1.0]
+	Offset			[0.0, 0.0]
+      }
+    }
+  }
+  Created		  "Thu Jan 16 11:11:41 2003"
+  Creator		  "Chris Grebeldinger"
+  UpdateHistory		  "UpdateHistoryNever"
+  ModifiedByFormat	  "%<Auto>"
+  LastModifiedBy	  "dmclean"
+  ModifiedDateFormat	  "%<Auto>"
+  LastModifiedDate	  "Fri Aug 05 09:51:54 2016"
+  RTWModifiedTimeStamp	  392291488
+  ModifiedComment	  "chris -- Wed Feb 16 09:18:30 2005 -- Version 1.1384\n"
+  ModifiedHistory	  "Feb 16/05 - Add error repeat, add offset ramp"
+  ModelVersionFormat	  "1.%<AutoIncrement:2294>"
+  ConfigurationManager	  "none"
+  SampleTimeColors	  on
+  SampleTimeAnnotations	  off
+  LibraryLinkDisplay	  "none"
+  WideLines		  on
+  ShowLineDimensions	  on
+  ShowPortDataTypes	  on
+  ShowDesignRanges	  off
+  ShowLoopsOnError	  on
+  IgnoreBidirectionalLines off
+  ShowStorageClass	  off
+  ShowTestPointIcons	  on
+  ShowSignalResolutionIcons on
+  ShowViewerIcons	  on
+  SortedOrder		  on
+  ExecutionContextIcon	  off
+  ShowLinearizationAnnotations on
+  BlockNameDataTip	  off
+  BlockParametersDataTip  on
+  BlockDescriptionStringDataTip	off
+  ToolBar		  on
+  StatusBar		  on
+  BrowserShowLibraryLinks on
+  BrowserLookUnderMasks	  on
+  SimulationMode	  "normal"
+  LinearizationMsg	  "none"
+  Profile		  off
+  ParamWorkspaceSource	  "MATLABWorkspace"
+  AccelSystemTargetFile	  "accel.tlc"
+  AccelTemplateMakefile	  "accel_default_tmf"
+  AccelMakeCommand	  "make_rtw"
+  TryForcingSFcnDF	  off
+  Object {
+    $PropName		    "DataLoggingOverride"
+    $ObjectID		    6
+    $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
+    model_		    "reachout_visual_rotation"
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      "reachout_visual_rotation"
+      PropName		      "logAsSpecifiedByModels_"
+    }
+    Array {
+      Type		      "Cell"
+      Dimension		      1
+      Cell		      ""
+      PropName		      "logAsSpecifiedByModelsSSIDs_"
+    }
+  }
+  RecordCoverage	  off
+  CovPath		  "/"
+  CovSaveName		  "covdata"
+  CovMetricSettings	  "dw"
+  CovNameIncrementing	  off
+  CovHtmlReporting	  on
+  CovForceBlockReductionOff on
+  covSaveCumulativeToWorkspaceVar on
+  CovSaveSingleToWorkspaceVar on
+  CovCumulativeVarName	  "covCumulativeData"
+  CovCumulativeReport	  off
+  CovReportOnPause	  on
+  CovModelRefEnable	  "Off"
+  CovExternalEMLEnable	  off
+  ExtModeBatchMode	  off
+  ExtModeEnableFloating	  on
+  ExtModeTrigType	  "manual"
+  ExtModeTrigMode	  "normal"
+  ExtModeTrigPort	  "1"
+  ExtModeTrigElement	  "any"
+  ExtModeTrigDuration	  1000
+  ExtModeTrigDurationFloating "auto"
+  ExtModeTrigHoldOff	  0
+  ExtModeTrigDelay	  0
+  ExtModeTrigDirection	  "rising"
+  ExtModeTrigLevel	  0
+  ExtModeArchiveMode	  "off"
+  ExtModeAutoIncOneShot	  off
+  ExtModeIncDirWhenArm	  off
+  ExtModeAddSuffixToVar	  off
+  ExtModeWriteAllDataToWs off
+  ExtModeArmWhenConnect	  off
+  ExtModeSkipDownloadWhenConnect off
+  ExtModeLogAll		  off
+  ExtModeAutoUpdateStatusClock on
+  BufferReuse		  off
+  ShowModelReferenceBlockVersion off
+  ShowModelReferenceBlockIO off
+  Array {
+    Type		    "Handle"
+    Dimension		    1
+    Simulink.ConfigSet {
+      $ObjectID		      7
+      Version		      "1.13.0"
+      Array {
+	Type			"Handle"
+	Dimension		8
+	Simulink.SolverCC {
+	  $ObjectID		  8
+	  Version		  "1.13.0"
+	  StartTime		  "0.0"
+	  StopTime		  "inf"
+	  AbsTol		  "auto"
+	  FixedStep		  "0.0005"
+	  InitialStep		  "auto"
+	  MaxNumMinSteps	  "-1"
+	  MaxOrder		  5
+	  ZcThreshold		  "auto"
+	  ConsecutiveZCsStepRelTol "10*128*eps"
+	  MaxConsecutiveZCs	  "1000"
+	  ExtrapolationOrder	  4
+	  NumberNewtonIterations  1
+	  MaxStep		  "auto"
+	  MinStep		  "auto"
+	  MaxConsecutiveMinStep	  "1"
+	  RelTol		  "1e-3"
+	  SolverMode		  "SingleTasking"
+	  EnableConcurrentExecution off
+	  ConcurrentTasks	  off
+	  Solver		  "ode4"
+	  SolverName		  "ode4"
+	  SolverJacobianMethodControl "auto"
+	  ShapePreserveControl	  "DisableAll"
+	  ZeroCrossControl	  "UseLocalSettings"
+	  ZeroCrossAlgorithm	  "Nonadaptive"
+	  AlgebraicLoopSolver	  "TrustRegion"
+	  SolverResetMethod	  "Fast"
+	  PositivePriorityOrder	  off
+	  AutoInsertRateTranBlk	  off
+	  SampleTimeConstraint	  "Unconstrained"
+	  InsertRTBMode		  "Whenever possible"
+	}
+	Simulink.DataIOCC {
+	  $ObjectID		  9
+	  Version		  "1.13.0"
+	  Decimation		  "1"
+	  ExternalInput		  "[t, u]"
+	  FinalStateName	  "xFinal"
+	  InitialState		  "xInitial"
+	  LimitDataPoints	  off
+	  MaxDataPoints		  "1000"
+	  LoadExternalInput	  off
+	  LoadInitialState	  off
+	  SaveFinalState	  off
+	  SaveCompleteFinalSimState off
+	  SaveFormat		  "Array"
+	  SignalLoggingSaveFormat "ModelDataLogs"
+	  SaveOutput		  off
+	  SaveState		  off
+	  SignalLogging		  on
+	  DSMLogging		  on
+	  InspectSignalLogs	  off
+	  SaveTime		  off
+	  ReturnWorkspaceOutputs  off
+	  StateSaveName		  "xout"
+	  TimeSaveName		  "tout"
+	  OutputSaveName	  "yout"
+	  SignalLoggingName	  "sigsOut"
+	  DSMLoggingName	  "dsmout"
+	  OutputOption		  "RefineOutputTimes"
+	  OutputTimes		  "[]"
+	  ReturnWorkspaceOutputsName "out"
+	  Refine		  "1"
+	}
+	Simulink.OptimizationCC {
+	  $ObjectID		  10
+	  Version		  "1.13.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    8
+	    Cell		    "ZeroExternalMemoryAtStartup"
+	    Cell		    "ZeroInternalMemoryAtStartup"
+	    Cell		    "NoFixptDivByZeroProtection"
+	    Cell		    "OptimizeModelRefInitCode"
+	    Cell		    "BooleansAsBitfields"
+	    Cell		    "PassReuseOutputArgsAs"
+	    Cell		    "PassReuseOutputArgsThreshold"
+	    Cell		    "UseSpecifiedMinMax"
+	    PropName		    "DisabledProps"
+	  }
+	  BlockReduction	  off
+	  BooleanDataType	  off
+	  ConditionallyExecuteInputs on
+	  InlineParams		  off
+	  UseIntDivNetSlope	  off
+	  UseFloatMulNetSlope	  off
+	  UseSpecifiedMinMax	  off
+	  InlineInvariantSignals  off
+	  OptimizeBlockIOStorage  off
+	  BufferReuse		  off
+	  EnhancedBackFolding	  off
+	  StrengthReduction	  off
+	  ExpressionFolding	  off
+	  BooleansAsBitfields	  off
+	  BitfieldContainerType	  "uint_T"
+	  EnableMemcpy		  on
+	  MemcpyThreshold	  64
+	  PassReuseOutputArgsAs	  "Structure reference"
+	  ExpressionDepthLimit	  2147483647
+	  FoldNonRolledExpr	  off
+	  LocalBlockOutputs	  off
+	  RollThreshold		  5
+	  SystemCodeInlineAuto	  off
+	  StateBitsets		  off
+	  DataBitsets		  off
+	  UseTempVars		  off
+	  ZeroExternalMemoryAtStartup on
+	  ZeroInternalMemoryAtStartup on
+	  InitFltsAndDblsToZero	  on
+	  NoFixptDivByZeroProtection off
+	  EfficientFloat2IntCast  off
+	  EfficientMapNaN2IntZero on
+	  OptimizeModelRefInitCode off
+	  LifeSpan		  "inf"
+	  MaxStackSize		  "Inherit from target"
+	  BufferReusableBoundary  on
+	  SimCompilerOptimization "Off"
+	  AccelVerboseBuild	  off
+	  ParallelExecutionInRapidAccelerator on
+	}
+	Simulink.DebuggingCC {
+	  $ObjectID		  11
+	  Version		  "1.13.0"
+	  RTPrefix		  "error"
+	  ConsistencyChecking	  "none"
+	  ArrayBoundsChecking	  "none"
+	  SignalInfNanChecking	  "none"
+	  SignalRangeChecking	  "none"
+	  ReadBeforeWriteMsg	  "UseLocalSettings"
+	  WriteAfterWriteMsg	  "UseLocalSettings"
+	  WriteAfterReadMsg	  "UseLocalSettings"
+	  AlgebraicLoopMsg	  "warning"
+	  ArtificialAlgebraicLoopMsg "warning"
+	  SaveWithDisabledLinksMsg "warning"
+	  SaveWithParameterizedLinksMsg	"none"
+	  CheckSSInitialOutputMsg on
+	  UnderspecifiedInitializationDetection	"Classic"
+	  MergeDetectMultiDrivingBlocksExec "none"
+	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
+	  SignalResolutionControl "TryResolveAllWithWarning"
+	  BlockPriorityViolationMsg "warning"
+	  MinStepSizeMsg	  "warning"
+	  TimeAdjustmentMsg	  "none"
+	  MaxConsecutiveZCsMsg	  "error"
+	  MaskedZcDiagnostic	  "warning"
+	  IgnoredZcDiagnostic	  "warning"
+	  SolverPrmCheckMsg	  "none"
+	  InheritedTsInSrcMsg	  "warning"
+	  DiscreteInheritContinuousMsg "warning"
+	  MultiTaskDSMMsg	  "warning"
+	  MultiTaskCondExecSysMsg "none"
+	  MultiTaskRateTransMsg	  "error"
+	  SingleTaskRateTransMsg  "none"
+	  TasksWithSamePriorityMsg "warning"
+	  SigSpecEnsureSampleTimeMsg "warning"
+	  CheckMatrixSingularityMsg "none"
+	  IntegerOverflowMsg	  "warning"
+	  Int32ToFloatConvMsg	  "warning"
+	  ParameterDowncastMsg	  "error"
+	  ParameterOverflowMsg	  "error"
+	  ParameterUnderflowMsg	  "none"
+	  ParameterPrecisionLossMsg "warning"
+	  ParameterTunabilityLossMsg "warning"
+	  FixptConstUnderflowMsg  "none"
+	  FixptConstOverflowMsg	  "none"
+	  FixptConstPrecisionLossMsg "none"
+	  UnderSpecifiedDataTypeMsg "none"
+	  UnnecessaryDatatypeConvMsg "none"
+	  VectorMatrixConversionMsg "none"
+	  InvalidFcnCallConnMsg	  "error"
+	  FcnCallInpInsideContextMsg "UseLocalSettings"
+	  SignalLabelMismatchMsg  "none"
+	  UnconnectedInputMsg	  "warning"
+	  UnconnectedOutputMsg	  "warning"
+	  UnconnectedLineMsg	  "warning"
+	  SFcnCompatibilityMsg	  "none"
+	  FrameProcessingCompatibilityMsg "warning"
+	  UniqueDataStoreMsg	  "none"
+	  BusObjectLabelMismatch  "warning"
+	  RootOutportRequireBusObject "warning"
+	  AssertControl		  "UseLocalSettings"
+	  EnableOverflowDetection off
+	  ModelReferenceIOMsg	  "none"
+	  ModelReferenceMultiInstanceNormalModeStructChecksumCheck "error"
+	  ModelReferenceVersionMismatchMessage "none"
+	  ModelReferenceIOMismatchMessage "none"
+	  ModelReferenceCSMismatchMessage "none"
+	  UnknownTsInhSupMsg	  "warning"
+	  ModelReferenceDataLoggingMessage "warning"
+	  ModelReferenceSymbolNameMessage "warning"
+	  ModelReferenceExtraNoncontSigs "error"
+	  StateNameClashWarn	  "warning"
+	  SimStateInterfaceChecksumMismatchMsg "warning"
+	  SimStateOlderReleaseMsg "error"
+	  InitInArrayFormatMsg	  "warning"
+	  StrictBusMsg		  "None"
+	  BusNameAdapt		  "WarnAndRepair"
+	  NonBusSignalsTreatedAsBus "none"
+	  LoggingUnavailableSignals "error"
+	  BlockIODiagnostic	  "none"
+	  SFUnusedDataAndEventsDiag "warning"
+	  SFUnexpectedBacktrackingDiag "warning"
+	  SFInvalidInputDataAccessInChartInitDiag "warning"
+	  SFNoUnconditionalDefaultTransitionDiag "warning"
+	  SFTransitionOutsideNaturalParentDiag "warning"
+	  SFUnconditionalTransitionShadowingDiag "warning"
+	  SFUndirectedBroadcastEventsDiag "warning"
+	  SFTransitionActionBeforeConditionDiag	"warning"
+	}
+	Simulink.HardwareCC {
+	  $ObjectID		  12
+	  Version		  "1.13.0"
+	  ProdBitPerChar	  8
+	  ProdBitPerShort	  16
+	  ProdBitPerInt		  32
+	  ProdBitPerLong	  32
+	  ProdBitPerLongLong	  64
+	  ProdBitPerFloat	  32
+	  ProdBitPerDouble	  64
+	  ProdBitPerPointer	  32
+	  ProdLargestAtomicInteger "Char"
+	  ProdLargestAtomicFloat  "None"
+	  ProdIntDivRoundTo	  "Zero"
+	  ProdEndianess		  "LittleEndian"
+	  ProdWordSize		  32
+	  ProdShiftRightIntArith  on
+	  ProdLongLongMode	  off
+	  ProdHWDeviceType	  "Generic->32-bit x86 compatible"
+	  TargetBitPerChar	  8
+	  TargetBitPerShort	  16
+	  TargetBitPerInt	  32
+	  TargetBitPerLong	  32
+	  TargetBitPerLongLong	  64
+	  TargetBitPerFloat	  32
+	  TargetBitPerDouble	  64
+	  TargetBitPerPointer	  32
+	  TargetLargestAtomicInteger "Char"
+	  TargetLargestAtomicFloat "None"
+	  TargetShiftRightIntArith on
+	  TargetLongLongMode	  off
+	  TargetIntDivRoundTo	  "Undefined"
+	  TargetEndianess	  "Unspecified"
+	  TargetWordSize	  32
+	  TargetTypeEmulationWarnSuppressLevel 0
+	  TargetPreprocMaxBitsSint 32
+	  TargetPreprocMaxBitsUint 32
+	  TargetHWDeviceType	  "32-bit Generic"
+	  TargetUnknown		  off
+	  ProdEqTarget		  on
+	}
+	Simulink.ModelReferenceCC {
+	  $ObjectID		  13
+	  Version		  "1.13.0"
+	  UpdateModelReferenceTargets "IfOutOfDateOrStructuralChange"
+	  CheckModelReferenceTargetMessage "error"
+	  EnableParallelModelReferenceBuilds off
+	  ParallelModelReferenceErrorOnInvalidPool on
+	  ParallelModelReferenceMATLABWorkerInit "None"
+	  ModelReferenceNumInstancesAllowed "Multi"
+	  PropagateVarSize	  "Infer from blocks in model"
+	  ModelReferencePassRootInputsByReference on
+	  ModelReferenceMinAlgLoopOccurrences off
+	  PropagateSignalLabelsOutOfModel off
+	  SupportModelReferenceSimTargetCustomCode off
+	}
+	Simulink.SFSimCC {
+	  $ObjectID		  14
+	  Version		  "1.13.0"
+	  SFSimEnableDebug	  on
+	  SFSimOverflowDetection  on
+	  SFSimEcho		  on
+	  SimBlas		  on
+	  SimCtrlC		  on
+	  SimExtrinsic		  on
+	  SimIntegrity		  on
+	  SimUseLocalCustomCode	  off
+	  SimParseCustomCode	  off
+	  SimBuildMode		  "sf_incremental_build"
+	}
+	Simulink.RTWCC {
+	  $BackupClass		  "Simulink.RTWCC"
+	  $ObjectID		  15
+	  Version		  "1.13.0"
+	  Array {
+	    Type		    "Cell"
+	    Dimension		    15
+	    Cell		    "IncludeHyperlinkInReport"
+	    Cell		    "GenerateTraceInfo"
+	    Cell		    "GenerateTraceReport"
+	    Cell		    "GenerateTraceReportSl"
+	    Cell		    "GenerateTraceReportSf"
+	    Cell		    "GenerateTraceReportEml"
+	    Cell		    "PortableWordSizes"
+	    Cell		    "GenerateWebview"
+	    Cell		    "GenerateCodeMetricsReport"
+	    Cell		    "GenerateCodeReplacementReport"
+	    Cell		    "GenerateErtSFunction"
+	    Cell		    "CreateSILPILBlock"
+	    Cell		    "CodeExecutionProfiling"
+	    Cell		    "CodeProfilingSaveOptions"
+	    Cell		    "CodeProfilingInstrumentation"
+	    PropName		    "DisabledProps"
+	  }
+	  SystemTargetFile	  "xpctarget.tlc"
+	  GenCodeOnly		  off
+	  MakeCommand		  "make_rtw"
+	  GenerateMakefile	  on
+	  PackageGeneratedCodeAndArtifacts off
+	  TemplateMakefile	  "xpc_default_tmf"
+	  Description		  "xPC Target"
+	  GenerateReport	  off
+	  SaveLog		  off
+	  RTWVerbose		  on
+	  RetainRTWFile		  off
+	  ProfileTLC		  off
+	  TLCDebug		  off
+	  TLCCoverage		  off
+	  TLCAssert		  off
+	  ProcessScriptMode	  "Default"
+	  ConfigurationMode	  "Optimized"
+	  ProcessScript		  "xpctarget_make_rtw_hook"
+	  ConfigAtBuild		  off
+	  RTWUseLocalCustomCode	  off
+	  RTWUseSimCustomCode	  off
+	  IncludeHyperlinkInReport off
+	  LaunchReport		  off
+	  PortableWordSizes	  off
+	  GenerateErtSFunction	  off
+	  CreateSILPILBlock	  "None"
+	  CodeExecutionProfiling  off
+	  CodeExecutionProfileVariable "executionProfile"
+	  CodeProfilingSaveOptions "SummaryOnly"
+	  CodeProfilingInstrumentation off
+	  SILDebugging		  off
+	  TargetLang		  "C"
+	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
+	  IncludeERTFirstTime	  on
+	  GenerateTraceInfo	  off
+	  GenerateTraceReport	  off
+	  GenerateTraceReportSl	  off
+	  GenerateTraceReportSf	  off
+	  GenerateTraceReportEml  off
+	  GenerateCodeInfo	  off
+	  GenerateWebview	  off
+	  GenerateCodeMetricsReport off
+	  GenerateCodeReplacementReport	off
+	  RTWCompilerOptimization "On"
+	  CheckMdlBeforeBuild	  "Off"
+	  CustomRebuildMode	  "OnUpdate"
+	  Array {
+	    Type		    "Handle"
+	    Dimension		    2
+	    Simulink.CodeAppCC {
+	      $ObjectID		      16
+	      Version		      "1.13.0"
+	      Array {
+		Type			"Cell"
+		Dimension		22
+		Cell			"IgnoreCustomStorageClasses"
+		Cell			"InsertBlockDesc"
+		Cell			"SFDataObjDesc"
+		Cell			"SimulinkDataObjDesc"
+		Cell			"DefineNamingRule"
+		Cell			"SignalNamingRule"
+		Cell			"ParamNamingRule"
+		Cell			"InlinedPrmAccess"
+		Cell			"CustomSymbolStr"
+		Cell			"CustomSymbolStrGlobalVar"
+		Cell			"CustomSymbolStrType"
+		Cell			"CustomSymbolStrField"
+		Cell			"CustomSymbolStrFcn"
+		Cell			"CustomSymbolStrBlkIO"
+		Cell			"CustomSymbolStrTmpVar"
+		Cell			"CustomSymbolStrMacro"
+		Cell			"IgnoreTestpoints"
+		Cell			"CustomSymbolStrFcnArg"
+		Cell			"ReqsInCode"
+		Cell			"InsertPolySpaceComments"
+		Cell			"MATLABFcnDesc"
+		Cell			"InternalIdentifier"
+		PropName		"DisabledProps"
+	      }
+	      ForceParamTrailComments off
+	      GenerateComments	      on
+	      IgnoreCustomStorageClasses on
+	      IgnoreTestpoints	      off
+	      IncHierarchyInIds	      off
+	      MaxIdLength	      63
+	      PreserveName	      off
+	      PreserveNameWithParent  off
+	      ShowEliminatedStatement on
+	      OperatorAnnotations     off
+	      IncAutoGenComments      off
+	      SimulinkDataObjDesc     off
+	      SFDataObjDesc	      off
+	      MATLABFcnDesc	      off
+	      IncDataTypeInIds	      off
+	      MangleLength	      1
+	      CustomSymbolStrGlobalVar "$R$N$M"
+	      CustomSymbolStrType     "$N$R$M_T"
+	      CustomSymbolStrField    "$N$M"
+	      CustomSymbolStrFcn      "$R$N$M$F"
+	      CustomSymbolStrFcnArg   "rt$I$N$M"
+	      CustomSymbolStrBlkIO    "rtb_$N$M"
+	      CustomSymbolStrTmpVar   "$N$M"
+	      CustomSymbolStrMacro    "$R$N$M"
+	      DefineNamingRule	      "None"
+	      ParamNamingRule	      "None"
+	      SignalNamingRule	      "None"
+	      InsertBlockDesc	      off
+	      InsertPolySpaceComments off
+	      SimulinkBlockComments   on
+	      MATLABSourceComments    off
+	      EnableCustomComments    off
+	      InternalIdentifier      "Shortened"
+	      InlinedPrmAccess	      "Literals"
+	      ReqsInCode	      off
+	      UseSimReservedNames     off
+	    }
+	    xpctarget.xpcTargetCC {
+	      $BackupClass	      "Simulink.TargetCC"
+	      $ObjectID		      17
+	      Version		      "1.13.0"
+	      Array {
+		Type			"Cell"
+		Dimension		16
+		Cell			"IncludeMdlTerminateFcn"
+		Cell			"CombineOutputUpdateFcns"
+		Cell			"SuppressErrorStatus"
+		Cell			"ERTCustomFileBanners"
+		Cell			"GenerateSampleERTMain"
+		Cell			"CPPClassGenCompliant"
+		Cell			"PurelyIntegerCode"
+		Cell			"GenerateAllocFcn"
+		Cell			"SupportComplex"
+		Cell			"SupportAbsoluteTime"
+		Cell			"SupportContinuousTime"
+		Cell			"SupportNonInlinedSFcns"
+		Cell			"GenerateTestInterfaces"
+		Cell			"ModelStepFunctionPrototypeControlCompliant"
+		Cell			"PortableWordSizes"
+		Cell			"GeneratePreprocessorConditionals"
+		PropName		"DisabledProps"
+	      }
+	      TargetFcnLib	      "ansi_tfl_tmw.mat"
+	      TargetLibSuffix	      ""
+	      TargetPreCompLibLocation ""
+	      CodeReplacementLibrary  "XPC_BLAS"
+	      UtilityFuncGeneration   "Auto"
+	      ERTMultiwordTypeDef     "System defined"
+	      ERTMultiwordLength      256
+	      MultiwordLength	      2048
+	      GenerateFullHeader      on
+	      GenerateSampleERTMain   off
+	      GenerateTestInterfaces  off
+	      IsPILTarget	      off
+	      ModelReferenceCompliant on
+	      ParMdlRefBuildCompliant on
+	      CompOptLevelCompliant   on
+	      ConcurrentExecutionCompliant on
+	      IncludeMdlTerminateFcn  on
+	      GeneratePreprocessorConditionals "Disable all"
+	      CombineOutputUpdateFcns off
+	      CombineSignalStateStructs	off
+	      SuppressErrorStatus     off
+	      ERTFirstTimeCompliant   off
+	      IncludeFileDelimiter    "Auto"
+	      ERTCustomFileBanners    off
+	      SupportAbsoluteTime     on
+	      LogVarNameModifier      "rt_"
+	      MatFileLogging	      on
+	      MultiInstanceERTCode    off
+	      SupportNonFinite	      on
+	      SupportComplex	      on
+	      PurelyIntegerCode	      off
+	      SupportContinuousTime   on
+	      SupportNonInlinedSFcns  on
+	      SupportVariableSizeSignals off
+	      EnableShiftOperators    on
+	      ParenthesesLevel	      "Nominal"
+	      MATLABClassNameForMDSCustomization "xpcAperiodicCustomization"
+	      ModelStepFunctionPrototypeControlCompliant off
+	      CPPClassGenCompliant    off
+	      AutosarCompliant	      off
+	      GRTInterface	      on
+	      GenerateAllocFcn	      off
+	      RL32ModeModifier	      "Real-Time"
+	      ExtMode		      on
+	      ExtModeMexFile	      "ext_xpc"
+	      ExtModeIntrfLevel	      "Level2 - Open"
+	      ExtModeArmWhenConnect   off
+	      RL32LogTETModifier      on
+	      RL32LogBufSizeModifier  "100000"
+	      xPCTaskExecutionProfile off
+	      xPCRL32EventNumber      "5000"
+	      RL32IRQSourceModifier   "Timer"
+	      xPCIRQSourceBoard	      "None/Other"
+	      xPCIOIRQSlot	      "-1"
+	      xpcDblBuff	      off
+	      xpcObjCom		      off
+	      xPCGenerateASAP2	      off
+	      xPCGenerateXML	      off
+	      RL32ObjectName	      "tg"
+	      xPCisDownloadable	      off
+	      xPCisDefaultEnv	      on
+	      xPCisModelTimeout	      on
+	      xPCModelTimeoutSecs     "5"
+	      xPCLoadParamSetFile     off
+	      xPCConcurrentTasks      off
+	      xPCEnableSFAnimation    off
+	    }
+	    PropName		    "Components"
+	  }
+	}
+	PropName		"Components"
+      }
+      Name		      "Configuration"
+      ExtraOptions	      "-aGenerateTraceInfo=0 -aIgnoreTestpoints=0 "
+      CurrentDlgPage	      "Real-Time Workshop/xPC Target options"
+      ConfigPrmDlgPosition     [ 400, 210, 1280, 840 ] 
+    }
+    PropName		    "ConfigurationSets"
+  }
+  Simulink.ConfigSet {
+    $PropName		    "ActiveConfigurationSet"
+    $ObjectID		    7
+  }
+  Object {
+    $PropName		    "DataTransfer"
+    $ObjectID		    18
+    $ClassName		    "Simulink.GlobalDataTransfer"
+    DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
+    DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
+    DefaultTransitionBetweenContTasks "Ensure deterministic transfer (minimum delay)"
+    DefaultExtrapolationMethodBetweenContTasks "None"
+    AutoInsertRateTranBlk   [0]
+  }
+  ExplicitPartitioning	  off
+  WSMdlFileData		  "DataTag0"
+  BlockDefaults {
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    NamePlacement	    "normal"
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    ShowName		    on
+    BlockRotation	    0
+    BlockMirror		    off
+  }
+  AnnotationDefaults {
+    HorizontalAlignment	    "center"
+    VerticalAlignment	    "middle"
+    ForegroundColor	    "black"
+    BackgroundColor	    "white"
+    DropShadow		    off
+    FontName		    "Helvetica"
+    FontSize		    10
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+    UseDisplayTextAsClickCallback off
+  }
+  LineDefaults {
+    FontName		    "Helvetica"
+    FontSize		    9
+    FontWeight		    "normal"
+    FontAngle		    "normal"
+  }
+  MaskDefaults {
+    SelfModifiable	    "off"
+    IconFrame		    "on"
+    IconOpaque		    "on"
+    RunInitForIconRedraw    "off"
+    IconRotate		    "none"
+    PortRotate		    "default"
+    IconUnits		    "autoscale"
+  }
+  MaskParameterDefaults {
+    Evaluate		    "on"
+    Tunable		    "on"
+    NeverSave		    "off"
+    Internal		    "off"
+    ReadOnly		    "off"
+    Enabled		    "on"
+    Visible		    "on"
+    ToolTip		    "on"
+  }
+  BlockParameterDefaults {
+    Block {
+      BlockType		      Concatenate
+      NumInputs		      "2"
+      Mode		      "Vector"
+      ConcatenateDimension    "1"
+    }
+    Block {
+      BlockType		      Constant
+      Value		      "1"
+      VectorParams1D	      on
+      SamplingMode	      "Sample based"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit from 'Constant value'"
+      LockScale		      off
+      SampleTime	      "inf"
+      FramePeriod	      "inf"
+      PreserveConstantTs      off
+    }
+    Block {
+      BlockType		      Demux
+      Outputs		      "4"
+      DisplayOption	      "none"
+      BusSelectionMode	      off
+    }
+    Block {
+      BlockType		      From
+      GotoTag		      "A"
+      IconDisplay	      "Tag"
+      TagVisibility	      "local"
+    }
+    Block {
+      BlockType		      Inport
+      Port		      "1"
+      OutputFunctionCall      off
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      LatchByDelayingOutsideSignal off
+      LatchInputForFeedbackSignals off
+      Interpolate	      on
+    }
+    Block {
+      BlockType		      Memory
+      X0		      "0"
+      InheritSampleTime	      off
+      LinearizeMemory	      off
+      LinearizeAsDelay	      off
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+    }
+    Block {
+      BlockType		      MultiPortSwitch
+      DataPortOrder	      "One-based contiguous"
+      Inputs		      "3"
+      DataPortIndices	      "{1,2,3}"
+      DataPortForDefault      "Last data port"
+      DiagnosticForDefault    "Error"
+      zeroidx		      off
+      InputSameDT	      on
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      LockScale		      off
+      RndMeth		      "Floor"
+      SaturateOnIntegerOverflow	on
+      SampleTime	      "-1"
+      AllowDiffInputSizes     off
+    }
+    Block {
+      BlockType		      Mux
+      Inputs		      "4"
+      DisplayOption	      "none"
+      UseBusObject	      off
+      BusObject		      "BusObject"
+      NonVirtualBus	      off
+    }
+    Block {
+      BlockType		      Outport
+      Port		      "1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      BusOutputAsStruct	      off
+      PortDimensions	      "-1"
+      VarSizeSig	      "Inherit"
+      SampleTime	      "-1"
+      SignalType	      "auto"
+      SamplingMode	      "auto"
+      SourceOfInitialOutputValue "Dialog"
+      OutputWhenDisabled      "held"
+      InitialOutput	      "[]"
+    }
+    Block {
+      BlockType		      S-Function
+      FunctionName	      "system"
+      SFunctionModules	      "''"
+      PortCounts	      "[]"
+      SFunctionDeploymentMode off
+    }
+    Block {
+      BlockType		      Selector
+      NumberOfDimensions      "1"
+      IndexMode		      "One-based"
+      InputPortWidth	      "-1"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      SubSystem
+      ShowPortLabels	      "FromPortIcon"
+      Permissions	      "ReadWrite"
+      PermitHierarchicalResolution "All"
+      TreatAsAtomicUnit	      off
+      CheckFcnCallInpInsideContextMsg off
+      SystemSampleTime	      "-1"
+      RTWFcnNameOpts	      "Auto"
+      RTWFileNameOpts	      "Auto"
+      FunctionInterfaceSpec   "void_void"
+      RTWMemSecFuncInitTerm   "Inherit from model"
+      RTWMemSecFuncExecute    "Inherit from model"
+      RTWMemSecDataConstants  "Inherit from model"
+      RTWMemSecDataInternal   "Inherit from model"
+      RTWMemSecDataParameters "Inherit from model"
+      SimViewingDevice	      off
+      DataTypeOverride	      "UseLocalSettings"
+      DataTypeOverrideAppliesTo	"AllNumericTypes"
+      MinMaxOverflowLogging   "UseLocalSettings"
+      SFBlockType	      "NONE"
+      Variant		      off
+      GeneratePreprocessorConditionals off
+    }
+    Block {
+      BlockType		      Terminator
+    }
+    Block {
+      BlockType		      TriggerPort
+      TriggerType	      "rising"
+      StatesWhenEnabling      "inherit"
+      PropagateVarSize	      "During execution"
+      ShowOutputPort	      off
+      OutputDataType	      "auto"
+      SampleTimeType	      "triggered"
+      SampleTime	      "1"
+      ZeroCross		      on
+      PortDimensions	      "-1"
+      TriggerSignalSampleTime "-1"
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      Interpolate	      on
+    }
+  }
+  System {
+    Name		    "reachout_visual_rotation"
+    Location		    [147, 34, 1719, 1105]
+    Open		    on
+    ModelBrowserVisibility  off
+    ModelBrowserWidth	    282
+    ScreenColor		    "white"
+    PaperOrientation	    "landscape"
+    PaperPositionMode	    "auto"
+    PaperType		    "usletter"
+    PaperUnits		    "inches"
+    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+    TiledPageScale	    1
+    ShowPageBoundaries	    off
+    ZoomFactor		    "100"
+    ReportName		    "simulink-default.rpt"
+    SIDHighWatermark	    "32"
+    Block {
+      BlockType		      Reference
+      Name		      "DataLogging"
+      SID		      "1"
+      Ports		      [2]
+      Position		      [795, 147, 970, 298]
+      ZOrder		      -1
+      BackgroundColor	      "[0.858820, 0.690190, 0.309800]"
+      LibraryVersion	      "1.1829"
+      SourceBlock	      "General/DataLogging"
+      SourceType	      "DataLogging"
+      log_event_codes	      on
+      log_analog_inputs	      off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "GUI Control"
+      SID		      "2"
+      Ports		      [1, 2]
+      Position		      [80, 29, 265, 391]
+      ZOrder		      -2
+      BackgroundColor	      "[0.858820, 0.690190, 0.309800]"
+      LibraryVersion	      "1.1829"
+      SourceBlock	      "General/GUI Control"
+      SourceType	      "GUI Control"
+      target_type_str	      "Circle"
+      Target_Type	      "1"
+      XYcols		      "[1 2]"
+      Vcols		      "3"
+      Lcols		      "4"
+      indices_padding	      "[0 0 0 0;0 0 0 0]"
+      task_version	      "1.0"
+      show_repeat_trial_flag  off
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Hand_Feedback"
+      SID		      "3"
+      Ports		      [0, 1]
+      Position		      [680, 681, 755, 729]
+      ZOrder		      -3
+      BackgroundColor	      "[0.741176, 0.686275, 0.607843]"
+      LibraryVersion	      "1.1325"
+      SourceBlock	      "KINARM_general/Hand_Feedback"
+      SourceType	      "Hand Feedback"
+      feedback_cntl_src	      "none"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "KINARM_HandFeedbackInTarget"
+      SID		      "5"
+      Ports		      [1, 1]
+      Position		      [165, 564, 295, 626]
+      ZOrder		      -4
+      BackgroundColor	      "green"
+      AncestorBlock	      "KINARM_general/KINARM_HandInTarget"
+      LibraryVersion	      "*"
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      Object {
+	$PropName		"MaskObject"
+	$ObjectID		19
+	$ClassName		"Simulink.Mask"
+	Type			"KINARM_HandInTarget"
+	Description		"This block returns a vector or array corresponding to the Target_Table rows indicating whether the spec"
+	"ified hand is in (=1) or out (=0) of each of the targets.\n"
+	Help			"Used to determine if the hand (finger-tip) is in any of the targets in the Target_Table.\n<P>\n<B><I>Use of t"
+	"his block requires that the DataLogging block (General library) be set to log KINARM data.</I></B>\n\n<H2>Library </H"
+	"2>\nKINARM_general (sub-library)\n\n<H2>Description </H2>\nThis block returns a vector or array corresponding to the "
+	"Target_Table rows indicating whether the specified hand (i.e. finger-tip) is in or out of each of the targets.  Each "
+	"element in the output vector or output array will be either a 0 (hand not in target) or a 1 (hand in target).\n<P> \n"
+	"A vector is returned if only one target state is specified in each target row (see Parameters and Dialog Box), with e"
+	"ach index of the vector corresponding to a row in the target table.  An array is returned if more than one target sta"
+	"te is specified in a target row, with each row of the array corresponding to a target row and each column correspondi"
+	"ng to the nth target state specified in each target row.  \n<P>\nThe output vector or array is typically used by a st"
+	"ateflow chart to affect behavior of the system.  Because this block returns hand-in-target information for all target"
+	"s in the target table, multiple targets can be monitored at once (i.e. the stateflow chart could have certain transit"
+	"ions that occur if the hand is in one target and other transitions if it is in a different target).  Likewise, becaus"
+	"e this block returns hand-in-target information for multiple states of a single target, those multiple states can be "
+	"monitored simultaneously.\n<P> \nBecause the KINARM_HandInTarget block returns information for only one hand, two cop"
+	"ies of this block are required if information for both hands is desired.\n<P>\n\n<H2>Parameters and Dialog Box</H2>\n"
+	"<B>Dominant Hand?:</B> this box determines which hand is used by this block : dominant hand position (checked box) or"
+	" the non-dominant hand position (unchecked box).  (Note: if the end-user wants to know about both the dominant hand a"
+	"nd the non-dominant hand, then 2 separate copies of this block are requried, one for each hand.)\n<P>\n<B>Type of Tar"
+	"get:</B> Enter the type of target specified in the target table:   \n<P>\n<B>Number of Target States:</B> Enter the n"
+	"umber of target states specified in each target row.  Up to four target states are allowed per target row.\n<P>\n<B>S"
+	"tate <n> Target Table Columns:</B> Enter the columns in the Target Table that specify the relevant target attributes."
+	"  Do this for each target state.\nFor a circle, enter the columns corresponding to logical radius (e.g. 4)\n<BR>For a"
+	"n ellipse, enter the columns corresponding to major radius, minor radius, rotation angle (e.g. [4, 5, 6]).\n<BR>For a"
+	" rectangle, enter the columns corresponding to length, height, and rotation angle (e.g. [4, 5, 6]).\n<BR>For a line, "
+	"enter the columns corresponding to stroke width, endpoint in x, and endpoint in y (e.g. [3, 4, 5]).\n<BR>For a triang"
+	"le, enter the columns corresponding to length, height, peak offset, and rotation angle (e.g. [4, 5, 6, 7]).\n\n<H2>Ex"
+	"amples</H2>\n<B>Example 1.</B>  Suppose a target row will be used to define 1 state for a circle type target and the "
+	"radius of the visual target is the same radius to be used for determination of hand-in-target.  The related Target Ta"
+	"ble column is: column 6 = radius.  For this example, \"State 1 Target Table Columns\" would equal [6].\n<P> \n\n<B>Ex"
+	"ample 2.</B>  Suppose a target row will be used to define 1 state for a circle type target, but the radius of the vis"
+	"ual target will be different than the radius to be used for determination of hand-in-target.  This option allows inde"
+	"pendent control over the size of the visual target versus the accuracy needed to be considered \"in the target\".  Th"
+	"e related Target Table columns are: column 6 = radius1 (i.e. radius to target to be drawn); column 7 = radius2 (i.e. "
+	"radius to be used for hand-in-target) .  For this example, \"State 1 Target Table Columns\" would equal [7].\n<P>\n<B"
+	">Example 3.</B>  Suppose a target row will be used to define 2 states for a circle type target, where the radius of t"
+	"he visual target will be a constant, but depending on the state of the system, one of 2 other and different radii wil"
+	"l be used for determination of hand-in-target.  The related Target Table columns are: column 6 = radius1 (i.e. radius"
+	" to target to be drawn); column 7 = radius2 (i.e. radius to be used for hand-in-target for state 1); column 8 = radiu"
+	"s3 (i.e. radius to be used for hand-in-target for state 2).  For this example, \"State 1 Target Table Columns\" would"
+	" equal [7], while \"State 2 Target Table Columns\" would equal [8].\n<P>\n\n<H2>Related Blocks </H2>\nDataLogging"
+	Initialization		"num_states=str2num(get_param(gcb, 'num_states'));\ncolumntext='(columns: ';\n\nfor i=1:num_states\n	"
+	"varname=['attribcol' num2str(i)];\n	if i>1\n		columntext=[columntext, '; '];\n	end\n	columntext=[columntext, get_para"
+	"m(gcb, varname)];\nend\ncolumntext=strvcat([columntext ')'],' ', ' ');\n\noutput_block=char(find_system(gcb,'LookUnde"
+	"rMasks','all','FollowLinks','on','SearchDepth',1,'BlockType','Outport'));\noutputname=get_param(output_block,'Name');"
+	"\n\n% Select only the desired states for output. The output port is also renamed to reflect \n% whether the output is"
+	" a vector (in the case of a single state) or an array (of vectors, \n% one for each of multiple states).\nif num_stat"
+	"es == 1\n	set_param([gcb '/Selected States'], 'Value', '[1]');\n	set_param(output_block, 'Name', 'HandInTarget_Vector"
+	"');\nelseif num_states == 2\n	set_param([gcb '/Selected States'], 'Value', '[1,2]');\n	set_param(output_block, 'Name'"
+	", 'HandInTarget_Array');\nelseif num_states == 3\n	set_param([gcb '/Selected States'], 'Value', '[1,2,3]');\n	set_par"
+	"am(output_block, 'Name', 'HandInTarget_Array');\nelse\n	set_param([gcb '/Selected States'], 'Value', '[1,2,3,4]');\n	"
+	"set_param(output_block, 'Name', 'HandInTarget_Array');\nend\n\n"
+	SelfModifiable		"on"
+	Display			"disp(columntext)\nport_label('output',1,outputname)\n"
+	Array {
+	  Type			  "Simulink.MaskParameter"
+	  Dimension		  7
+	  Object {
+	    $ObjectID		    20
+	    Type		    "checkbox"
+	    Name		    "use_dominant_hand"
+	    Prompt		    "Dominant Hand?"
+	    Value		    "on"
+	  }
+	  Object {
+	    $ObjectID		    21
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      5
+	      Cell		      "Circle"
+	      Cell		      "Ellipse"
+	      Cell		      "Rectangle"
+	      Cell		      "Line"
+	      Cell		      "Triangle"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "target_type"
+	    Prompt		    "Type of Target"
+	    Value		    "Circle"
+	    Callback		    "target_type=get_param(gcb, 'target_type');\nattribcol1=[str2num(get_param(gcb, 'attribcol1')) 0 0 "
+	    "0 0 0 0];\nattribcol2=[str2num(get_param(gcb, 'attribcol2')) 0 0 0 0 0 0];\nattribcol3=[str2num(get_param(gcb, 'a"
+	    "ttribcol3')) 0 0 0 0 0 0];\nattribcol4=[str2num(get_param(gcb, 'attribcol4')) 0 0 0 0 0 0];\nswitch target_type(1"
+	    ":3)\n	case 'Cir'\n		numcol=1;\n	case 'Ell'\n		numcol=3;\n    case 'Rec'\n        numcol=3;\n    case 'Lin'\n     "
+	    "   numcol=3;\n    case 'Tri'\n        numcol=4;\n	otherwise\n		numcol=1;\nend\nif numcol==1\n	set_param(gcb, 'att"
+	    "ribcol1', num2str(attribcol1(1)));\n	set_param(gcb, 'attribcol2', num2str(attribcol2(1)));\n	set_param(gcb, 'attr"
+	    "ibcol3', num2str(attribcol3(1)));\n	set_param(gcb, 'attribcol4', num2str(attribcol4(1)));\nelse\n	set_param(gcb, "
+	    "'attribcol1', ['[' num2str(attribcol1(1:numcol)) ']']);\n	set_param(gcb, 'attribcol2', ['[' num2str(attribcol2(1:"
+	    "numcol)) ']']);\n	set_param(gcb, 'attribcol3', ['[' num2str(attribcol3(1:numcol)) ']']);\n	set_param(gcb, 'attrib"
+	    "col4', ['[' num2str(attribcol4(1:numcol)) ']']);\nend"
+	  }
+	  Object {
+	    $ObjectID		    22
+	    Type		    "popup"
+	    Array {
+	      Type		      "Cell"
+	      Dimension		      4
+	      Cell		      "1"
+	      Cell		      "2"
+	      Cell		      "3"
+	      Cell		      "4"
+	      PropName		      "TypeOptions"
+	    }
+	    Name		    "num_states"
+	    Prompt		    "Number of Target States"
+	    Value		    "1"
+	    Callback		    "num_states = str2num(get_param(gcb, 'num_states'));\nvis = get_param(gcb, 'MaskVisibilities');\n\n"
+	    "% Select only the desired states for output. The output port is also renamed to reflect \n% whether the output is"
+	    " a vector (in the case of a single state) or an array (of vectors, \n% one for each of multiple states).\noutput_"
+	    "block=char(find_system(gcb, 'LookUnderMasks', 'all', 'FollowLinks', 'on', 'SearchDepth', 1, 'BlockType', 'Outport"
+	    "'));\n\nif num_states == 1\n	set_param([gcb '/Selected States'], 'Value', '[1]');\n	set_param(output_block, 'Name"
+	    "', 'HandInTarget_Vector');\n	vis{5} = 'off';\n	vis{6} = 'off';\n	vis{7} = 'off';\nelseif num_states == 2\n	set_pa"
+	    "ram([gcb '/Selected States'], 'Value', '[1,2]');\n	set_param(output_block, 'Name', 'HandInTarget_Array');\n	vis{5"
+	    "} = 'on';\n	vis{6} = 'off';\n	vis{7} = 'off';\nelseif num_states == 3\n	set_param([gcb '/Selected States'], 'Valu"
+	    "e', '[1,2,3]');\n	set_param(output_block, 'Name','HandInTarget_Array');\n	vis{5} = 'on';\n	vis{6} = 'on';\n	vis{7"
+	    "} = 'off';\nelse\n	set_param([gcb '/Selected States'], 'Value', '[1,2,3,4]');\n	set_param(output_block, 'Name', '"
+	    "HandInTarget_Array');\n	vis{5} = 'on';\n	vis{6} = 'on';\n	vis{7} = 'on';\nend\nset_param(gcb, 'MaskVisibilities',"
+	    " vis);\n\ntarget_type=get_param(gcb, 'target_type');\nattribcol1=[str2num(get_param(gcb, 'attribcol1')) 0 0 0 0 0"
+	    " 0];\nattribcol2=[str2num(get_param(gcb, 'attribcol2')) 0 0 0 0 0 0];\nattribcol3=[str2num(get_param(gcb, 'attrib"
+	    "col3')) 0 0 0 0 0 0];\nattribcol4=[str2num(get_param(gcb, 'attribcol4')) 0 0 0 0 0 0];\nswitch target_type(1:3)\n"
+	    "	case 'Cir'\n		numcol=1;\n	case 'Ell'\n		numcol=3;\n    case 'Rec'\n        numcol=3;\n    case 'Lin'\n        nu"
+	    "mcol=3;\n    case 'Tri'\n        numcol=4;\n	otherwise\n		numcol=1;\nend\nif numcol==1\n	set_param(gcb, 'attribco"
+	    "l1', num2str(attribcol1(1)));\n	set_param(gcb, 'attribcol2', num2str(attribcol2(1)));\n	set_param(gcb, 'attribcol"
+	    "3', num2str(attribcol3(1)));\n	set_param(gcb, 'attribcol4', num2str(attribcol4(1)));\nelse\n	set_param(gcb, 'attr"
+	    "ibcol1', ['[' num2str(attribcol1(1:numcol)) ']']);\n	set_param(gcb, 'attribcol2', ['[' num2str(attribcol2(1:numco"
+	    "l)) ']']);\n	set_param(gcb, 'attribcol3', ['[' num2str(attribcol3(1:numcol)) ']']);\n	set_param(gcb, 'attribcol4'"
+	    ", ['[' num2str(attribcol4(1:numcol)) ']']);\nend\n"
+	  }
+	  Object {
+	    $ObjectID		    23
+	    Type		    "edit"
+	    Name		    "attribcol1"
+	    Prompt		    "State 1 Target Table Column(s)"
+	    Value		    "4"
+	    Callback		    "target_type=get_param(gcb, 'target_type');\nattribcol1=[str2num(get_param(gcb, 'attribcol1')) 0 0 "
+	    "0 0 0 0];\nattribcol2=[str2num(get_param(gcb, 'attribcol2')) 0 0 0 0 0 0];\nattribcol3=[str2num(get_param(gcb, 'a"
+	    "ttribcol3')) 0 0 0 0 0 0];\nattribcol4=[str2num(get_param(gcb, 'attribcol4')) 0 0 0 0 0 0];\nswitch target_type(1"
+	    ":3)\n	case 'Cir'\n		numcol=1;\n	case 'Ell'\n		numcol=3;\n    case 'Rec'\n        numcol=3;\n    case 'Lin'\n     "
+	    "   numcol=3;\n    case 'Tri'\n        numcol=4;\n	otherwise\n		numcol=1;\nend\nif numcol==1\n	set_param(gcb, 'att"
+	    "ribcol1', num2str(attribcol1(1)));\n	set_param(gcb, 'attribcol2', num2str(attribcol2(1)));\n	set_param(gcb, 'attr"
+	    "ibcol3', num2str(attribcol3(1)));\n	set_param(gcb, 'attribcol4', num2str(attribcol4(1)));\nelse\n	set_param(gcb, "
+	    "'attribcol1', ['[' num2str(attribcol1(1:numcol)) ']']);\n	set_param(gcb, 'attribcol2', ['[' num2str(attribcol2(1:"
+	    "numcol)) ']']);\n	set_param(gcb, 'attribcol3', ['[' num2str(attribcol3(1:numcol)) ']']);\n	set_param(gcb, 'attrib"
+	    "col4', ['[' num2str(attribcol4(1:numcol)) ']']);\nend"
+	  }
+	  Object {
+	    $ObjectID		    24
+	    Type		    "edit"
+	    Name		    "attribcol2"
+	    Prompt		    "State 2 Target Table Column(s)"
+	    Value		    "3"
+	    Visible		    "off"
+	    Callback		    "target_type=get_param(gcb, 'target_type');\nattribcol1=[str2num(get_param(gcb, 'attribcol1')) 0 0 "
+	    "0 0 0 0];\nattribcol2=[str2num(get_param(gcb, 'attribcol2')) 0 0 0 0 0 0];\nattribcol3=[str2num(get_param(gcb, 'a"
+	    "ttribcol3')) 0 0 0 0 0 0];\nattribcol4=[str2num(get_param(gcb, 'attribcol4')) 0 0 0 0 0 0];\nswitch target_type(1"
+	    ":3)\n	case 'Cir'\n		numcol=1;\n	case 'Ell'\n		numcol=3;\n    case 'Rec'\n        numcol=3;\n    case 'Lin'\n     "
+	    "   numcol=3;\n    case 'Tri'\n        numcol=4;\n	otherwise\n		numcol=1;\nend\nif numcol==1\n	set_param(gcb, 'att"
+	    "ribcol1', num2str(attribcol1(1)));\n	set_param(gcb, 'attribcol2', num2str(attribcol2(1)));\n	set_param(gcb, 'attr"
+	    "ibcol3', num2str(attribcol3(1)));\n	set_param(gcb, 'attribcol4', num2str(attribcol4(1)));\nelse\n	set_param(gcb, "
+	    "'attribcol1', ['[' num2str(attribcol1(1:numcol)) ']']);\n	set_param(gcb, 'attribcol2', ['[' num2str(attribcol2(1:"
+	    "numcol)) ']']);\n	set_param(gcb, 'attribcol3', ['[' num2str(attribcol3(1:numcol)) ']']);\n	set_param(gcb, 'attrib"
+	    "col4', ['[' num2str(attribcol4(1:numcol)) ']']);\nend"
+	  }
+	  Object {
+	    $ObjectID		    25
+	    Type		    "edit"
+	    Name		    "attribcol3"
+	    Prompt		    "State 3 Target Table Column(s)"
+	    Value		    "3"
+	    Visible		    "off"
+	    Callback		    "target_type=get_param(gcb, 'target_type');\nattribcol1=[str2num(get_param(gcb, 'attribcol1')) 0 0 "
+	    "0 0 0 0];\nattribcol2=[str2num(get_param(gcb, 'attribcol2')) 0 0 0 0 0 0];\nattribcol3=[str2num(get_param(gcb, 'a"
+	    "ttribcol3')) 0 0 0 0 0 0];\nattribcol4=[str2num(get_param(gcb, 'attribcol4')) 0 0 0 0 0 0];\nswitch target_type(1"
+	    ":3)\n	case 'Cir'\n		numcol=1;\n	case 'Ell'\n		numcol=3;\n    case 'Rec'\n        numcol=3;\n    case 'Lin'\n     "
+	    "   numcol=3;\n    case 'Tri'\n        numcol=4;\n	otherwise\n		numcol=1;\nend\nif numcol==1\n	set_param(gcb, 'att"
+	    "ribcol1', num2str(attribcol1(1)));\n	set_param(gcb, 'attribcol2', num2str(attribcol2(1)));\n	set_param(gcb, 'attr"
+	    "ibcol3', num2str(attribcol3(1)));\n	set_param(gcb, 'attribcol4', num2str(attribcol4(1)));\nelse\n	set_param(gcb, "
+	    "'attribcol1', ['[' num2str(attribcol1(1:numcol)) ']']);\n	set_param(gcb, 'attribcol2', ['[' num2str(attribcol2(1:"
+	    "numcol)) ']']);\n	set_param(gcb, 'attribcol3', ['[' num2str(attribcol3(1:numcol)) ']']);\n	set_param(gcb, 'attrib"
+	    "col4', ['[' num2str(attribcol4(1:numcol)) ']']);\nend"
+	  }
+	  Object {
+	    $ObjectID		    26
+	    Type		    "edit"
+	    Name		    "attribcol4"
+	    Prompt		    "State 4 Target Table Column(s)"
+	    Value		    "3"
+	    Visible		    "off"
+	    Callback		    "target_type=get_param(gcb, 'target_type');\nattribcol1=[str2num(get_param(gcb, 'attribcol1')) 0 0 "
+	    "0 0 0 0];\nattribcol2=[str2num(get_param(gcb, 'attribcol2')) 0 0 0 0 0 0];\nattribcol3=[str2num(get_param(gcb, 'a"
+	    "ttribcol3')) 0 0 0 0 0 0];\nattribcol4=[str2num(get_param(gcb, 'attribcol4')) 0 0 0 0 0 0];\nswitch target_type(1"
+	    ":3)\n	case 'Cir'\n		numcol=1;\n	case 'Ell'\n		numcol=3;\n    case 'Rec'\n        numcol=3;\n    case 'Lin'\n     "
+	    "   numcol=3;\n    case 'Tri'\n        numcol=4;\n	otherwise\n		numcol=1;\nend\nif numcol==1\n	set_param(gcb, 'att"
+	    "ribcol1', num2str(attribcol1(1)));\n	set_param(gcb, 'attribcol2', num2str(attribcol2(1)));\n	set_param(gcb, 'attr"
+	    "ibcol3', num2str(attribcol3(1)));\n	set_param(gcb, 'attribcol4', num2str(attribcol4(1)));\nelse\n	set_param(gcb, "
+	    "'attribcol1', ['[' num2str(attribcol1(1:numcol)) ']']);\n	set_param(gcb, 'attribcol2', ['[' num2str(attribcol2(1:"
+	    "numcol)) ']']);\n	set_param(gcb, 'attribcol3', ['[' num2str(attribcol3(1:numcol)) ']']);\n	set_param(gcb, 'attrib"
+	    "col4', ['[' num2str(attribcol4(1:numcol)) ']']);\nend"
+	  }
+	  PropName		  "Parameters"
+	}
+      }
+      System {
+	Name			"KINARM_HandFeedbackInTarget"
+	Location		[385, 125, 1597, 1051]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	SIDHighWatermark	"24"
+	Block {
+	  BlockType		  Inport
+	  Name			  "CursorPos"
+	  SID			  "5:1"
+	  Position		  [435, 413, 465, 427]
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Arm1"
+	  SID			  "5:2"
+	  Ports			  [1, 1]
+	  Position		  [360, 245, 435, 285]
+	  ZOrder		  -2
+	  NumberOfDimensions	  "2"
+	  InputPortWidth	  "3"
+	  IndexOptions		  "Index vector (dialog),Select all"
+	  Indices		  "1,-1"
+	  OutputSizes		  "slselsubs([(-2),(-2)],1),slselsubs([(-2),(-2)],2)"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Arm2"
+	  SID			  "5:3"
+	  Ports			  [1, 1]
+	  Position		  [360, 320, 435, 360]
+	  ZOrder		  -3
+	  NumberOfDimensions	  "2"
+	  InputPortWidth	  "3"
+	  IndexOptions		  "Index vector (dialog),Select all"
+	  Indices		  "2,-1"
+	  OutputSizes		  "slselsubs([(-2),(-2)],1),slselsubs([(-2),(-2)],2)"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Array Selector"
+	  SID			  "5:4"
+	  Ports			  [2, 1]
+	  Position		  [940, 509, 1000, 591]
+	  ZOrder		  -4
+	  NumberOfDimensions	  "2"
+	  InputPortWidth	  "3"
+	  IndexOptions		  "Select all,Index vector (port)"
+	  Indices		  "-1,1"
+	  OutputSizes		  "slselsubs([(-2),(-2)],1),slselsubs([(-2),(-2)],2)"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Array_Selector1"
+	  SID			  "5:5"
+	  Ports			  [2, 1]
+	  Position		  [520, 408, 575, 452]
+	  ZOrder		  -5
+	  NumberOfDimensions	  "2"
+	  InputPortWidth	  "3"
+	  IndexOptions		  "Index vector (port),Select all"
+	  Indices		  "-1,1"
+	  OutputSizes		  "1"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Dominant_Arm"
+	  SID			  "5:6"
+	  Ports			  [1, 1]
+	  Position		  [230, 119, 295, 161]
+	  ZOrder		  -6
+	  NumberOfDimensions	  "2"
+	  InputPortWidth	  "3"
+	  IndexOptions		  "Index vector (dialog),Index vector (dialog)"
+	  Indices		  "[3],[1]"
+	  OutputSizes		  "slselsubs([(-2),(-2)],1),slselsubs([(-2),(-2)],2)"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Embedded\nMATLAB InsideTarget"
+	  SID			  "5:7"
+	  Ports			  [5, 1]
+	  Position		  [610, 402, 805, 658]
+	  ZOrder		  -7
+	  ForegroundColor	  "blue"
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  SFBlockType		  "MATLAB Function"
+	  System {
+	    Name		    "Embedded\nMATLAB InsideTarget"
+	    Location		    [227, 345, 838, 789]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "16"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "handpos"
+	      SID		      "5:7::1"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      -1
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "target_type"
+	      SID		      "5:7::2"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      -2
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "attribcol"
+	      SID		      "5:7::3"
+	      Position		      [20, 171, 40, 189]
+	      ZOrder		      -3
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "num_targets"
+	      SID		      "5:7::4"
+	      Position		      [20, 206, 40, 224]
+	      ZOrder		      -4
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Target_Table"
+	      SID		      "5:7::5"
+	      Position		      [20, 246, 40, 264]
+	      ZOrder		      -5
+	      Port		      "5"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "5:7::15"
+	      Ports		      [1, 1]
+	      Position		      [270, 230, 320, 270]
+	      ZOrder		      2
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "5:7::14"
+	      Tag		      "Stateflow S-Function reachout_visual_rotation 4"
+	      Ports		      [5, 2]
+	      Position		      [180, 100, 230, 220]
+	      ZOrder		      1
+	      FunctionName	      "sf_sfun"
+	      PortCounts	      "[5 2]"
+	      EnableBusSupport	      on
+	      Port {
+		PortNumber		2
+		Name			"intarget"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "5:7::16"
+	      Position		      [460, 241, 480, 259]
+	      ZOrder		      3
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "intarget"
+	      SID		      "5:7::9"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      -9
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "handpos"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "target_type"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "attribcol"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "num_targets"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      4
+	    }
+	    Line {
+	      SrcBlock		      "Target_Table"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      5
+	    }
+	    Line {
+	      Name		      "intarget"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "intarget"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      DstBlock		      " Demux "
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Embedded\nMATLAB WhichHand"
+	  SID			  "5:8"
+	  Ports			  [2, 2]
+	  Position		  [355, 65, 470, 165]
+	  ZOrder		  -8
+	  ForegroundColor	  "blue"
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  SFBlockType		  "MATLAB Function"
+	  System {
+	    Name		    "Embedded\nMATLAB WhichHand"
+	    Location		    [227, 345, 838, 789]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "14"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "use_dominant_hand"
+	      SID		      "5:8::1"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      -1
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "dominant_hand"
+	      SID		      "5:8::2"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      -2
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "5:8::13"
+	      Ports		      [1, 1]
+	      Position		      [270, 230, 320, 270]
+	      ZOrder		      2
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "5:8::12"
+	      Tag		      "Stateflow S-Function reachout_visual_rotation 5"
+	      Ports		      [2, 3]
+	      Position		      [180, 100, 230, 180]
+	      ZOrder		      1
+	      FunctionName	      "sf_sfun"
+	      PortCounts	      "[2 3]"
+	      EnableBusSupport	      on
+	      Port {
+		PortNumber		2
+		Name			"hand"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"cursor"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "5:8::14"
+	      Position		      [460, 241, 480, 259]
+	      ZOrder		      3
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "hand"
+	      SID		      "5:8::6"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      -6
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "cursor"
+	      SID		      "5:8::7"
+	      Position		      [460, 136, 480, 154]
+	      ZOrder		      -7
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "use_dominant_hand"
+	      SrcPort		      1
+	      Points		      [120, 0]
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "dominant_hand"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      Name		      "hand"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "hand"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "cursor"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      3
+	      DstBlock		      "cursor"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      DstBlock		      " Demux "
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From"
+	  SID			  "5:9"
+	  Position		  [45, 252, 130, 278]
+	  ZOrder		  -9
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "KINdata"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From1"
+	  SID			  "5:10"
+	  Position		  [445, 613, 560, 647]
+	  ZOrder		  -10
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "Target_Table"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Selector
+	  Name			  "Hand_Pos"
+	  SID			  "5:11"
+	  Ports			  [1, 1]
+	  Position		  [235, 244, 300, 286]
+	  ZOrder		  -11
+	  NumberOfDimensions	  "2"
+	  InputPortWidth	  "3"
+	  IndexOptions		  "Select all,Index vector (dialog)"
+	  Indices		  "-1,[23,24]"
+	  OutputSizes		  "slselsubs([(-2),(-2)],1),slselsubs([(-2),(-2)],2)"
+	}
+	Block {
+	  BlockType		  MultiPortSwitch
+	  Name			  "Multiport\nSwitch"
+	  SID			  "5:12"
+	  Ports			  [3, 1]
+	  Position		  [540, 242, 570, 288]
+	  ZOrder		  -12
+	  Inputs		  "2"
+	  InputSameDT		  off
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Mux
+	  Name			  "Mux"
+	  SID			  "5:13"
+	  Ports			  [4, 1]
+	  Position		  [390, 419, 400, 636]
+	  ZOrder		  -13
+	  ShowName		  off
+	  DisplayOption		  "bar"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Selected States"
+	  SID			  "5:14"
+	  Position		  [845, 555, 905, 585]
+	  ZOrder		  -14
+	  Value			  "[1]"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Target_Type"
+	  SID			  "5:15"
+	  Position		  [445, 464, 530, 496]
+	  ZOrder		  -15
+	  Value			  "target_type"
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  "Terminator"
+	  SID			  "5:16"
+	  Position		  [660, 255, 680, 275]
+	  ZOrder		  -16
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Use_Dominant_Hand?"
+	  SID			  "5:17"
+	  Position		  [175, 22, 300, 58]
+	  ZOrder		  -17
+	  Value			  "use_dominant_hand"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "attribcol1"
+	  SID			  "5:18"
+	  Position		  [265, 429, 350, 461]
+	  ZOrder		  -18
+	  Value			  "attribcol1"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "attribcol2"
+	  SID			  "5:19"
+	  Position		  [265, 484, 350, 516]
+	  ZOrder		  -19
+	  Value			  "attribcol2"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "attribcol3"
+	  SID			  "5:20"
+	  Position		  [265, 539, 350, 571]
+	  ZOrder		  -20
+	  Value			  "attribcol3"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "attribcol4"
+	  SID			  "5:21"
+	  Position		  [265, 594, 350, 626]
+	  ZOrder		  -21
+	  Value			  "attribcol4"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "num_states"
+	  SID			  "5:22"
+	  Position		  [445, 564, 530, 596]
+	  ZOrder		  -22
+	  Value			  "num_states"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "HandInTarget_Vector"
+	  SID			  "5:23"
+	  Position		  [1060, 543, 1090, 557]
+	  ZOrder		  -23
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "Selected States"
+	  SrcPort		  1
+	  DstBlock		  "Array Selector"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "num_states"
+	  SrcPort		  1
+	  DstBlock		  "Embedded\nMATLAB InsideTarget"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "Mux"
+	  SrcPort		  1
+	  DstBlock		  "Embedded\nMATLAB InsideTarget"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "attribcol4"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "attribcol3"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "attribcol2"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "attribcol1"
+	  SrcPort		  1
+	  DstBlock		  "Mux"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Use_Dominant_Hand?"
+	  SrcPort		  1
+	  Points		  [35, 0]
+	  DstBlock		  "Embedded\nMATLAB WhichHand"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Embedded\nMATLAB WhichHand"
+	  SrcPort		  1
+	  Points		  [25, 0; 0, 160]
+	  DstBlock		  "Multiport\nSwitch"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Target_Type"
+	  SrcPort		  1
+	  DstBlock		  "Embedded\nMATLAB InsideTarget"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Array Selector"
+	  SrcPort		  1
+	  DstBlock		  "HandInTarget_Vector"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "From1"
+	  SrcPort		  1
+	  DstBlock		  "Embedded\nMATLAB InsideTarget"
+	  DstPort		  5
+	}
+	Line {
+	  SrcBlock		  "Embedded\nMATLAB InsideTarget"
+	  SrcPort		  1
+	  DstBlock		  "Array Selector"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Multiport\nSwitch"
+	  SrcPort		  1
+	  DstBlock		  "Terminator"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Arm2"
+	  SrcPort		  1
+	  Points		  [85, 0]
+	  DstBlock		  "Multiport\nSwitch"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Arm1"
+	  SrcPort		  1
+	  DstBlock		  "Multiport\nSwitch"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Dominant_Arm"
+	  SrcPort		  1
+	  DstBlock		  "Embedded\nMATLAB WhichHand"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Hand_Pos"
+	  SrcPort		  1
+	  Points		  [0, 0; 20, 0]
+	  Branch {
+	    Points		    [0, 75]
+	    DstBlock		    "Arm2"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Arm1"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "From"
+	  SrcPort		  1
+	  Points		  [0, 0; 65, 0]
+	  Branch {
+	    Points		    [0, -125]
+	    DstBlock		    "Dominant_Arm"
+	    DstPort		    1
+	  }
+	  Branch {
+	    DstBlock		    "Hand_Pos"
+	    DstPort		    1
+	  }
+	}
+	Line {
+	  SrcBlock		  "CursorPos"
+	  SrcPort		  1
+	  DstBlock		  "Array_Selector1"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Array_Selector1"
+	  SrcPort		  1
+	  DstBlock		  "Embedded\nMATLAB InsideTarget"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Embedded\nMATLAB WhichHand"
+	  SrcPort		  2
+	  Points		  [15, 0; 0, 300]
+	  DstBlock		  "Array_Selector1"
+	  DstPort		  2
+	}
+	Annotation {
+	  SID			  "5:24"
+	  Name			  "This block was modified from the KINARM_HandInTarget Block to accept cursor position input (i.e. visual \n"
+	  "representation of hand feedback), rather than the actual position of the hand."
+	  Position		  [563, 84]
+	  HorizontalAlignment	  "left"
+	  ZOrder		  -1
+	}
+      }
+    }
+    Block {
+      BlockType		      Concatenate
+      Name		      "Matrix\nConcatenation"
+      SID		      "6"
+      Ports		      [3, 1]
+      Position		      [975, 479, 1030, 521]
+      ZOrder		      -5
+      NumInputs		      "3"
+      Mode		      "Multidimensional array"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Parameter Table Defn"
+      SID		      "32"
+      Ports		      []
+      Position		      [1180, 157, 1310, 233]
+      ZOrder		      1
+      BackgroundColor	      "[0.858820, 0.690190, 0.309800]"
+      LibraryVersion	      "1.1829"
+      UserDataPersistent      on
+      UserData		      "DataTag1"
+      SourceBlock	      "General/Parameter Table Defn"
+      SourceType	      ""
+      ShowInLibBrowser	      "0"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Process_Video_CMD"
+      SID		      "7"
+      Ports		      [1]
+      Position		      [1070, 471, 1235, 529]
+      ZOrder		      -6
+      BackgroundColor	      "[0.858820, 0.690190, 0.309800]"
+      LibraryVersion	      "1.938"
+      SourceBlock	      "Video/Process_Video_CMD"
+      SourceType	      "Process_Video_CMD"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Show_Target"
+      SID		      "8"
+      Ports		      [2, 1]
+      Position		      [725, 373, 920, 422]
+      ZOrder		      -7
+      BackgroundColor	      "[0.858820, 0.690190, 0.309800]"
+      LibraryVersion	      "1.938"
+      SourceBlock	      "Video/Show_Target"
+      SourceType	      "Show_Target"
+      target_type	      "Circle"
+      num_states	      "2"
+      attribcol1	      "[COLOR 0 0 VISUAL_RADIUS]"
+      attribcol2	      "[ALTCOLOR 0 0 VISUAL_RADIUS]"
+      attribcol3	      "[0 0 0 0]"
+      attribcol4	      "[0 0 0 0]"
+      attribcol5	      "[0 0 24 0]"
+      stateindices_padding    "[0 0 0 0 0 0 0;0 0 0 0 0 0 0;0 0 0 0 0 0 0;0 0 0 0 0 0 0;0 0 0 0 0 0 0]"
+      source		      "dialog"
+      opacity		      "100"
+      target_display	      "Both subject and operator displays"
+      num_col		      "4"
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Show_Target1"
+      SID		      "9"
+      Ports		      [2, 1]
+      Position		      [725, 473, 920, 522]
+      ZOrder		      -8
+      BackgroundColor	      "[0.858820, 0.690190, 0.309800]"
+      LibraryVersion	      "1.938"
+      SourceBlock	      "Video/Show_Target"
+      SourceType	      "Show_Target"
+      target_type	      "Circle"
+      num_states	      "2"
+      attribcol1	      "[COLOR 0 0 VISUAL_RADIUS]"
+      attribcol2	      "[ALTCOLOR 0 0 VISUAL_RADIUS]"
+      attribcol3	      "[0 0 0 0]"
+      attribcol4	      "[0 0 0 0]"
+      attribcol5	      "[0 0 24 0]"
+      stateindices_padding    "[0 0 0 0 0 0 0;0 0 0 0 0 0 0;0 0 0 0 0 0 0;0 0 0 0 0 0 0;0 0 0 0 0 0 0]"
+      source		      "dialog"
+      opacity		      "100"
+      target_display	      "Both subject and operator displays"
+      num_col		      "4"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Trial_Control"
+      SID		      "10"
+      Ports		      [2, 8, 0, 1]
+      Position		      [345, 151, 650, 744]
+      ZOrder		      -9
+      ErrorFcn		      "Stateflow.Translate.translate"
+      PermitHierarchicalResolution "ExplicitOnly"
+      TreatAsAtomicUnit	      on
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      SFBlockType	      "Chart"
+      System {
+	Name			"Trial_Control"
+	Location		[147, 34, 1629, 964]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	SIDHighWatermark	"22"
+	Block {
+	  BlockType		  Inport
+	  Name			  "Trial_Protocol"
+	  SID			  "10::1"
+	  Position		  [20, 101, 40, 119]
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "HandInTarget"
+	  SID			  "10::2"
+	  Position		  [20, 136, 40, 154]
+	  ZOrder		  -2
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  TriggerPort
+	  Name			  " input events "
+	  SID			  "10::3"
+	  Ports			  [0, 1]
+	  Position		  [20, 171, 40, 189]
+	  ZOrder		  -3
+	  TriggerType		  "either"
+	  ShowOutputPort	  on
+	}
+	Block {
+	  BlockType		  Demux
+	  Name			  " Demux "
+	  SID			  "10::21"
+	  Ports			  [1, 1]
+	  Position		  [270, 425, 320, 465]
+	  ZOrder		  2
+	  Outputs		  "1"
+	}
+	Block {
+	  BlockType		  S-Function
+	  Name			  " SFunction "
+	  SID			  "10::20"
+	  Tag			  "Stateflow S-Function reachout_visual_rotation 1"
+	  Ports			  [3, 9]
+	  Position		  [180, 100, 230, 300]
+	  ZOrder		  1
+	  FunctionName		  "sf_sfun"
+	  PortCounts		  "[3 9]"
+	  EnableBusSupport	  on
+	  Port {
+	    PortNumber		    2
+	    Name		    "logging_enable"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    3
+	    Name		    "event_code"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    4
+	    Name		    "targetA_row"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    5
+	    Name		    "targetA_state"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    6
+	    Name		    "targetB_row"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    7
+	    Name		    "targetB_state"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    8
+	    Name		    "e_ApplyNewRotation"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	  Port {
+	    PortNumber		    9
+	    Name		    "e_Trial_End"
+	    RTWStorageClass	    "Auto"
+	    DataLoggingNameMode	    "SignalName"
+	  }
+	}
+	Block {
+	  BlockType		  Terminator
+	  Name			  " Terminator "
+	  SID			  "10::22"
+	  Position		  [460, 436, 480, 454]
+	  ZOrder		  3
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "logging_enable"
+	  SID			  "10::7"
+	  Position		  [460, 101, 480, 119]
+	  ZOrder		  -7
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "event_code"
+	  SID			  "10::8"
+	  Position		  [460, 136, 480, 154]
+	  ZOrder		  -8
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "targetA_row"
+	  SID			  "10::10"
+	  Position		  [460, 171, 480, 189]
+	  ZOrder		  -9
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "targetA_state"
+	  SID			  "10::11"
+	  Position		  [460, 206, 480, 224]
+	  ZOrder		  -10
+	  Port			  "4"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "targetB_row"
+	  SID			  "10::12"
+	  Position		  [460, 246, 480, 264]
+	  ZOrder		  -11
+	  Port			  "5"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "targetB_state"
+	  SID			  "10::13"
+	  Position		  [460, 281, 480, 299]
+	  ZOrder		  -12
+	  Port			  "6"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "e_ApplyNewRotation"
+	  SID			  "10::14"
+	  Position		  [460, 316, 480, 334]
+	  ZOrder		  -13
+	  Port			  "7"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "e_Trial_End"
+	  SID			  "10::15"
+	  Position		  [460, 351, 480, 369]
+	  ZOrder		  -14
+	  Port			  "8"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "Trial_Protocol"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "HandInTarget"
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  2
+	}
+	Line {
+	  Name			  "logging_enable"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  2
+	  DstBlock		  "logging_enable"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "event_code"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  3
+	  DstBlock		  "event_code"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "targetA_row"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  4
+	  DstBlock		  "targetA_row"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "targetA_state"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  5
+	  DstBlock		  "targetA_state"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "targetB_row"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  6
+	  DstBlock		  "targetB_row"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "targetB_state"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  7
+	  DstBlock		  "targetB_state"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "e_ApplyNewRotation"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  8
+	  DstBlock		  "e_ApplyNewRotation"
+	  DstPort		  1
+	}
+	Line {
+	  Name			  "e_Trial_End"
+	  Labels		  [0, 0]
+	  SrcBlock		  " SFunction "
+	  SrcPort		  9
+	  DstBlock		  "e_Trial_End"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  " Demux "
+	  SrcPort		  1
+	  DstBlock		  " Terminator "
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  " input events "
+	  SrcPort		  1
+	  DstBlock		  " SFunction "
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  " SFunction "
+	  SrcPort		  1
+	  Points		  [20, 0]
+	  DstBlock		  " Demux "
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Visual_Rotation"
+      SID		      "12"
+      Ports		      [3, 2]
+      Position		      [795, 601, 920, 809]
+      ZOrder		      -10
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      System {
+	Name			"Visual_Rotation"
+	Location		[147, 34, 1719, 1105]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"usletter"
+	PaperUnits		"inches"
+	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Inport
+	  Name			  "e_ApplyNewRotation"
+	  SID			  "13"
+	  Position		  [180, 213, 210, 227]
+	  ZOrder		  -1
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "VCODES_IN"
+	  SID			  "14"
+	  Position		  [345, 493, 375, 507]
+	  ZOrder		  -2
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Inport
+	  Name			  "Trial_Protocol"
+	  SID			  "15"
+	  Position		  [110, 293, 140, 307]
+	  ZOrder		  -3
+	  Port			  "3"
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Embedded\nMATLAB Function"
+	  SID			  "16"
+	  Ports			  [4, 2]
+	  Position		  [515, 327, 715, 523]
+	  ZOrder		  -4
+	  ForegroundColor	  "blue"
+	  ErrorFcn		  "Stateflow.Translate.translate"
+	  PermitHierarchicalResolution "ExplicitOnly"
+	  TreatAsAtomicUnit	  on
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  SFBlockType		  "MATLAB Function"
+	  System {
+	    Name		    "Embedded\nMATLAB Function"
+	    Location		    [227, 345, 838, 789]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    SIDHighWatermark	    "16"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "rotation"
+	      SID		      "16::1"
+	      Position		      [20, 101, 40, 119]
+	      ZOrder		      -1
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Trial_Protocol"
+	      SID		      "16::2"
+	      Position		      [20, 136, 40, 154]
+	      ZOrder		      -2
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Target_Table"
+	      SID		      "16::3"
+	      Position		      [20, 171, 40, 189]
+	      ZOrder		      -3
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "VCODES_IN"
+	      SID		      "16::4"
+	      Position		      [20, 206, 40, 224]
+	      ZOrder		      -4
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Demux
+	      Name		      " Demux "
+	      SID		      "16::15"
+	      Ports		      [1, 1]
+	      Position		      [270, 230, 320, 270]
+	      ZOrder		      2
+	      Outputs		      "1"
+	    }
+	    Block {
+	      BlockType		      S-Function
+	      Name		      " SFunction "
+	      SID		      "16::14"
+	      Tag		      "Stateflow S-Function reachout_visual_rotation 3"
+	      Ports		      [4, 3]
+	      Position		      [180, 102, 230, 203]
+	      ZOrder		      1
+	      FunctionName	      "sf_sfun"
+	      PortCounts	      "[4 3]"
+	      EnableBusSupport	      on
+	      Port {
+		PortNumber		2
+		Name			"VCODES"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	      Port {
+		PortNumber		3
+		Name			"CursorPos"
+		RTWStorageClass		"Auto"
+		DataLoggingNameMode	"SignalName"
+	      }
+	    }
+	    Block {
+	      BlockType		      Terminator
+	      Name		      " Terminator "
+	      SID		      "16::16"
+	      Position		      [460, 241, 480, 259]
+	      ZOrder		      3
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "VCODES"
+	      SID		      "16::8"
+	      Position		      [460, 101, 480, 119]
+	      ZOrder		      -8
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "CursorPos"
+	      SID		      "16::9"
+	      Position		      [460, 136, 480, 154]
+	      ZOrder		      -9
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "rotation"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Trial_Protocol"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Target_Table"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      3
+	    }
+	    Line {
+	      SrcBlock		      "VCODES_IN"
+	      SrcPort		      1
+	      DstBlock		      " SFunction "
+	      DstPort		      4
+	    }
+	    Line {
+	      Name		      "VCODES"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      2
+	      DstBlock		      "VCODES"
+	      DstPort		      1
+	    }
+	    Line {
+	      Name		      "CursorPos"
+	      Labels		      [0, 0]
+	      SrcBlock		      " SFunction "
+	      SrcPort		      3
+	      DstBlock		      "CursorPos"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " Demux "
+	      SrcPort		      1
+	      DstBlock		      " Terminator "
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      " SFunction "
+	      SrcPort		      1
+	      Points		      [20, 0]
+	      DstBlock		      " Demux "
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  From
+	  Name			  "From"
+	  SID			  "17"
+	  Position		  [320, 435, 425, 465]
+	  ZOrder		  -5
+	  CloseFcn		  "tagdialog Close"
+	  GotoTag		  "Target_Table"
+	  TagVisibility		  "global"
+	}
+	Block {
+	  BlockType		  Memory
+	  Name			  "Memory"
+	  SID			  "18"
+	  Position		  [180, 285, 210, 315]
+	  ZOrder		  -6
+	  InheritSampleTime	  on
+	}
+	Block {
+	  BlockType		  Memory
+	  Name			  "Memory2"
+	  SID			  "20"
+	  Position		  [265, 205, 295, 235]
+	  ZOrder		  -7
+	  InheritSampleTime	  on
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Triggered\nSubsystem"
+	  SID			  "21"
+	  Ports			  [1, 1, 0, 1]
+	  Position		  [295, 264, 445, 336]
+	  ZOrder		  -8
+	  TreatAsAtomicUnit	  on
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  System {
+	    Name		    "Triggered\nSubsystem"
+	    Location		    [302, 514, 1018, 1021]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "usletter"
+	    PaperUnits		    "inches"
+	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "Trial_Protocol"
+	      SID		      "22"
+	      Position		      [70, 143, 100, 157]
+	      ZOrder		      -1
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      TriggerPort
+	      Name		      "Trigger"
+	      SID		      "24"
+	      Ports		      []
+	      Position		      [305, 20, 325, 40]
+	      ZOrder		      -2
+	      TriggerType	      "either"
+	      StatesWhenEnabling      "held"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Embedded\nMATLAB Function"
+	      SID		      "25"
+	      Ports		      [1, 1]
+	      Position		      [165, 95, 435, 205]
+	      ZOrder		      -3
+	      ForegroundColor	      "blue"
+	      ErrorFcn		      "Stateflow.Translate.translate"
+	      PermitHierarchicalResolution "ExplicitOnly"
+	      TreatAsAtomicUnit	      on
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      SFBlockType	      "MATLAB Function"
+	      System {
+		Name			"Embedded\nMATLAB Function"
+		Location		[227, 345, 838, 789]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"usletter"
+		PaperUnits		"inches"
+		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		SIDHighWatermark	"13"
+		Block {
+		  BlockType		  Inport
+		  Name			  "Trial_Protocol"
+		  SID			  "25::1"
+		  Position		  [20, 101, 40, 119]
+		  ZOrder		  -1
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Demux
+		  Name			  " Demux "
+		  SID			  "25::12"
+		  Ports			  [1, 1]
+		  Position		  [270, 230, 320, 270]
+		  ZOrder		  2
+		  Outputs		  "1"
+		}
+		Block {
+		  BlockType		  S-Function
+		  Name			  " SFunction "
+		  SID			  "25::11"
+		  Tag			  "Stateflow S-Function reachout_visual_rotation 2"
+		  Ports			  [1, 2]
+		  Position		  [180, 100, 230, 160]
+		  ZOrder		  1
+		  FunctionName		  "sf_sfun"
+		  PortCounts		  "[1 2]"
+		  EnableBusSupport	  on
+		  Port {
+		    PortNumber		    2
+		    Name		    "rotation"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		  }
+		}
+		Block {
+		  BlockType		  Terminator
+		  Name			  " Terminator "
+		  SID			  "25::13"
+		  Position		  [460, 241, 480, 259]
+		  ZOrder		  3
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "rotation"
+		  SID			  "25::6"
+		  Position		  [460, 101, 480, 119]
+		  ZOrder		  -5
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  SrcBlock		  "Trial_Protocol"
+		  SrcPort		  1
+		  DstBlock		  " SFunction "
+		  DstPort		  1
+		}
+		Line {
+		  Name			  "rotation"
+		  Labels		  [0, 0]
+		  SrcBlock		  " SFunction "
+		  SrcPort		  2
+		  DstBlock		  "rotation"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  " Demux "
+		  SrcPort		  1
+		  DstBlock		  " Terminator "
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  " SFunction "
+		  SrcPort		  1
+		  DstBlock		  " Demux "
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Outport
+	      Name		      "rotation"
+	      SID		      "26"
+	      Position		      [570, 143, 600, 157]
+	      ZOrder		      -4
+	      IconDisplay	      "Port number"
+	    }
+	    Line {
+	      SrcBlock		      "Trial_Protocol"
+	      SrcPort		      1
+	      DstBlock		      "Embedded\nMATLAB Function"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Embedded\nMATLAB Function"
+	      SrcPort		      1
+	      DstBlock		      "rotation"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "VCODES"
+	  SID			  "27"
+	  Position		  [755, 368, 785, 382]
+	  ZOrder		  -9
+	  IconDisplay		  "Port number"
+	}
+	Block {
+	  BlockType		  Outport
+	  Name			  "CursorPos"
+	  SID			  "28"
+	  Position		  [750, 468, 780, 482]
+	  ZOrder		  -10
+	  Port			  "2"
+	  IconDisplay		  "Port number"
+	}
+	Line {
+	  SrcBlock		  "Trial_Protocol"
+	  SrcPort		  1
+	  DstBlock		  "Memory"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Embedded\nMATLAB Function"
+	  SrcPort		  1
+	  DstBlock		  "VCODES"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "VCODES_IN"
+	  SrcPort		  1
+	  DstBlock		  "Embedded\nMATLAB Function"
+	  DstPort		  4
+	}
+	Line {
+	  SrcBlock		  "Embedded\nMATLAB Function"
+	  SrcPort		  2
+	  DstBlock		  "CursorPos"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Memory"
+	  SrcPort		  1
+	  Points		  [15, 0]
+	  Branch {
+	    DstBlock		    "Triggered\nSubsystem"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, 100]
+	    DstBlock		    "Embedded\nMATLAB Function"
+	    DstPort		    2
+	  }
+	}
+	Line {
+	  SrcBlock		  "e_ApplyNewRotation"
+	  SrcPort		  1
+	  DstBlock		  "Memory2"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Triggered\nSubsystem"
+	  SrcPort		  1
+	  Points		  [5, 0; 0, 50]
+	  DstBlock		  "Embedded\nMATLAB Function"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "From"
+	  SrcPort		  1
+	  DstBlock		  "Embedded\nMATLAB Function"
+	  DstPort		  3
+	}
+	Line {
+	  SrcBlock		  "Memory2"
+	  SrcPort		  1
+	  Points		  [70, 0]
+	  DstBlock		  "Triggered\nSubsystem"
+	  DstPort		  trigger
+	}
+	Annotation {
+	  SID			  "30"
+	  Name			  "This sub-system implements a visual rotation about a target defined in the target table.\n\nRotation of c"
+	  "ursor feedback is implemented at every time step by the Rotation function.\nThe amount of rotation is remembered fr"
+	  "om one time step to the next, and is only changed/updated\nupon reciept of a e_ApplyNewRotation event, which trigge"
+	  "rs the Triggered Subsystem to execute.\n\nThe memory blocks on the inputs to this block prevent a loop from occurin"
+	  "g (i.e. if the output from here goes to \nanother block which then feeds back into this block, which forms a loop, "
+	  "which needs to be broken by the Memory block)."
+	  Position		  [74, 58]
+	  HorizontalAlignment	  "left"
+	  ZOrder		  -1
+	}
+      }
+    }
+    Block {
+      BlockType		      Constant
+      Name		      "Constant"
+      SID		      "29"
+      Position		      [40, 95, 70, 125]
+      ZOrder		      -11
+      IOType		      "siggen"
+    }
+    Line {
+      SrcBlock		      "Show_Target"
+      SrcPort		      1
+      Points		      [35, 0]
+      DstBlock		      "Matrix\nConcatenation"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "GUI Control"
+      SrcPort		      2
+      Points		      [50, 0]
+      Branch {
+	DstBlock		"Trial_Control"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 475]
+	DstBlock		"Visual_Rotation"
+	DstPort			3
+      }
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      8
+      Points		      [0, 105; -600, 0; 0, -605]
+      DstBlock		      "GUI Control"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "GUI Control"
+      SrcPort		      1
+      Points		      [225, 0]
+      DstBlock		      "Trial_Control"
+      DstPort		      trigger
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      4
+      DstBlock		      "Show_Target"
+      DstPort		      2
+    }
+    Line {
+      Labels		      [0, 0]
+      SrcBlock		      "Trial_Control"
+      SrcPort		      3
+      Points		      [10, 0; 0, 50]
+      DstBlock		      "Show_Target"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Show_Target1"
+      SrcPort		      1
+      DstBlock		      "Matrix\nConcatenation"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      5
+      DstBlock		      "Show_Target1"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      6
+      Points		      [0, -50]
+      DstBlock		      "Show_Target1"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      2
+      DstBlock		      "DataLogging"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Matrix\nConcatenation"
+      SrcPort		      1
+      DstBlock		      "Process_Video_CMD"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Hand_Feedback"
+      SrcPort		      1
+      DstBlock		      "Visual_Rotation"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Visual_Rotation"
+      SrcPort		      2
+      Points		      [20, 0; 0, 90; -795, 0]
+      DstBlock		      "KINARM_HandFeedbackInTarget"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "KINARM_HandFeedbackInTarget"
+      SrcPort		      1
+      DstBlock		      "Trial_Control"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      7
+      DstBlock		      "Visual_Rotation"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Visual_Rotation"
+      SrcPort		      1
+      Points		      [20, 0; 0, -140]
+      DstBlock		      "Matrix\nConcatenation"
+      DstPort		      3
+    }
+    Line {
+      SrcBlock		      "Trial_Control"
+      SrcPort		      1
+      DstBlock		      "DataLogging"
+      DstPort		      1
+    }
+    Annotation {
+      SID		      "31"
+      Name		      "The purpose of this task is to apply a rotation to the visual handfeedback so that the visual handf"
+      "eedback is no longer spatially aligned with the actual hand position.\nThis type of task is sometimes call a vis"
+      "uomotor rotation task.\nThe task program is coded up such that the amount of visuomotor rotation can be specifie"
+      "d explicitly, or as an increment compared to the previous rotation.\nAll rotations are about a target specified "
+      "in the target table.\n\nThe KINARM_HandInTarget block was unlinked from the TDK and customized to use the cursor"
+      " position as hand feedback input, rather than the KINARM robot's actual location."
+      Position		      [646, 54]
+      HorizontalAlignment     "left"
+      ZOrder		      -1
+    }
+  }
+}
+MatData {
+  NumRecords		  2
+  DataRecord {
+    Tag			    DataTag0
+    Data		    "  %)30     .    4 H   8    (     @         %    \"     $    3     0         %  0 !@    $    ,    3F%M90"
+    "  5F%L=64       X   !     !@    @    $          4    (     0    X    !         !     .    0DM)3E]35$507U1)344   X "
+    "   X    !@    @    &          4    (     0    $    !          D    (    _*GQTDUB0#\\.    .     8    (    !        "
+    "  %    \"     $    %     0         0    !0   &-O;%]X    #@   #@    &    \"     8         !0    @    !     0    $  "
+    "       \"0    @           #P/PX    X    !@    @    $          4    (     0    4    !         !     %    8V]L7WD   "
+    " .    .     8    (    !@         %    \"     $    !     0         )    \"             ! #@   $     &    \"     0  "
+    "       !0    @    !    \"P    $         $     L   !%7U1!4D=%5%]/3@      #@   #@    &    \"     8         !0    @  "
+    "  !     0    $         \"0    @            (0 X   !     !@    @    $          4    (     0   !     !         !    "
+    " 0    15](3TQ$7T%47U1!4D=%5 X    X    !@    @    &          4    (     0    $    !          D    (            %$ ."
+    "    0     8    (    !          %    \"     $    .     0         0    #@   $Q/1TE#04Q?4D%$2553   .    .     8    ( "
+    "   !@         %    \"     $    !     0         )    \"            !! #@   $     &    \"     0         !0    @    !"
+    "    $     $         $    !    !35$%25%]405)'151?0T],#@   #@    &    \"     8         !0    @    !     0    $      "
+    "   \"0    @           #P/PX   !     !@    @    $          4    (     0    X    !         !     .    14Y$7U1!4D=%5%"
+    "]#3TP   X    X    !@    @    &          4    (     0    $    !          D    (             $ .    0     8    (    "
+    "!          %    \"     $    /     0         0    #P   %)/5$%424].7T-%3E1%4@ .    .     8    (    !@         %    \""
+    "     $    !     0         )    \"             A #@   $@    &    \"     0         !0    @    !    %0    $         $"
+    "    !4   !704E47T%47S%S=%1!4D=%5%]#3TP    .    .     8    (    !@         %    \"     $    !     0         )    \""
+    "            !! #@   $     &    \"     0         !0    @    !    $     $         $    !    !-05A214%#2%1)345?0T],#@"
+    "   #@    &    \"     8         !0    @    !     0    $         \"0    @            40 X   !(    !@    @    $      "
+    "    4    (     0   !4    !         !     5    5T%)5%]!5%\\R;F1405)'151?0T],    #@   #@    &    \"     8         !0"
+    "    @    !     0    $         \"0    @            80 X   !     !@    @    $          4    (     0    T    !       "
+    "  !     -    4D]4051)3TY?5%E010    X    X    !@    @    &          4    (     0    $    !          D    (         "
+    "   ($ .    .     8    (    !          %    \"     $    (     0         0    \"    %)/5$%424].#@   #@    &    \"   "
+    "  8         !0    @    !     0    $         \"0    @            B0 X   !(    !@    @    $          4    (     0   "
+    "!,    !         !     3    1$5,05E?4$]35%1224%,7T-/3       #@   #@    &    \"     8         !0    @    !     0    "
+    "$         \"0    @            <0 X   !     !@    @    $          4    (     0    T    !         !     -    15]35$%"
+    "97T-%3E1%4@    X    X    !@    @    &          4    (     0    $    !          D    (             $ .    0     8  "
+    "  (    !          %    \"     $    -     0         0    #0   %9)4U5!3%]2041)55,    .    .     8    (    !@        "
+    " %    \"     $    !     0         )    \"             A #@   #@    &    \"     0         !0    @    !    !0    $  "
+    "       $     4   !#3TQ/4@    X    X    !@    @    &          4    (     0    $    !          D    (            %$ "
+    ".    .     8    (    !          %    \"     $    (     0         0    \"    $%,5$-/3$]2#@   #@    &    \"     8   "
+    "      !0    @    !     0    $         \"0    @            80 "
+  }
+  DataRecord {
+    Tag			    DataTag1
+    Data		    "  %)30     .    &$    8    (     @         %    \"     $    '     0         %  0 #P    $    \\    <&%R8"
+    "6US            ;G5M7W!A<F%M        <W5B7V)L;V-K7VYA;64 87!P;'D                   X   ! !0  !@    @    \"          "
+    "4    (     0    (    !          4 !  -     0   ((   !P87)A;6EN9&5X    8V]N<W1A;G1N86UE '!A<F%M;&%B96P   !P87)A;71Y"
+    "<&4     <&%R86UO<'1I;VX  '!A<F%M9&5S8P    !E;F%B;&5E=F5N=   9&ES86)L965V96YT &)U='1O;F=R;W5P  !B;&]C:VYA;64       "
+    "      #@   #     &    \"     0         !0    @    !     0    $         $  ! #$    .    ,     8    (    !          "
+    "%    \"                0         0          X    P    !@    @    $          4    (               !         !      "
+    "    #@   #     &    \"     0         !0    @               $         $          .    ,     8    (    !          % "
+    "   \"                0         0          X    P    !@    @    $          4    (               !         !        "
+    "  #@   #     &    \"     0         !0    @               $         $          .    ,     8    (    !          %   "
+    " \"                0         0          X    P    !@    @    $          4    (               !         !          "
+    "#@   $     &    \"     0         !0    @    !    #0    $         $     T   !)3E-44E5#5$E/3E,]    #@   #     &    \""
+    "     0         !0    @    !     0    $         $  ! #(    .    ,     8    (    !          %    \"                0"
+    "         0          X    P    !@    @    $          4    (               !         !          #@   #     &    \"  "
+    "   0         !0    @               $         $          .    ,     8    (    !          %    \"                0  "
+    "       0          X    P    !@    @    $          4    (               !         !          #@   #     &    \"    "
+    " 0         !0    @               $         $          .    ,     8    (    !          %    \"                0    "
+    "     0          X    P    !@    @    $          4    (               !         !          #@   $     &    \"     0"
+    "         !0    @    !    #P    $         $     \\   !,3T%$7T9/4CU%251(15( #@   #@    &    \"     8         !0    @"
+    "    !     0    $         \"0    @             0 X   !     !@    @    $          4    (     0    \\    !         ! "
+    "    /    =&%S:U]D969I;FET:6]N  X    P    !@    @    ) @        4    (     0    $    !          (  0      #@   $ 0 "
+    "  &    \"     (         !0    @    !    !@    $         !0 $  T    !    @@   &-O;G-T86YT;F%M90!P87)A;6EN9&5X    <&"
+    "%R86UL86)E;    '!A<F%M='EP90    !P87)A;6]P=&EO;@  96YA8FQE979E;G0  &1I<V%B;&5E=F5N= !B=71T;VYG<F]U<   <&%R86UD97-C"
+    "     &)L;V-K;F%M90             .    .     8    (    !          %    \"     $    %     0         0    !0   &-O;%]X "
+    "   #@   #     &    \"     0         !0    @    !     0    $         $  ! #$    .    ,     8    (    !          %  "
+    "  \"     $    !     0         0  $ 6     X    X    !@    @    $          4    (     0    4    !         !     %   "
+    " 9FQO870    .    ,     8    (    !          %    \"     $    $     0         0  0 ;F]N90X    P    !@    @    $    "
+    "      4    (     0         !         !          #@   #     &    \"     0         !0    @    !          $         $"
+    "          .    ,     8    (    !          %    \"     $          0         0          X   !H    !@    @    $      "
+    "    4    (     0   #8    !         !     V    6\"!0;W-I=&EO;B H8VTI(&]F('1H92!T87)G970@<F5L871I=F4@=&\\@(&QO8V%L(\""
+    "@P+# I   .    @     8    (    !          %    \"     $   !-     0         0    30   &-O;%]X.U@[9FQO870[6\"!0;W-I=&"
+    "EO;B H8VTI(&]F('1H92!T87)G970@<F5L871I=F4@=&\\@(&QO8V%L(\"@P+# I.SL[;F]N93L[    #@   #@    &    \"     0         !"
+    "0    @    !    !0    $         $     4   !C;VQ?>0    X    P    !@    @    $          4    (     0    $    !       "
+    "  !   0 R    #@   #     &    \"     0         !0    @    !     0    $         $  ! %D    .    .     8    (    !   "
+    "       %    \"     $    %     0         0    !0   &9L;V%T    #@   #     &    \"     0         !0    @    !    !   "
+    "  $         $  $ &YO;F4.    ,     8    (    !          %    \"     $          0         0          X    P    !@   "
+    " @    $          4    (     0         !         !          #@   #     &    \"     0         !0    @    !          "
+    "$         $          .    :     8    (    !          %    \"     $    V     0         0    -@   %D@4&]S:71I;VX@*&-"
+    "M*2!O9B!T:&4@=&%R9V5T(')E;&%T:79E('1O(\"!L;V-A;\" H,\"PP*0  #@   (     &    \"     0         !0    @    !    30   "
+    " $         $    $T   !C;VQ?>3M9.V9L;V%T.UD@4&]S:71I;VX@*&-M*2!O9B!T:&4@=&%R9V5T(')E;&%T:79E('1O(\"!L;V-A;\" H,\"PP"
+    "*3L[.VYO;F4[.P    X   !     !@    @    $          4    (     0    T    !         !     -    5DE354%,7U)!1$E54P    "
+    "X    P    !@    @    $          4    (     0    $    !         !   0 S    #@   $     &    \"     0         !0    @"
+    "    !    #0    $         $     T   !6:7-U86P@<F%D:75S    #@   #@    &    \"     0         !0    @    !    !0    $ "
+    "        $     4   !F;&]A=     X    P    !@    @    $          4    (     0    0    !         !  ! !N;VYE#@   #    "
+    " &    \"     0         !0    @    !          $         $          .    ,     8    (    !          %    \"     $   "
+    "       0         0          X    P    !@    @    $          4    (     0         !         !          #@   #     &"
+    "    \"     0         !0    @    !          $         $          .    8     8    (    !          %    \"     $    K"
+    "     0         0    *P   %9)4U5!3%]2041)55,[5FES=6%L(')A9&EU<SMF;&]A=#L[.SMN;VYE.SL       X   !     !@    @    $  "
+    "        4    (     0    X    !         !     .    3$]'24-!3%]2041)55,   X    P    !@    @    $          4    (    "
+    " 0    $    !         !   0 T    #@   $     &    \"     0         !0    @    !    #@    $         $     X   !,;V=I8"
+    "V%L(')A9&EU<P  #@   #@    &    \"     0         !0    @    !    !0    $         $     4   !F;&]A=     X    P    !@"
+    "    @    $          4    (     0    0    !         !  ! !N;VYE#@   #     &    \"     0         !0    @    !       "
+    "   $         $          .    ,     8    (    !          %    \"     $          0         0          X    P    !@  "
+    "  @    $          4    (     0         !         !          #@   #     &    \"     0         !0    @    !         "
+    " $         $          .    8     8    (    !          %    \"     $    M     0         0    +0   $Q/1TE#04Q?4D%$25"
+    "53.TQO9VEC86P@<F%D:75S.V9L;V%T.SL[.VYO;F4[.P    X    X    !@    @    $          4    (     0    4    !         !  "
+    "   %    0T],3U(    .    ,     8    (    !          %    \"     $    !     0         0  $ -0    X    X    !@    @  "
+    "  $          4    (     0    4    !         !     %    0V]L;W(    .    .     8    (    !          %    \"     $   "
+    " &     0         0    !@   &-O;&]U<@  #@   #     &    \"     0         !0    @    !    !     $         $  $ &YO;F4"
+    ".    ,     8    (    !          %    \"     $          0         0          X    P    !@    @    $          4    ("
+    "     0         !         !          #@   #     &    \"     0         !0    @    !          $         $          . "
+    "   ,     8    (    !          %    \"     $          0         0          X   !0    !@    @    $          4    (  "
+    "   0   !P    !         !     <    0T],3U([0V]L;W([8V]L;W5R.SL[.VYO;F4[.P     .    .     8    (    !          %    "
+    "\"     $    (     0         0    \"    $%,5$-/3$]2#@   #     &    \"     0         !0    @    !     0    $        "
+    " $  ! #8    .    0     8    (    !          %    \"     $    )     0         0    \"0   $%L=\"U#;VQO<@         .  "
+    "  .     8    (    !          %    \"     $    &     0         0    !@   &-O;&]U<@  #@   #     &    \"     0       "
+    "  !0    @    !    !     $         $  $ &YO;F4.    ,     8    (    !          %    \"     $          0         0   "
+    "       X    P    !@    @    $          4    (     0         !         !          #@   #     &    \"     0         "
+    "!0    @    !          $         $          .    ,     8    (    !          %    \"     $          0         0     "
+    "     X   !8    !@    @    $          4    (     0   \",    !         !     C    04Q40T],3U([06QT+4-O;&]R.V-O;&]U<C"
+    "L[.SMN;VYE.SL       X    X    !@    @    &          4    (     0    $    !          D    (            &$ .    0   "
+    "  8    (    !          %    \"     $    ,     0         0    #    '1A<F=E=%]T86)L90     .          X    P    !@   "
+    " @    &          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    "
+    "$         \"0    @               X   !     !@    @    $          4    (     0    H    !         !     *    ;&]A9%]"
+    "T86)L90        X         #@   .@;   &    \"     (         !0    @    !    \"0    $         !0 $  T    !    @@   &-"
+    "O;G-T86YT;F%M90!P87)A;6EN9&5X    <&%R86UL86)E;    '!A<F%M='EP90    !P87)A;6]P=&EO;@  96YA8FQE979E;G0  &1I<V%B;&5E="
+    "F5N= !B=71T;VYG<F]U<   <&%R86UD97-C     &)L;V-K;F%M90             .    0     8    (    !          %    \"     $   "
+    " 0     0         0    $    %-405)47U1!4D=%5%]#3TP.    ,     8    (    !          %    \"     $    !     0         "
+    "0  $ ,0    X   !     !@    @    $          4    (     0    P    !         !     ,    4W1A<G1?5&%R9V5T      X    X "
+    "   !@    @    $          4    (     0    8    !         !     &    =&%R9V5T   .    ,     8    (    !          %   "
+    " \"     $    $     0         0  0 ;F]N90X    P    !@    @    $          4    (     0         !         !          "
+    "#@   #     &    \"     0         !0    @    !          $         $          .    ,     8    (    !          %    \""
+    "     $          0         0          X   !8    !@    @    $          4    (     0   \"4    !         !     E    1F"
+    "ER<W0@=&%R9V5T('1O(&%P<&5A<B!D=7)I;F<@82!T<FEA;     X   \"(    !@    @    $          4    (     0   %,    !       "
+    "  !    !3    4U1!4E1?5$%21T547T-/3#M3=&%R=%]487)G970[=&%R9V5T.T9I<G-T('1A<F=E=\"!T;R!A<'!E87(@9'5R:6YG(&$@=')I86P["
+    ".SMN;VYE.SL       X   !     !@    @    $          4    (     0    X    !         !     .    14Y$7U1!4D=%5%]#3TP   "
+    "X    P    !@    @    $          4    (     0    $    !         !   0 R    #@   $     &    \"     0         !0    @"
+    "    !    \"@    $         $     H   !%;F1?5&%R9V5T        #@   #@    &    \"     0         !0    @    !    !@    $"
+    "         $     8   !T87)G970   X    P    !@    @    $          4    (     0    0    !         !  ! !N;VYE#@   #   "
+    "  &    \"     0         !0    @    !          $         $          .    ,     8    (    !          %    \"     $  "
+    "        0         0          X    P    !@    @    $          4    (     0         !         !          #@   (@    "
+    "&    \"     0         !0    @    !    4@    $         $    %(   !396-O;F0@=&%R9V5T('1O(&%P<&5A<B!D=7)I;F<@82!T<FEA"
+    ";\" H:2YE+B!R96%C:\"!T;R!T:&ES('1A<F=E=\"!F<F]M(#%S=\"!T87)G970I        #@   +     &    \"     0         !0    @  "
+    "  !    ?     $         $    'P   !%3D1?5$%21T547T-/3#M%;F1?5&%R9V5T.W1A<F=E=#M396-O;F0@=&%R9V5T('1O(&%P<&5A<B!D=7)"
+    "I;F<@82!T<FEA;\" H:2YE+B!R96%C:\"!T;R!T:&ES('1A<F=E=\"!F<F]M(#%S=\"!T87)G970I.SL[;F]N93L[      X   !     !@    @  "
+    "  $          4    (     0    \\    !         !     /    4D]4051)3TY?0T5.5$52  X    P    !@    @    $          4   "
+    " (     0    $    !         !   0 S    #@   $     &    \"     0         !0    @    !    #0    $         $     T   !"
+    "2;W1A=&5?0V5N=&5R    #@   #@    &    \"     0         !0    @    !    !@    $         $     8   !T87)G970   X    P"
+    "    !@    @    $          4    (     0    0    !         !  ! !N;VYE#@   #     &    \"     0         !0    @    ! "
+    "         $         $          .    ,     8    (    !          %    \"     $          0         0          X    P  "
+    "  !@    @    $          4    (     0         !         !          #@   *     &    \"     0         !0    @    !   "
+    " :0    $         $    &D   !487)G970@=&\\@=7-E(&9O<B!R;W1A=&EO;B!C96YT97(@*&DN92X@=FES=6%L(')O=&%T:6]N(&]C8W5R<R!A"
+    "8F]U=\"!T:&4@<&]S:71I;VX@9&5F:6YE9\"!B>2!T:&ES('1A<F=E=\"D         #@   ,@    &    \"     0         !0    @    !  "
+    "  EP    $         $    )<   !23U1!5$E/3E]#14Y415([4F]T871E7T-E;G1E<CMT87)G970[5&%R9V5T('1O('5S92!F;W(@<F]T871I;VX@"
+    "8V5N=&5R(\"AI+F4N('9I<W5A;\"!R;W1A=&EO;B!O8V-U<G,@86)O=70@=&AE('!O<VET:6]N(&1E9FEN960@8GD@=&AI<R!T87)G970I.SL[;F]N"
+    "93L[  X   !(    !@    @    $          4    (     0   !4    !         !     5    5T%)5%]!5%\\Q<W1405)'151?0T],    #"
+    "@   #     &    \"     0         !0    @    !     0    $         $  ! #0    .    0     8    (    !          %    \""
+    "     $    /     0         0    #P   #%S=%]487)G971?5V%I=  .    .     8    (    !          %    \"     $    '     0"
+    "         0    !P   &EN=&5G97( #@   #     &    \"     0         !0    @    !    !     $         $  $ &YO;F4.    ,  "
+    "   8    (    !          %    \"     $          0         0          X    P    !@    @    $          4    (     0  "
+    "       !         !          #@   #     &    \"     0         !0    @    !          $         $          .    6    "
+    " 8    (    !          %    \"     $    E     0         0    )0   %)E<75I<F5D(&AO;&0@=&EM92!A=\" Q<W0@=&%R9V5T(\"AM"
+    "<RD    .    D     8    (    !          %    \"     $   !<     0         0    7    %=!251?051?,7-T5$%21T547T-/3#LQ<"
+    "W1?5&%R9V5T7U=A:70[:6YT96=E<CM297%U:7)E9\"!H;VQD('1I;64@870@,7-T('1A<F=E=\" H;7,I.SL[;F]N93L[      X   !     !@   "
+    " @    $          4    (     0   !     !         !     0    34%84D5!0TA424U%7T-/3 X    P    !@    @    $          4"
+    "    (     0    $    !         !   0 U    #@   $     &    \"     0         !0    @    !    #     $         $     P "
+    "  !-87A296%C:%1I;64     #@   #@    &    \"     0         !0    @    !    !P    $         $     <   !I;G1E9V5R  X  "
+    "  P    !@    @    $          4    (     0    0    !         !  ! !N;VYE#@   #     &    \"     0         !0    @   "
+    " !          $         $          .    ,     8    (    !          %    \"     $          0         0          X    "
+    "P    !@    @    $          4    (     0         !         !          #@   &     &    \"     0         !0    @    !"
+    "    +0    $         $    \"T   !M87AI;75M('1I;64@86QL;W=E9\"!F;W(@<W5C97-S9G5L(')E86-H(\"AM<RD    .    D     8    "
+    "(    !          %    \"     $   !<     0         0    7    $U!6%)%04-(5$E-15]#3TP[36%X4F5A8VA4:6UE.VEN=&5G97([;6%X"
+    ":6UU;2!T:6UE(&%L;&]W960@9F]R('-U8V5S<V9U;\"!R96%C:\" H;7,I.SL[;F]N93L[      X   !(    !@    @    $          4    ("
+    "     0   !4    !         !     5    5T%)5%]!5%\\R;F1405)'151?0T],    #@   #     &    \"     0         !0    @    !"
+    "     0    $         $  ! #8    .    0     8    (    !          %    \"     $    /     0         0    #P   #)N9%]48"
+    "7)G971?5V%I=  .    .     8    (    !          %    \"     $    '     0         0    !P   &EN=&5G97( #@   #     &  "
+    "  \"     0         !0    @    !    !     $         $  $ &YO;F4.    ,     8    (    !          %    \"     $       "
+    "   0         0          X    P    !@    @    $          4    (     0         !         !          #@   #     &    "
+    "\"     0         !0    @    !          $         $          .    6     8    (    !          %    \"     $    D    "
+    " 0         0    )    &1E;&%Y(&%F=&5R(')E86-H:6YG(#)N9\"!T87)G970@*&US*0     .    D     8    (    !          %    \""
+    "     $   !;     0         0    6P   %=!251?051?,FYD5$%21T547T-/3#LR;F1?5&%R9V5T7U=A:70[:6YT96=E<CMD96QA>2!A9G1E<B!"
+    "R96%C:&EN9R R;F0@=&%R9V5T(\"AM<RD[.SMN;VYE.SL       X   !(    !@    @    $          4    (     0   !,    !        "
+    " !     3    1$5,05E?4$]35%1224%,7T-/3       #@   #     &    \"     0         !0    @    !     0    $         $  ! "
+    "#<    .    0     8    (    !          %    \"     $    0     0         0    $    %!O<W0M5')I86Q?1&5L87D.    .     "
+    "8    (    !          %    \"     $    '     0         0    !P   &EN=&5G97( #@   #     &    \"     0         !0    "
+    "@    !    !     $         $  $ &YO;F4.    ,     8    (    !          %    \"     $          0         0          X"
+    "    P    !@    @    $          4    (     0         !         !          #@   #     &    \"     0         !0    @ "
+    "   !          $         $          .    2     8    (    !          %    \"     $    8     0         0    &    '1I;"
+    "64@8F5T=V5E;B!T<FEA;',@*&US*0X   \"     !@    @    $          4    (     0   $X    !         !    !.    1$5,05E?4$"
+    "]35%1224%,7T-/3#M0;W-T+51R:6%L7T1E;&%Y.VEN=&5G97([=&EM92!B971W965N('1R:6%L<R H;7,I.SL[;F]N93L[   .    0     8    ("
+    "    !          %    \"     $    -     0         0    #0   %)/5$%424].7U194$4    .    ,     8    (    !          % "
+    "   \"     $    !     0         0  $ .     X   !     !@    @    $          4    (     0    L    !         !     +  "
+    "  4F]T871E7U1Y<&4       X    X    !@    @    $          4    (     0    <    !         !     '    :6YT96=E<@ .    "
+    ",     8    (    !          %    \"     $    $     0         0  0 ;F]N90X    P    !@    @    $          4    (     "
+    "0         !         !          #@   #     &    \"     0         !0    @    !          $         $          .    , "
+    "    8    (    !          %    \"     $          0         0          X   \"(    !@    @    $          4    (     0"
+    "   %@    !         !    !8    ,\" M/B!N;R!R;W1A=&EO;BP@,2 M/B!R;W1A=&4@<W!E8VEF:65D(&%M;W5N=\"P@,B M/B!C:&%N9V4@<F"
+    "]T871I;VX@8GD@<W!E8VEF:65D(&%M;W5N= X   \"X    !@    @    $          4    (     0   (,    !         !    \"#    4D"
+    "]4051)3TY?5%E013M2;W1A=&5?5'EP93MI;G1E9V5R.S @+3X@;F\\@<F]T871I;VXL(#$@+3X@<F]T871E('-P96-I9FEE9\"!A;6]U;G0L(#(@+3"
+    "X@8VAA;F=E(')O=&%T:6]N(&)Y('-P96-I9FEE9\"!A;6]U;G0[.SMN;VYE.SL       X    X    !@    @    $          4    (     0 "
+    "   @    !         !     (    4D]4051)3TX.    ,     8    (    !          %    \"     $    !     0         0  $ .0  "
+    "  X    X    !@    @    $          4    (     0    @    !         !     (    4F]T871I;VX.    .     8    (    !     "
+    "     %    \"     $    '     0         0    !P   &EN=&5G97( #@   #     &    \"     0         !0    @    !    !     "
+    "$         $  $ &YO;F4.    ,     8    (    !          %    \"     $          0         0          X    P    !@    @"
+    "    $          4    (     0         !         !          #@   #     &    \"     0         !0    @    !          $ "
+    "        $          .    @     8    (    !          %    \"     $   !+     0         0    2P   %)O=&%T:6]N(\"AD96=R"
+    "965S($-#5RD@*&%B<V]L=71E(&]R(&EN8W)E;65N=&%L+\"!D97!E;F1I;F<@;VX@4F]T871E7U1Y<&4I*0      #@   *     &    \"     0 "
+    "        !0    @    !    ;@    $         $    &X   !23U1!5$E/3CM2;W1A=&EO;CMI;G1E9V5R.U)O=&%T:6]N(\"AD96=R965S($-#5"
+    "RD@*&%B<V]L=71E(&]R(&EN8W)E;65N=&%L+\"!D97!E;F1I;F<@;VX@4F]T871E7U1Y<&4I*3L[.VYO;F4[.P  #@   #@    &    \"     8  "
+    "       !0    @    !     0    $         \"0    @            B0 X    X    !@    @    $          4    (     0    @   "
+    " !         !     (    5%!?=&%B;&4.          X    P    !@    @    &          4    (               !          D     "
+    "    #@   #@    &    \"     8         !0    @    !     0    $         \"0    @               X   !     !@    @    $"
+    "          4    (     0    D    !         !     )    =&%S:U]W:61E          X         #@   &@)   &    \"     (      "
+    "   !0    @    !     P    $         !0 $  T    !    @@   &-O;G-T86YT;F%M90!P87)A;6EN9&5X    <&%R86UL86)E;    '!A<F%"
+    "M='EP90    !P87)A;6]P=&EO;@  96YA8FQE979E;G0  &1I<V%B;&5E=F5N= !B=71T;VYG<F]U<   <&%R86UD97-C     &)L;V-K;F%M90   "
+    "          .    0     8    (    !          %    \"     $    0     0         0    $    $5?2$],1%]!5%]405)'150.    , "
+    "    8    (    !          %    \"     $    !     0         0  $ -0    X   !     !@    @    $          4    (     0 "
+    "   X    !         !     .    2$],1%]!5%]405)'150   X    P    !@    @    $          4    (               !         "
+    "!          #@   #     &    \"     0         !0    @    !    !     $         $  $ &YO;F4.    ,     8    (    !     "
+    "     %    \"     $          0         0          X    P    !@    @    $          4    (     0         !         ! "
+    "         #@   #     &    \"     0         !0    @    !          $         $          .    8     8    (    !       "
+    "   %    \"     $    O     0         0    +P   %-U8FIE8W0@<W1A<G1S(&AO;&1I;F<@870@=&AE('!E<FEP:&5R86P@=&%R9V5T  X  "
+    " \"0    !@    @    $          4    (     0   %D    !         !    !9    15](3TQ$7T%47U1!4D=%5#M(3TQ$7T%47U1!4D=%5#"
+    "L[4W5B:F5C=\"!S=&%R=',@:&]L9&EN9R!A=\"!T:&4@<&5R:7!H97)A;\"!T87)G970[.SMN;VYE.SL         #@   $     &    \"     0 "
+    "        !0    @    !    #0    $         $     T   !%7U-405E?0T5.5$52    #@   #     &    \"     0         !0    @  "
+    "  !     0    $         $  ! #(    .    0     8    (    !          %    \"     $    +     0         0    \"P   %-40"
+    "5E?0T5.5%)%       .    ,     8    (    !          %    \"                0         0          X    P    !@    @   "
+    " $          4    (     0    0    !         !  ! !N;VYE#@   #     &    \"     0         !0    @    !          $    "
+    "     $          .    ,     8    (    !          %    \"     $          0         0          X    P    !@    @    $"
+    "          4    (     0         !         !          #@   %@    &    \"     0         !0    @    !    *     $      "
+    "   $    \"@   !S=6)J96-T(&UU<W0@=V%I=\"!A=\"!C96YT<F4@<W1A<G1I;F<@;F]W#@   (     &    \"     0         !0    @    "
+    "!    3     $         $    $P   !%7U-405E?0T5.5$52.U-405E?0T5.5%)%.SMS=6)J96-T(&UU<W0@=V%I=\"!A=\"!C96YT<F4@<W1A<G1"
+    "I;F<@;F]W.SL[;F]N93L[      X   !     !@    @    $          4    (     0    L    !         !     +    15]405)'151?3"
+    "TX       X    P    !@    @    $          4    (     0    $    !         !   0 S    #@   $     &    \"     0       "
+    "  !0    @    !    \"0    $         $     D   !405)'151?3TX         #@   #     &    \"     0         !0    @       "
+    "        $         $          .    ,     8    (    !          %    \"     $    $     0         0  0 ;F]N90X    P   "
+    " !@    @    $          4    (     0         !         !          #@   #     &    \"     0         !0    @    !    "
+    "      $         $          .    ,     8    (    !          %    \"     $          0         0          X   !X    !"
+    "@    @    $          4    (     0   $$    !         !    !!    5&%R9V5T(&QI9VAT($].+\"!S=&%R=\"!W86ET:6YG(&9O<B!S="
+    "6)J96-T('1O(&QE879E(&-E;G1R92!T87)G970         #@   )@    &    \"     0         !0    @    !    80    $         $ "
+    "   &$   !%7U1!4D=%5%]/3CM405)'151?3TX[.U1A<F=E=\"!L:6=H=\"!/3BP@<W1A<G0@=V%I=&EN9R!F;W(@<W5B:F5C=\"!T;R!L96%V92!C9"
+    "6YT<F4@=&%R9V5T.SL[;F]N93L[          X    X    !@    @    &          4    (     0    $    !          D    (       "
+    "     \"$ .    .     8    (    !          %    \"     $    &     0         0    !@   &5V96YT<P  #@         .    ,  "
+    "   8    (    !@         %    \"                0         )          X    X    !@    @    &          4    (     0  "
+    "  $    !          D    (               .    .     8    (    !          %    \"     $    '     0         0    !P   "
+    "&)U='1O;G, #@         "
+  }
+}
+# Finite State Machines
+#
+#    Stateflow Version 7.6 (R2013a) dated Jan 19 2013, 14:32:20
+#
+#
+
+Stateflow {
+  machine {
+    id			    1
+    name		    "reachout_visual_rotation"
+    created		    "16-Jan-2003 15:58:18"
+    creator		    "C.Grebeldinger"
+    isLibrary		    0
+    firstData		    74
+    firstTarget		    92
+    debug {
+      runTimeCheck	      [1 1 0 1]
+    }
+    sfVersion		    76014001.0015
+  }
+  chart {
+    id			    2
+    name		    "Trial_Control"
+    windowPosition	    [147 34 1482 930]
+    viewLimits		    [666.225 1135.915 884.149 1132.114]
+    zoomFactor		    0.437
+    transitionLabelColor    [0 0.5019607843137255 0.2509803921568627]
+    screen		    [1 1 1680 1050 1.333333333333333]
+    treeNode		    [0 10 0 0]
+    firstTransition	    30
+    viewObj		    2
+    machine		    1
+    subviewS {
+      x1		      55.831
+      zoomFactor	      1.25
+    }
+    ssIdHighWaterMark	    46
+    decomposition	    CLUSTER_CHART
+    firstEvent		    26
+    firstData		    17
+    sampleTime		    "0.001"
+    chartFileNumber	    1
+    disableImplicitCasting  1
+    actionLanguage	    1
+    supportVariableSizing   0
+  }
+  state {
+    id			    3
+    labelString		    "Show2ndTarget/\n// Turn on second target, log an event, wait until hand-is-in-target or wait for"
+    " specified delay\nevent_code=E_TARGET_ON;\ntargetB_row = Trial_Protocol[END_TARGET_COL];\ntargetB_state=1;\ntickCo"
+    "unt =Trial_Protocol[MAXREACHTIME_COL];"
+    position		    [611.9077 545.8181 703.332 119.9614]
+    fontSize		    12
+    chart		    2
+    treeNode		    [10 0 6 4]
+    subviewer		    2
+    ssIdNumber		    1
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+    }
+  }
+  state {
+    id			    4
+    labelString		    "StayAt2ndTarget/\n// change the 2nd target's state, log an event, wait for a specified period of"
+    " time\nevent_code=E_HOLD_AT_TARGET;\ntargetB_state=2;\ntickCount =Trial_Protocol[WAIT_AT_2ndTARGET_COL];"
+    position		    [601.1398 731.779 500.4848 108.3695]
+    fontSize		    12
+    chart		    2
+    treeNode		    [10 0 3 5]
+    subviewer		    2
+    ssIdNumber		    2
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+    }
+  }
+  state {
+    id			    5
+    labelString		    "EndOfTrial/\n// Wait for a specified period of time,\ntickCount =Trial_Protocol[DELAY_POSTTRIAL_"
+    "COL];"
+    position		    [678.2252 951.9137 445.6898 112.4353]
+    fontSize		    12
+    chart		    2
+    treeNode		    [10 0 4 0]
+    visible		    0
+    subviewer		    2
+    ssIdNumber		    3
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+    }
+  }
+  state {
+    id			    6
+    labelString		    "StayAtFirstTarget/\n// change the first target state (e.g. colour), log an event, wait for speci"
+    "fied period of time.  Hand must STAY in target for specified time.\nlogging_enable = 1;\nevent_code=E_STAY_CENTER;"
+    "\ntargetA_state=2;\ntickCount =Trial_Protocol[WAIT_AT_1stTARGET_COL];"
+    position		    [567.14 268.7115 853.6292 129.3042]
+    fontSize		    12
+    chart		    2
+    treeNode		    [10 0 8 3]
+    subviewer		    2
+    subviewS {
+      x1		      -15
+      y1		      -15
+      pos		      [0 0 294.6 86.807]
+    }
+    ssIdNumber		    4
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+    }
+  }
+  state {
+    id			    7
+    labelString		    "Inter_Trial_State/\n// send e_Trial_End event\ne_Trial_End;\n// turn off both targets\n// stop d"
+    "ata logging\nevent_code=0;\ntargetA_state=0;\ntargetB_state=0;\nlogging_enable = 0;"
+    position		    [66.3125 479.9063 175.9063 197.3439]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 9 0]
+    subviewer		    2
+    ssIdNumber		    5
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+    }
+  }
+  state {
+    id			    8
+    labelString		    "FirstTargetOn/\n// Turn on first target, set loading conditions, enable data logging, wait for s"
+    "pecified delay or until hand-is-in-target\ntargetA_row = Trial_Protocol[START_TARGET_COL];\ntargetA_state=1;"
+    position		    [594.1991 59.8367 680.6395 114.1799]
+    fontSize		    12
+    arrowSize		    6.223
+    chart		    2
+    treeNode		    [10 0 0 6]
+    subviewer		    2
+    subviewS {
+      x1		      -15
+      y1		      -15
+      pos		      [0 0 322.515 100.313]
+    }
+    ssIdNumber		    6
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+    }
+  }
+  state {
+    id			    9
+    labelString		    "Initialize/\n// Turn off both targets, set hand_feedback on\ntargetA_state=0;\ntargetB_state=0;"
+    position		    [138.3523 32.7385 313.1875 93.5625]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 0 10 7]
+    subviewer		    2
+    ssIdNumber		    7
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+    }
+  }
+  state {
+    id			    10
+    labelString		    "Main_Trial"
+    position		    [485.8438 18.2813 995.75 1101.75]
+    fontSize		    12
+    chart		    2
+    treeNode		    [2 8 0 9]
+    firstTransition	    11
+    subviewer		    2
+    ssIdNumber		    8
+    type		    OR_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+    }
+  }
+  transition {
+    id			    11
+    labelString		    "[HandInTarget[targetA_row]==1]"
+    labelPosition	    [722.69 223.872 174.291 16.842]
+    fontSize		    12
+    src {
+      id		      8
+      intersection	      [3 0 1 0.7279 779.3873 174.0166 0 121.581]
+    }
+    dst {
+      id		      6
+      intersection	      [1 -0 -1 0.2486 779.3873 268.7115 0 -121.581]
+    }
+    midPoint		    [779.3873 219.1619]
+    chart		    2
+    linkNode		    [10 0 12]
+    dataLimits		    [776.987 781.787 174.017 268.712]
+    stampAngle		    -4.7376
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    11
+  }
+  transition {
+    id			    12
+    labelString		    "[HandInTarget[targetA_row]==0]"
+    labelPosition	    [1058.028 214.802 174.291 16.842]
+    fontSize		    12
+    arrowSize		    6.223
+    src {
+      id		      6
+      intersection	      [1 0 -1 0.6004 1079.641 268.7115 0 145.1222]
+    }
+    dst {
+      id		      8
+      intersection	      [3 0 1 0.3398 1043.5629 174.0166 0 -109.044]
+    }
+    midPoint		    [1060.4262 222.6918]
+    chart		    2
+    linkNode		    [10 11 13]
+    dataLimits		    [1041.696 1079.641 174.017 268.711]
+    stampAngle		    -1
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    2
+    ssIdNumber		    18
+  }
+  transition {
+    id			    13
+    labelString		    "after(tickCount, e_clk)/\ne_ApplyNewRotation\n// apply the new rotation amount now (i.e. wait un"
+    "til the subject is in the starting target before applying a new\n// rotation, so that they do not see the hand fee"
+    "dback jump/change when a new rotation is applied)\n// have this event occur on this transition, rather than in the"
+    " \"StayAtFirstTarget\" state to ensure that the subject\n// is really starting the trial.  Could have put this eve"
+    "nt in the \"Show2ndTarget\" state instead."
+    labelPosition	    [874.701 427.938 601.584 91.696]
+    fontSize		    12
+    src {
+      id		      6
+      intersection	      [3 0 1 0.6501 865.7895 398.0157 0 63.5424]
+    }
+    dst {
+      id		      3
+      intersection	      [1 -0 -1 0.361 865.7895 545.8181 0 -63.5424]
+    }
+    midPoint		    [865.7895 470.8693]
+    chart		    2
+    linkNode		    [10 12 14]
+    dataLimits		    [863.39 868.189 398.016 545.818]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    9
+  }
+  transition {
+    id			    14
+    labelString		    "[HandInTarget[targetB_row]==1]"
+    labelPosition	    [809.957 687.144 174.291 16.842]
+    fontSize		    12
+    src {
+      id		      3
+      intersection	      [3 0 1 0.724 806.0383 665.7795 0 2.1094]
+    }
+    dst {
+      id		      4
+      intersection	      [1 -0 -1 0.4094 806.0383 731.779 0 -2.1094]
+    }
+    midPoint		    [806.0383 695.9533]
+    chart		    2
+    linkNode		    [10 13 15]
+    dataLimits		    [803.638 808.438 665.779 731.779]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    2
+    ssIdNumber		    10
+  }
+  transition {
+    id			    15
+    labelString		    "after(tickCount, e_clk)/"
+    labelPosition	    [1134.278 964.277 124.627 16.842]
+    fontSize		    12
+    src {
+      id		      3
+      intersection	      [3 0 1 0.0829 1256.9208 665.7795 0 -355.8507]
+    }
+    dst {
+      id		      5
+      intersection	      [2 1 0 0.2636 1123.915 981.5521 0 252.4833]
+    }
+    midPoint		    [1234.952 874.8467]
+    chart		    2
+    linkNode		    [10 14 16]
+    dataLimits		    [1123.915 1258.391 665.78 983.952]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    14
+  }
+  transition {
+    id			    16
+    labelString		    "after(tickCount, e_clk)"
+    labelPosition	    [813.856 863.873 120.879 16.842]
+    fontSize		    12
+    src {
+      id		      4
+      intersection	      [3 0 1 0.587 807.8607 840.1485 0 19.9245]
+    }
+    dst {
+      id		      5
+      intersection	      [1 0 -1 0.2909 807.8607 951.9137 0 -19.9245]
+    }
+    midPoint		    [807.8607 894.2001]
+    chart		    2
+    linkNode		    [10 15 0]
+    dataLimits		    [805.461 810.261 840.149 951.914]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    15
+  }
+  data {
+    id			    17
+    ssIdNumber		    20
+    name		    "logging_enable"
+    linkNode		    [2 0 18]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_BOOLEAN_TYPE
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "boolean"
+  }
+  data {
+    id			    18
+    ssIdNumber		    21
+    name		    "event_code"
+    linkNode		    [2 17 19]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      range {
+	minimum			"0"
+      }
+      initialValue	      "0"
+      type {
+	primitive		SF_UINT16_TYPE
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "uint16"
+  }
+  data {
+    id			    19
+    ssIdNumber		    23
+    name		    "Trial_Protocol"
+    linkNode		    [2 18 20]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+	firstIndex		"1"
+      }
+      type {
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    20
+    ssIdNumber		    24
+    name		    "HandInTarget"
+    linkNode		    [2 19 21]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+	firstIndex		"1"
+      }
+      type {
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    21
+    ssIdNumber		    25
+    name		    "targetA_row"
+    description		    "index of the row currently being used in the TargetTable"
+    linkNode		    [2 20 22]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      range {
+	minimum			"1"
+	maximum			"32"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    22
+    ssIdNumber		    26
+    name		    "targetA_state"
+    linkNode		    [2 21 23]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    23
+    ssIdNumber		    27
+    name		    "targetB_row"
+    linkNode		    [2 22 24]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    24
+    ssIdNumber		    28
+    name		    "targetB_state"
+    linkNode		    [2 23 25]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    25
+    ssIdNumber		    29
+    name		    "tickCount"
+    linkNode		    [2 24 0]
+    scope		    LOCAL_DATA
+    machine		    1
+    props {
+      type {
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "double"
+  }
+  event {
+    id			    26
+    ssIdNumber		    43
+    name		    "e_ApplyNewRotation"
+    linkNode		    [2 0 27]
+    scope		    OUTPUT_EVENT
+    trigger		    EITHER_EDGE_EVENT
+    machine		    1
+  }
+  event {
+    id			    27
+    ssIdNumber		    44
+    name		    "e_clk"
+    linkNode		    [2 26 28]
+    scope		    INPUT_EVENT
+    trigger		    RISING_EDGE_EVENT
+    machine		    1
+  }
+  event {
+    id			    28
+    ssIdNumber		    45
+    name		    "e_ExitTrialNow"
+    linkNode		    [2 27 29]
+    scope		    INPUT_EVENT
+    trigger		    EITHER_EDGE_EVENT
+    machine		    1
+  }
+  event {
+    id			    29
+    ssIdNumber		    46
+    name		    "e_Trial_End"
+    linkNode		    [2 28 0]
+    scope		    OUTPUT_EVENT
+    trigger		    EITHER_EDGE_EVENT
+    machine		    1
+  }
+  transition {
+    id			    30
+    labelPosition	    [214.397 0 8.433 16.842]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 208.8195 4.6135 0 0.5458]
+    }
+    dst {
+      id		      9
+      intersection	      [1 0 -1 0.225 208.8195 32.7385 0 -0.5458]
+    }
+    midPoint		    [208.8195 15.0267]
+    chart		    2
+    linkNode		    [2 0 31]
+    dataLimits		    [206.42 211.22 4.614 32.739]
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    13
+  }
+  transition {
+    id			    31
+    labelPosition	    [533.297 96.758 8.433 16.842]
+    fontSize		    12
+    arrowSize		    6.223
+    src {
+      id		      9
+      intersection	      [2 1 -0 0.6243 451.5398 91.1496 0 -2.8125]
+    }
+    dst {
+      id		      8
+      intersection	      [4 -1 0 0.6512 594.1991 99.6623 0 9.8635]
+    }
+    midPoint		    [522.6537 95.6833]
+    chart		    2
+    linkNode		    [2 30 32]
+    dataLimits		    [451.54 594.199 91.15 101.529]
+    stampAngle		    -1
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    19
+  }
+  transition {
+    id			    32
+    labelString		    "after(tickCount, e_clk)"
+    labelPosition	    [231.732 264.856 120.879 16.842]
+    fontSize		    12
+    arrowSize		    6.223
+    src {
+      id		      7
+      intersection	      [1 0 -1 0.4273 141.4723 479.9063 0 -100.7465]
+    }
+    dst {
+      id		      8
+      intersection	      [4 -1 0 0.3851 594.1991 130.046 0 43.9706]
+    }
+    midPoint		    [304.7868 225.2941]
+    chart		    2
+    linkNode		    [2 31 33]
+    dataLimits		    [141.472 594.199 128.179 479.906]
+    stampAngle		    -1
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    16
+  }
+  transition {
+    id			    33
+    labelString		    "e_ExitTrialNow/\n// if e_ExitTrialNow event occurs...\ntickCount=1;"
+    labelPosition	    [273.695 459.754 186.472 46.784]
+    fontSize		    12
+    src {
+      id		      10
+      intersection	      [4 -1 0 0.5504 485.8438 513.5732 0 -5.5312]
+    }
+    dst {
+      id		      7
+      intersection	      [2 1 -0 0.1706 242.2188 513.5732 0 5.5312]
+    }
+    midPoint		    [362.9958 513.5732]
+    chart		    2
+    linkNode		    [2 32 34]
+    dataLimits		    [242.219 485.844 511.173 515.973]
+    stampAngle		    -1
+    subviewer		    2
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    17
+  }
+  transition {
+    id			    34
+    labelPosition	    [391.24 952.786 8.433 16.842]
+    fontSize		    12
+    src {
+      id		      5
+      intersection	      [4 -1 0 0.4686 678.2252 1011.6618 0 3.4587]
+    }
+    dst {
+      id		      7
+      intersection	      [3 0 1 0.6 136.675 677.2501 0 -3.4587]
+    }
+    midPoint		    [356.5603 944.1139]
+    chart		    2
+    linkNode		    [2 33 0]
+    dataLimits		    [134.275 678.225 677.25 1011.662]
+    stampAngle		    -1
+    subviewer		    2
+    slide {
+      sticky		      BOTH_STICK
+      midPointSticky	      1
+    }
+    executionOrder	    1
+    ssIdNumber		    12
+  }
+  instance {
+    id			    35
+    name		    "Trial_Control"
+    machine		    1
+    chart		    2
+  }
+  chart {
+    id			    36
+    name		    "Visual_Rotation/Triggered\nSubsystem/Embedded\nMATLAB Function"
+    windowPosition	    [741 346.25 213 385]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 1680 1050 1.333333333333333]
+    treeNode		    [0 37 0 0]
+    firstTransition	    41
+    firstJunction	    40
+    viewObj		    36
+    machine		    1
+    ssIdHighWaterMark	    6
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    38
+    chartFileNumber	    2
+    disableImplicitCasting  1
+    eml {
+      name		      "Calculate_Desired_Rotation"
+    }
+    supportVariableSizing   0
+  }
+  state {
+    id			    37
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    36
+    treeNode		    [36 0 0 0]
+    superState		    SUBCHART
+    subviewer		    36
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function rotation   = Calculate_Desired_Rotation(Trial_Protocol)\n% This block supports an embedd"
+      "able subset of the MATLAB language.\n% See the help menu for details. \n\n%This block was modified by IEB, Sept "
+      "24, 2008\n%It updates the desired amount of rotation\n\n% NOTE ALL ROTATIONS ARE CURRENTLY IN DEGREES IN THE FUN"
+      "CTION\n\n% create a persistent variable to remember the rotation amount from one time-step to the next\npersiste"
+      "nt rotation_memory\n\nif isempty(rotation_memory),            rotation_memory = 0;										end\n\n% where to lo"
+      "ok in the TP table for these parameters\nrotate_type_COL = 8;\nrotation_amount_COL = 9;\n\nrotate_type = Trial_P"
+      "rotocol(rotate_type_COL);\nrotation_amount = Trial_Protocol(rotation_amount_COL);\n\nif rotate_type == 0\n	%set "
+      "the rotation = 0\n	rotation = 0;\nelseif rotate_type ==1\n	%set the rotation = specified amount\n	rotation = rot"
+      "ation_amount;\nelseif rotate_type == 2\n	%set the rotation to change by specified amount\n	rotation = rotation_m"
+      "emory + rotation_amount;\nelse\n	%do nothing\n	rotation = rotation_memory;\nend\n\n% save the rotation amount fo"
+      "r the next time-step\nrotation_memory = rotation;	\n\n\n\n\n"
+      editorLayout	      "100 M4x1[26 36 1428 968]"
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+      fimathForFiConstructors FimathMatlabFactoryDefault
+      emlDefaultFimath	      FimathUserSpecified
+    }
+  }
+  data {
+    id			    38
+    ssIdNumber		    4
+    name		    "rotation"
+    linkNode		    [36 0 39]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    39
+    ssIdNumber		    5
+    name		    "Trial_Protocol"
+    linkNode		    [36 38 0]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+	firstIndex		"1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    40
+    position		    [23.5747 49.5747 7]
+    chart		    36
+    linkNode		    [36 0 0]
+    subviewer		    36
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    41
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [32.125 19.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      40
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    36
+    linkNode		    [36 0 0]
+    dataLimits		    [23.575 23.575 14.625 34.575]
+    subviewer		    36
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    42
+    name		    "Visual_Rotation/Triggered\nSubsystem/Embedded\nMATLAB Function"
+    machine		    1
+    chart		    36
+  }
+  chart {
+    id			    43
+    name		    "Visual_Rotation/Embedded\nMATLAB Function"
+    windowPosition	    [721 346.25 213 385]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 1680 1050 1.333333333333333]
+    treeNode		    [0 44 0 0]
+    firstTransition	    52
+    firstJunction	    51
+    viewObj		    43
+    visible		    1
+    machine		    1
+    subviewS {
+    }
+    ssIdHighWaterMark	    9
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    45
+    chartFileNumber	    3
+    disableImplicitCasting  1
+    eml {
+      name		      "Rotation"
+    }
+    supportVariableSizing   0
+  }
+  state {
+    id			    44
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    43
+    treeNode		    [43 0 0 0]
+    superState		    SUBCHART
+    subviewer		    43
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [VCODES, CursorPos]  = Rotation(rotation, Trial_Protocol, Target_Table, VCODES_IN)\n% Th"
+      "is block supports an embeddable subset of the MATLAB language.\n% See the help menu for details. \n\n%This block"
+      " was modified by IEB, Sept 24, 2008\n%It rotates the cursor position around a location specified as a target in "
+      "the Trial_Protocol.\n\n% VCODEs are length VCODE_LENGTH.\n% All dimensions are units of (m).\n% VCODE index defi"
+      "nition: 1-5 as the same for all target types\n% 1 - Target type\n%		1=circle\n%		2=ellipse\n%       3=rectangle\n"
+      "%		4=line\n%       5=triangle\n%		6 and higher - not implemented yet\n% 2 - status\n%		0=off\n%		1=on\n% 3 - x p"
+      "osition (m)\n% 4 - y position (m)\n\n% column in target table to find the target to rotation about\nrotation_cen"
+      "ter_COL = 3;\n\nrotation_center_target = Trial_Protocol(rotation_center_COL);\nx_center = Target_Table(rotation_"
+      "center_target, 1) * 0.01;		%convert to meters\ny_center = Target_Table(rotation_center_target, 2) * 0.01;		%conv"
+      "ert to meters\n\nrotation = rotation*pi/180;		%convert desired rotation from degrees to radians\n\nVCODES = VCOD"
+      "ES_IN;\nCursorPos = VCODES(1:2,3:4);\nT = [x_center, y_center; x_center, y_center];                       %trans"
+      "lation matrix\nR = [cos(rotation) -sin(rotation); sin(rotation) cos(rotation)];	%rotation matrix\n\nCursorPos = "
+      "CursorPos - T;				%translate\nCursorPos = (R*CursorPos')';			%rotate\nCursorPos = CursorPos + T;				%re-translat"
+      "e\n\nVCODES(1:2,3:4) = CursorPos;			%apply updated positions back into the VCODEs		\n\n\n\n"
+      editorLayout	      "100 M4x1[112 62 1082 792]"
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+      fimathForFiConstructors FimathMatlabFactoryDefault
+      emlDefaultFimath	      FimathUserSpecified
+    }
+  }
+  data {
+    id			    45
+    ssIdNumber		    4
+    name		    "VCODES"
+    linkNode		    [43 0 46]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+	firstIndex		"1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    46
+    ssIdNumber		    5
+    name		    "rotation"
+    linkNode		    [43 45 47]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    47
+    ssIdNumber		    6
+    name		    "Trial_Protocol"
+    linkNode		    [43 46 48]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    48
+    ssIdNumber		    7
+    name		    "Target_Table"
+    linkNode		    [43 47 49]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_INHERITED
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    49
+    ssIdNumber		    8
+    name		    "CursorPos"
+    linkNode		    [43 48 50]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    50
+    ssIdNumber		    9
+    name		    "VCODES_IN"
+    linkNode		    [43 49 0]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+	firstIndex		"1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    51
+    position		    [23.5747 49.5747 7]
+    chart		    43
+    linkNode		    [43 0 0]
+    subviewer		    43
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    52
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [32.125 19.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      51
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    43
+    linkNode		    [43 0 0]
+    dataLimits		    [21.175 25.975 14.625 42.575]
+    subviewer		    43
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    53
+    name		    "Visual_Rotation/Embedded\nMATLAB Function"
+    machine		    1
+    chart		    43
+  }
+  chart {
+    id			    54
+    name		    "KINARM_HandFeedbackInTarget/Embedded\nMATLAB InsideTarget"
+    windowPosition	    [975 346.25 213 385]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 1680 1050 1.333333333333333]
+    treeNode		    [0 55 0 0]
+    firstTransition	    63
+    firstJunction	    62
+    viewObj		    54
+    machine		    1
+    toolbarMode		    LIBRARY_TOOLBAR
+    ssIdHighWaterMark	    9
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    56
+    chartFileNumber	    4
+    disableImplicitCasting  1
+    eml {
+      name		      "FIsInsideTarget"
+    }
+    supportVariableSizing   0
+  }
+  state {
+    id			    55
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    54
+    treeNode		    [54 0 0 0]
+    superState		    SUBCHART
+    subviewer		    54
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function intarget = FIsInsideTarget(handpos, target_type, attribcol, num_targets, Target_Table)\n"
+      "% all dimensions in m, rad\n% arguments:\n% handpos: x,y positions of center of target\n% attribcol: columns in "
+      "target table specifying target attributes.  \n% Specific to Target_Type\n%	circle:\n%	[X0,Y0,r...,rn] where:\n%	"
+      "X0,Y0 : centre of circle\n%	r : logical radius of circle (i.e. radius used to determine 'in' or 'out' of target)"
+      "\n%	rn: logical radius of other targets (e.g. 2nd, 3rd) also specified in target row.\n%   Up to 4 targets can b"
+      "e specified in a row\n% ellipse:\n%	[X0,Y0,a,b,t...,an, bn, tn] where:\n%	X0,Y0 : centre of ellipse\n%	a,b : maj"
+      "or, minor radii of ellipse\n%	t : rotation of ellipse in degrees\n%	an,bn : major, minor radii of ellipse of oth"
+      "er targets (e.g. 2nd, 3rd) also specified in target row\n%	tn : rotation of ellipse in degrees of other targets "
+      "(e.g. 2nd, 3rd) also specified in target row\n%   Up to 4 targets can be specified in a row\n\n\ntarget_col_x=1;"
+      "\ntarget_col_y=2;\n\nx=handpos(1);\ny=handpos(2);\n\nintarget = zeros(size(Target_Table,1),4);\n\nX0 = Target_Ta"
+      "ble(:,target_col_x)*0.01;			%Target Table sizes in cm in v1.4\nY0 = Target_Table(:,target_col_y)*0.01;			%Target"
+      " Table sizes in cm in v1.4\n\ndeltax=x-X0;\ndeltay=y-Y0;\n\nINT_MAX=2^32-1;\n\nif target_type==1			%circle\n	for"
+      " target=1:num_targets\n		r = Target_Table(:,attribcol(target))*0.01;			%Target Table sizes in cm in v1.4\n		% si"
+      "mple euclidean distance\n		distance2 = deltax.^2 + deltay.^2;					%distance2 is the square of the distance\n	   "
+      " intarget(:,target) = (distance2 <= r.^2);\n	end\nelseif target_type==2		%ellipse\n	for target=1:num_targets\n	 "
+      "   a = Target_Table(:,attribcol(target*3-2))*0.01;			%Target Table sizes in cm in v1.4\n	    b = Target_Table(:,"
+      "attribcol(target*3-1))*0.01;			%Target Table sizes in cm in v1.4	\n	    t = Target_Table(:,attribcol(target*3))*"
+      "(pi / 180.0);	%Target Table angles in degrees in v1.4\n		sint=sin(t);\n		cost=cos(t);\n		xrotate=deltax.*cost+de"
+      "ltay.*sint;		%location of x point in ellipse's coordinate frame\n		yrotate=-deltax.*sint+deltay.*cost;		%locatio"
+      "n of y point in ellipse's coordinate frame\n		m=yrotate./xrotate;						%slope of line between the (x,y) to (x0,y"
+      "0) in ellipse's coordinate frame\n		y2sq=1./(1./(m.*a).^2+1./b.^2);			%y2sq is y2^2, where y2 is the intersectio"
+      "n of the ellipse and the (x,y) to (x0,y0) line\n	    intarget(:,target) = (yrotate.^2 <= y2sq);\n    end\nelseif"
+      " target_type==3       %rectangle\n    for target=1:num_targets\n        w = Target_Table(:,attribcol(target*3-2)"
+      ")*0.01;  %width (sizes in cm in v1.4)\n        h = Target_Table(:,attribcol(target*3-1))*0.01;  %height (sizes i"
+      "n cm in v1.4)\n        \n        if attribcol(target*3) > 0\n            t = Target_Table(:,attribcol(target*3))"
+      "*(pi / 180.0);  %angle (angles in degrees in v1.4)\n        else\n            t = zeros(size(Target_Table, 1), 1"
+      ");\n        end\n\n        sint=sin(t);\n        cost=cos(t);\n\n        xrotate=deltax.*cost + deltay.*sint;   "
+      "%location of x point in rectangle's coordinate frame\n        yrotate=-deltax.*sint + deltay.*cost;  %location o"
+      "f y point in rectangle's coordinate frame\n\n        intarget(:,target) = abs(xrotate) <= w/2 & abs(yrotate) <= "
+      "h/2;\n    end\nelseif target_type==4       %line\n    for target=1:num_targets\n        % treat the line like a "
+      "rectangle of height h and width w\n        % determine height (stroke width) in the same fashion as in Show_Targ"
+      "et\n        if attribcol(target*3-2) == 0                     %0 column index means stroke width of 0\n         "
+      "   h = zeros(size(Target_Table, 1), 1);\n        elseif attribcol(target*3-2) < 0                  %-ve column i"
+      "ndex means stroke width of 1mm\n            h = ones(size(Target_Table, 1), 1) .* 0.001;\n        else\n        "
+      "    h = Target_Table(:,attribcol(target*3-2)) * 0.01;  %target table contains width in cm\n        end\n        "
+      "\n        ex = Target_Table(:,attribcol(target*3-1))*0.01;  %endpoint in x relative to start point (cm)\n       "
+      " ey = Target_Table(:,attribcol(target*3))*0.01;    %endpoint in y relative to start point (cm)\n        \n      "
+      "  w = sqrt(ex.^2 + ey.^2);                          %width (cm)\n        \n        % determine the vector from t"
+      "he line's midpoint to the hand position\n        handx = deltax - ex/2;\n        handy = deltay - ey/2;\n       "
+      " \n        t = atan2(ey, ex);                                %calculate angle of the line (rads)\n        sint ="
+      " sin(t);\n        cost = cos(t);\n        \n        xrotate = handx.*cost + handy.*sint;   %location of x point "
+      "in rectangle's coordinate frame\n        yrotate = -handx.*sint + handy.*cost;  %location of y point in rectangl"
+      "e's coordinate frame\n \n        intarget(:,target) = abs(xrotate) <= w/2 & abs(yrotate) <= h/2;\n    end\nelsei"
+      "f target_type==5  % triangle\n    for target=1:num_targets\n        w = Target_Table(:,attribcol(target*4-3))*0."
+      "01;         %length (sizes in cm in v1.4)\n        \n        % If a height column of 0 is specified, make the tr"
+      "iangle equilateral. Otherwise, use the\n        % values for height and peak offset from the target table.\n    "
+      "    if attribcol(target*4-2) > 0\n            h = Target_Table(:,attribcol(target*4-2))*0.01;  %height (sizes in"
+      " cm in v1.4)\n            p = Target_Table(:,attribcol(target*4-1))*0.01;  %peak offset (sizes in cm in v1.4)\n "
+      "       else\n            h = w.*sin(pi/3.0);\n            p = zeros(size(Target_Table, 1), 1);\n        end\n   "
+      "     \n        if attribcol(target*4) > 0\n            t = Target_Table(:,attribcol(target*4))*(pi / 180.0);  %a"
+      "ngle (angles in degrees in v1.4)\n        else\n            t = zeros(size(Target_Table, 1), 1);\n        end\n "
+      "       \n        sint = sin(t);\n        cost = cos(t);\n        \n        xrotate = deltax.*cost + deltay.*sint"
+      ";   %location of x point in triangle's coordinate frame\n        yrotate = -deltax.*sint + deltay.*cost;  %locat"
+      "ion of y point in triangle's coordinate frame\n        \n        % Begin to find centroid of triangle relative t"
+      "o the point on the base beneath the peak. \"Left vertex\" \n        % refers to the vertex at the left end of th"
+      "e base, and \"right vertex\" to the vertex at the right end.\n        n = w./2.0 + p;  % distance along base fro"
+      "m left vertex to peak\n        m = w./2.0 - p;  % distance along base from peak to right vertex\n\n        alpha"
+      " = atan2(h, n);  % angle between base and line from left vertex to peak\n        beta = atan2(h, m);   % angle b"
+      "etween base and line from right vertex to peak\n        \n        length1 = sqrt(h.*h + n.*n) ./ 2.0;  % half le"
+      "ngth of line from left vertex to peak\n        length2 = sqrt(h.*h + m.*m) ./ 2.0;  % half length of line from r"
+      "ight vertex to peak\n\n        % Determine slope of line from left vertex to midpoint of line from right vertex "
+      "to peak.\n        slope1 = ones(size(Target_Table, 1), 1) .* INT_MAX;\n        \n        for i=1:size(Target_Tab"
+      "le, 1)\n            if abs(w(i) - length2(i)*cos(beta(i))) > 0.0\n                slope1(i) = length2(i)*sin(bet"
+      "a(i)) / (w(i) - length2(i)*cos(beta(i)));\n            end\n        end\n\n        % Determine slope of line fro"
+      "m right vertex to midpoint of line from left vertex to peak.\n        slope2 = ones(size(Target_Table, 1), 1) .*"
+      " INT_MAX;\n\n        for i=1:size(Target_Table, 1)\n            if abs(w(i) - length1(i)*cos(alpha(i))) > 0.0\n "
+      "               slope2(i) = -length1(i)*sin(alpha(i)) / (w(i) - length1(i)*cos(alpha(i)));\n            end\n    "
+      "    end\n\n        % Calculate centroid position.\n        centroid_x = -(m.*slope2 + n.*slope1) ./ (slope1 - sl"
+      "ope2);\n        centroid_y = slope1.*(centroid_x + n);\n\n        % Test if the point is under the left side of "
+      "the peak.\n        is_under_left = false(size(Target_Table, 1), 1);\n\n        for i=1:size(Target_Table, 1)\n  "
+      "          if n(i) >= 0\n                is_under_left(i) = (h(i) + (h(i)/n(i)) * (xrotate(i) + centroid_x(i))) >"
+      "= (yrotate(i) + centroid_y(i));\n            else\n                is_under_left(i) = (h(i) + (h(i)/n(i)) * (xro"
+      "tate(i) + centroid_x(i))) <= (yrotate(i) + centroid_y(i));\n            end\n        end\n        \n        % Te"
+      "st if the point is under the right side of the peak.\n        is_under_right = false(size(Target_Table, 1), 1);\n"
+      "\n        for i=1:size(Target_Table, 1)\n            if m(i) >= 0\n                is_under_right(i) = (h(i) - ("
+      "h(i)/m(i)) * (xrotate(i) + centroid_x(i))) >= (yrotate(i) + centroid_y(i));\n            else\n                i"
+      "s_under_right(i) = (h(i) - (h(i)/m(i)) * (xrotate(i) + centroid_x(i))) <= (yrotate(i) + centroid_y(i));\n       "
+      "     end\n        end\n        \n        intarget(:,target) = is_under_right & ...            %under right side "
+      "of peak\n                             is_under_left & ...             %under left side of peak\n                "
+      "             (yrotate + centroid_y) >= 0.0;  %above base\n    end\nend\n\n\n"
+      editorLayout	      "100 M4x1[25 25 720 600]"
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+      fimathForFiConstructors FimathMatlabFactoryDefault
+      emlDefaultFimath	      FimathUserSpecified
+    }
+  }
+  data {
+    id			    56
+    ssIdNumber		    4
+    name		    "handpos"
+    linkNode		    [54 0 57]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"2"
+	firstIndex		"1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    57
+    ssIdNumber		    5
+    name		    "target_type"
+    linkNode		    [54 56 58]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    58
+    ssIdNumber		    6
+    name		    "attribcol"
+    linkNode		    [54 57 59]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+	firstIndex		"1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    59
+    ssIdNumber		    7
+    name		    "num_targets"
+    linkNode		    [54 58 60]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    60
+    ssIdNumber		    8
+    name		    "intarget"
+    linkNode		    [54 59 61]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+	firstIndex		"1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    61
+    ssIdNumber		    9
+    name		    "Target_Table"
+    linkNode		    [54 60 0]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+	firstIndex		"1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    62
+    position		    [23.5747 49.5747 7]
+    chart		    54
+    linkNode		    [54 0 0]
+    subviewer		    54
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    63
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [32.125 19.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      62
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    54
+    linkNode		    [54 0 0]
+    dataLimits		    [23.575 23.575 14.625 34.575]
+    subviewer		    54
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    64
+    name		    "KINARM_HandFeedbackInTarget/Embedded\nMATLAB InsideTarget"
+    machine		    1
+    chart		    54
+  }
+  chart {
+    id			    65
+    name		    "KINARM_HandFeedbackInTarget/Embedded\nMATLAB WhichHand"
+    windowPosition	    [909 346.25 213 385]
+    viewLimits		    [0 156.75 0 153.75]
+    screen		    [1 1 1680 1050 1.333333333333333]
+    treeNode		    [0 66 0 0]
+    firstTransition	    72
+    firstJunction	    71
+    viewObj		    65
+    machine		    1
+    ssIdHighWaterMark	    7
+    decomposition	    CLUSTER_CHART
+    type		    EML_CHART
+    firstData		    67
+    chartFileNumber	    5
+    disableImplicitCasting  1
+    eml {
+      name		      "WhichHand"
+    }
+    supportVariableSizing   0
+  }
+  state {
+    id			    66
+    labelString		    "eML_blk_kernel()"
+    position		    [18 64.5 118 66]
+    fontSize		    12
+    chart		    65
+    treeNode		    [65 0 0 0]
+    superState		    SUBCHART
+    subviewer		    65
+    ssIdNumber		    1
+    type		    FUNC_STATE
+    decomposition	    CLUSTER_STATE
+    eml {
+      isEML		      1
+      script		      "function [hand, cursor] = WhichHand(use_dominant_hand, dominant_hand)\n\nif use_dominant_hand==1	"
+      "			%use the dominant hand\n	hand=dominant_hand;		\n	cursor = 1;\nelse\n	hand=3-dominant_hand;			%use the non-dom"
+      "inant hand. i.e. if dominant_hand=2, hand=1 and vice-versa\n	cursor = 2;\nend\n\n"
+      editorLayout	      "100 M4x1[462 117 1167 796]"
+      fimathString	      "fimath(...\n'RoundMode', 'floor',...\n'OverflowMode', 'wrap',...\n'ProductMode', 'KeepLSB', "
+      "'ProductWordLength', 32,...\n'SumMode', 'KeepLSB', 'SumWordLength', 32,...\n'CastBeforeSum', false)"
+      fimathForFiConstructors FimathMatlabFactoryDefault
+      emlDefaultFimath	      FimathUserSpecified
+    }
+  }
+  data {
+    id			    67
+    ssIdNumber		    4
+    name		    "use_dominant_hand"
+    linkNode		    [65 0 68]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    68
+    ssIdNumber		    5
+    name		    "dominant_hand"
+    linkNode		    [65 67 69]
+    scope		    INPUT_DATA
+    machine		    1
+    props {
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    69
+    ssIdNumber		    6
+    name		    "hand"
+    linkNode		    [65 68 70]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  data {
+    id			    70
+    ssIdNumber		    7
+    name		    "cursor"
+    linkNode		    [65 69 0]
+    scope		    OUTPUT_DATA
+    machine		    1
+    props {
+      array {
+	size			"-1"
+      }
+      type {
+	method			SF_INHERITED_TYPE
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+      frame		      SF_FRAME_NO
+    }
+    dataType		    "Inherit: Same as Simulink"
+  }
+  junction {
+    id			    71
+    position		    [23.5747 49.5747 7]
+    chart		    65
+    linkNode		    [65 0 0]
+    subviewer		    65
+    ssIdNumber		    3
+    type		    CONNECTIVE_JUNCTION
+  }
+  transition {
+    id			    72
+    labelString		    "{eML_blk_kernel();}"
+    labelPosition	    [32.125 19.875 102.544 14.964]
+    fontSize		    12
+    src {
+      intersection	      [0 0 1 0 23.5747 14.625 0 0]
+    }
+    dst {
+      id		      71
+      intersection	      [1 0 -1 0 23.5747 42.5747 0 0]
+    }
+    midPoint		    [23.5747 24.9468]
+    chart		    65
+    linkNode		    [65 0 0]
+    dataLimits		    [23.575 23.575 14.625 34.575]
+    subviewer		    65
+    drawStyle		    SMART
+    slide {
+      sticky		      BOTH_STICK
+    }
+    executionOrder	    1
+    ssIdNumber		    2
+  }
+  instance {
+    id			    73
+    name		    "KINARM_HandFeedbackInTarget/Embedded\nMATLAB WhichHand"
+    machine		    1
+    chart		    65
+  }
+  data {
+    id			    74
+    name		    "col_x"
+    linkNode		    [1 0 75]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "1"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    75
+    name		    "col_y"
+    linkNode		    [1 74 76]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "2"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    76
+    name		    "E_TARGET_ON"
+    linkNode		    [1 75 77]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "3"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    77
+    name		    "E_HOLD_AT_TARGET"
+    linkNode		    [1 76 78]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "5"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    78
+    name		    "LOGICAL_RADIUS"
+    linkNode		    [1 77 79]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "4"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    79
+    name		    "START_TARGET_COL"
+    linkNode		    [1 78 80]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "1"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    80
+    name		    "END_TARGET_COL"
+    linkNode		    [1 79 81]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "2"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    81
+    name		    "ROTATION_CENTER"
+    linkNode		    [1 80 82]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "3"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    82
+    name		    "WAIT_AT_1stTARGET_COL"
+    linkNode		    [1 81 83]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "4"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    83
+    name		    "MAXREACHTIME_COL"
+    linkNode		    [1 82 84]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "5"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    84
+    name		    "WAIT_AT_2ndTARGET_COL"
+    linkNode		    [1 83 85]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "6"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    85
+    name		    "ROTATION_TYPE"
+    linkNode		    [1 84 86]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "8"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    86
+    name		    "ROTATION"
+    linkNode		    [1 85 87]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "9"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    87
+    name		    "DELAY_POSTTRIAL_COL"
+    linkNode		    [1 86 88]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "7"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    88
+    name		    "E_STAY_CENTER"
+    linkNode		    [1 87 89]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "2"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    89
+    name		    "VISUAL_RADIUS"
+    linkNode		    [1 88 90]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "3"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    90
+    name		    "COLOR"
+    linkNode		    [1 89 91]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "5"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  data {
+    id			    91
+    name		    "ALTCOLOR"
+    linkNode		    [1 90 0]
+    scope		    CONSTANT_DATA
+    machine		    1
+    props {
+      initialValue	      "6"
+      type {
+	primitive		SF_DOUBLE_TYPE
+	isSigned		1
+	wordLength		"16"
+      }
+    }
+    dataType		    "double"
+  }
+  target {
+    id			    92
+    name		    "sfun"
+    codeFlags		    ""
+    machine		    1
+    linkNode		    [1 0 93]
+  }
+  target {
+    id			    93
+    name		    "rtw"
+    description		    "Default RTW target."
+    codeFlags		    " comments=1 statebitsets=1 databitsets=1 emitlogicalops=1 elseifdetection=1 constantfolding=1 redu"
+    "ndantloadelimination=1 preservenames=0 preservenameswithparent=0 exportcharts=0"
+    machine		    1
+    linkNode		    [1 92 0]
+  }
+}
