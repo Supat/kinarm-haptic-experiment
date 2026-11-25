@@ -19,7 +19,7 @@ if ~isempty(find_system(name, 'SearchDepth', 1, 'Name', 'KINARM_EP_Apply_Loads')
     rip_block(epb);
 end
 add_block('KINARM_EP_loads/KINARM_EP_Apply_Loads', epb, ...
-    'Position', [760 470 865 516]);
+    'Position', [800 560 920 606]);
 set_param(epb, 'up_duration', '500', 'down_duration', '500', 'max_force', '30');
 add_line(name, 'Ball_Engine/2', 'KINARM_EP_Apply_Loads/1', 'autorouting', 'on');
 fprintf('Added KINARM_EP_Apply_Loads (ramps 500/500, force limit 30 N)\n');

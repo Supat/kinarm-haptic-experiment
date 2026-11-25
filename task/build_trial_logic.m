@@ -249,11 +249,11 @@ add_block('built-in/UnitDelay', [name '/UD_hand'], 'SampleTime', '0.001', ...
 % second instance watches the other hand and a max() ORs the two vectors.
 % Feeds the chart (trial start/hold) and the ring colour alike.
 add_block('KINARM_general/KINARM_HandInTarget', [name '/KINARM_HandInTarget2'], ...
-    'Position', [60 330 160 370]);
+    'Position', [30 410 160 450]);
 set_param([name '/KINARM_HandInTarget2'], 'use_dominant_hand', 'off', ...
     'attribcol1', '[4]');
 add_block('built-in/MinMax', [name '/HIT_any'], 'Function', 'max', ...
-    'Inputs', '2', 'Position', [200 340 230 370]);
+    'Inputs', '2', 'Position', [95 470 125 500]);
 
 %% 5. Rewire the root level from scratch
 for h = find_system(name, 'SearchDepth', 1, 'FindAll', 'on', 'Type', 'line')'
