@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.11"
+    ComputedModelVersion    "1.12"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -68,9 +68,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "Supat"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Nov 25 14:55:33 2026"
-  RTWModifiedTimeStamp	  717519332
-  ModelVersionFormat	  "1.%<AutoIncrement:11>"
+  LastModifiedDate	  "Wed Nov 25 16:49:05 2026"
+  RTWModifiedTimeStamp	  717526144
+  ModelVersionFormat	  "1.%<AutoIncrement:12>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -1120,7 +1120,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "68"
+    SIDHighWatermark	    "69"
     Block {
       BlockType		      SubSystem
       Name		      "Ball_Engine"
@@ -1544,7 +1544,7 @@ Model {
       SID		      "58"
       Position		      [900, 600, 1020, 620]
       ZOrder		      58
-      GotoTag		      "KINARMScalingRobot1"
+      GotoTag		      "KINARMEPScalingRobot1"
     }
     Block {
       BlockType		      From
@@ -1552,7 +1552,7 @@ Model {
       SID		      "59"
       Position		      [900, 640, 1020, 660]
       ZOrder		      59
-      GotoTag		      "KINARMScalingRobot2"
+      GotoTag		      "KINARMEPScalingRobot2"
     }
     Block {
       BlockType		      From
@@ -1560,7 +1560,7 @@ Model {
       SID		      "60"
       Position		      [900, 680, 1020, 700]
       ZOrder		      60
-      GotoTag		      "KINARMTorqueCMD"
+      GotoTag		      "KINARMEPTorqueCMD"
     }
     Block {
       BlockType		      Mux
@@ -1749,7 +1749,7 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"481"
+	SIDHighWatermark	"482"
 	Block {
 	  BlockType		  Inport
 	  Name			  "logging_enable"
@@ -7353,6 +7353,14 @@ Model {
 	      ZOrder		      -66
 	    }
 	    Block {
+	      BlockType		      From
+	      Name		      "EPTorqueCMD"
+	      SID		      "3:482"
+	      Position		      [1425, 668, 1525, 712]
+	      ZOrder		      4
+	      GotoTag		      "KINARMEPTorqueCMD"
+	    }
+	    Block {
 	      BlockType		      SubSystem
 	      Name		      "Force Sensor Control Subsystem"
 	      SID		      "3:299"
@@ -9423,14 +9431,6 @@ Model {
 	    }
 	    Block {
 	      BlockType		      Constant
-	      Name		      "ZeroEPTorque"
-	      SID		      "3:416"
-	      Position		      [1425, 668, 1525, 712]
-	      ZOrder		      -113
-	      Value		      "[0 0 0 0]"
-	    }
-	    Block {
-	      BlockType		      Constant
 	      Name		      "robot_count"
 	      SID		      "3:418"
 	      Position		      [1275, 939, 1310, 971]
@@ -9445,12 +9445,6 @@ Model {
 	      ZOrder		      -116
 	      GotoTag		      "status_data"
 	      TagVisibility	      "global"
-	    }
-	    Line {
-	      SrcBlock		      "ZeroEPTorque"
-	      SrcPort		      1
-	      DstBlock		      "AddTorques"
-	      DstPort		      2
 	    }
 	    Line {
 	      SrcBlock		      "Arm2 secondary encoder counts"
@@ -10314,6 +10308,12 @@ Model {
 	      SrcPort		      1
 	      DstBlock		      "AddTorques"
 	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "EPTorqueCMD"
+	      SrcPort		      1
+	      DstBlock		      "AddTorques"
+	      DstPort		      2
 	    }
 	    Annotation {
 	      SID		      "3:428"
@@ -16140,6 +16140,21 @@ Model {
     }
     Block {
       BlockType		      Reference
+      Name		      "KINARM_EP_Apply_Loads"
+      SID		      "69"
+      Ports		      [1]
+      Position		      [760, 472, 865, 518]
+      ZOrder		      69
+      BackgroundColor	      "[0.741176, 0.686275, 0.607843]"
+      LibraryVersion	      "1.120"
+      SourceBlock	      "KINARM_EP_loads/KINARM_EP_Apply_Loads"
+      SourceType	      "KINARM_EP_Apply_Loads"
+      up_duration	      "500"
+      down_duration	      "500"
+      max_force		      "30"
+    }
+    Block {
+      BlockType		      Reference
       Name		      "KINARM_HandInTarget"
       SID		      "5"
       Ports		      [0, 1]
@@ -16258,14 +16273,14 @@ Model {
 	TiledPageScale		1
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
-	SIDHighWatermark	"747"
+	SIDHighWatermark	"822"
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "TP_table"
-	  SID			  "4:714"
+	  SID			  "4:789"
 	  Ports			  []
 	  Position		  [100, 200, 240, 240]
-	  ZOrder		  73
+	  ZOrder		  80
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -16292,7 +16307,7 @@ Model {
 	      BlockType		      Constant
 	      Name		      "BallTarget;BallTarget;target;Target Table row of the ball graphic (X and Y overridden each tick);;"
 	      ";none;;"
-	      SID		      "4:717"
+	      SID		      "4:792"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -16300,7 +16315,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "HoldTime;HoldTime;int;Required hold at home before release (ms);;;none;;"
-	      SID		      "4:721"
+	      SID		      "4:796"
 	      Position		      [200, 200, 240, 240]
 	      ZOrder		      7
 	      Value		      "4"
@@ -16308,14 +16323,14 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "HomeTarget;HomeTarget;target;Target Table row of the home target;;;none;;"
-	      SID		      "4:715"
+	      SID		      "4:790"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Load;Load;load;Load Table row for this trial;;;none;;"
-	      SID		      "4:719"
+	      SID		      "4:794"
 	      Position		      [200, 140, 240, 180]
 	      ZOrder		      5
 	      Value		      "3"
@@ -16323,7 +16338,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "ReleaseDelayMax;ReleaseDelayMax;int;Maximum random delay before ball release (ms);;;none;;"
-	      SID		      "4:725"
+	      SID		      "4:800"
 	      Position		      [200, 320, 240, 360]
 	      ZOrder		      11
 	      Value		      "6"
@@ -16331,7 +16346,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "ReleaseDelayMin;ReleaseDelayMin;int;Minimum random delay before ball release (ms);;;none;;"
-	      SID		      "4:723"
+	      SID		      "4:798"
 	      Position		      [200, 260, 240, 300]
 	      ZOrder		      9
 	      Value		      "5"
@@ -16339,56 +16354,56 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:716"
+	      SID		      "4:791"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:718"
+	      SID		      "4:793"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator3"
-	      SID		      "4:720"
+	      SID		      "4:795"
 	      Position		      [300, 150, 340, 170]
 	      ZOrder		      6
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator4"
-	      SID		      "4:722"
+	      SID		      "4:797"
 	      Position		      [300, 210, 340, 230]
 	      ZOrder		      8
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator5"
-	      SID		      "4:724"
+	      SID		      "4:799"
 	      Position		      [300, 270, 340, 290]
 	      ZOrder		      10
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator6"
-	      SID		      "4:726"
+	      SID		      "4:801"
 	      Position		      [300, 330, 340, 350]
 	      ZOrder		      12
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator7"
-	      SID		      "4:728"
+	      SID		      "4:803"
 	      Position		      [300, 390, 340, 410]
 	      ZOrder		      14
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "TrialTimeout;TrialTimeout;int;Maximum trial duration (ms);;;none;;"
-	      SID		      "4:727"
+	      SID		      "4:802"
 	      Position		      [200, 380, 240, 420]
 	      ZOrder		      13
 	      Value		      "7"
@@ -16441,10 +16456,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "buttons"
-	  SID			  "4:743"
+	  SID			  "4:818"
 	  Ports			  []
 	  Position		  [100, 380, 240, 420]
-	  ZOrder		  76
+	  ZOrder		  83
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -16470,7 +16485,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "BTN_MARK;Mark event;;Marks a timestamp event in the data;;;;;"
-	      SID		      "4:744"
+	      SID		      "4:819"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	      Value		      "2"
@@ -16478,7 +16493,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "BTN_REPEAT;Repeat trial;;Repeat the current trial;;;;;"
-	      SID		      "4:746"
+	      SID		      "4:821"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "3"
@@ -16486,14 +16501,14 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:745"
+	      SID		      "4:820"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:747"
+	      SID		      "4:822"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
@@ -16514,10 +16529,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "events"
-	  SID			  "4:734"
+	  SID			  "4:809"
 	  Ports			  []
 	  Position		  [100, 320, 240, 360]
-	  ZOrder		  75
+	  ZOrder		  82
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -16543,14 +16558,14 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "E_BALL_RELEASE;BALL_RELEASE;;Ball released at the slope top;;;none;;"
-	      SID		      "4:735"
+	      SID		      "4:810"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "E_CONTACT_END;CONTACT_END;;Ball-hand contact ended;;;none;;"
-	      SID		      "4:739"
+	      SID		      "4:814"
 	      Position		      [200, 140, 240, 180]
 	      ZOrder		      5
 	      Value		      "3"
@@ -16558,7 +16573,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "E_CONTACT_START;CONTACT_START;;Ball-hand contact started (pen greater than 0);;;none;;"
-	      SID		      "4:737"
+	      SID		      "4:812"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -16566,7 +16581,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "E_HAND_LEFT_HOME;HAND_LEFT_HOME;;Hand left home before impact - trial aborted;;;error;;"
-	      SID		      "4:741"
+	      SID		      "4:816"
 	      Position		      [200, 200, 240, 240]
 	      ZOrder		      7
 	      Value		      "4"
@@ -16574,28 +16589,28 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:736"
+	      SID		      "4:811"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:738"
+	      SID		      "4:813"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator3"
-	      SID		      "4:740"
+	      SID		      "4:815"
 	      Position		      [300, 150, 340, 170]
 	      ZOrder		      6
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator4"
-	      SID		      "4:742"
+	      SID		      "4:817"
 	      Position		      [300, 210, 340, 230]
 	      ZOrder		      8
 	    }
@@ -16628,10 +16643,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "load_table"
-	  SID			  "4:689"
+	  SID			  "4:764"
 	  Ports			  []
 	  Position		  [100, 140, 240, 180]
-	  ZOrder		  72
+	  ZOrder		  79
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -16657,14 +16672,14 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "BallMass;BallMass;float;Ball mass (kg);;;none;;"
-	      SID		      "4:690"
+	      SID		      "4:765"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "BallRadius;BallRadius;float;Ball radius (cm);;;none;;"
-	      SID		      "4:692"
+	      SID		      "4:767"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -16672,7 +16687,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Bc;Bc;float;Contact damping (N s per m);;;none;;"
-	      SID		      "4:704"
+	      SID		      "4:779"
 	      Position		      [200, 440, 240, 480]
 	      ZOrder		      15
 	      Value		      "8"
@@ -16680,7 +16695,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "FlatLength;FlatLength;float;Flat run-out length (cm);;;none;;"
-	      SID		      "4:698"
+	      SID		      "4:773"
 	      Position		      [200, 260, 240, 300]
 	      ZOrder		      9
 	      Value		      "5"
@@ -16688,7 +16703,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Fmax;Fmax;float;Contact force clamp (N), also hard-clamped in the model;;;none;;"
-	      SID		      "4:706"
+	      SID		      "4:781"
 	      Position		      [200, 500, 240, 540]
 	      ZOrder		      17
 	      Value		      "9"
@@ -16696,7 +16711,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "HapticsOn;HapticsOn;int;Contact force on (1) or visual only (0);;;none;;"
-	      SID		      "4:708"
+	      SID		      "4:783"
 	      Position		      [200, 560, 240, 600]
 	      ZOrder		      19
 	      Value		      "10"
@@ -16704,7 +16719,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Kc;Kc;float;Contact stiffness (N per m);;;none;;"
-	      SID		      "4:702"
+	      SID		      "4:777"
 	      Position		      [200, 380, 240, 420]
 	      ZOrder		      13
 	      Value		      "7"
@@ -16712,7 +16727,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "RollRes;RollRes;float;Rolling resistance coefficient;;;none;;"
-	      SID		      "4:700"
+	      SID		      "4:775"
 	      Position		      [200, 320, 240, 360]
 	      ZOrder		      11
 	      Value		      "6"
@@ -16720,7 +16735,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "SlopeAngle;SlopeAngle;float;Slope angle (deg);;;none;;"
-	      SID		      "4:694"
+	      SID		      "4:769"
 	      Position		      [200, 140, 240, 180]
 	      ZOrder		      5
 	      Value		      "3"
@@ -16728,7 +16743,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "SlopeLength;SlopeLength;float;Slope length (cm);;;none;;"
-	      SID		      "4:696"
+	      SID		      "4:771"
 	      Position		      [200, 200, 240, 240]
 	      ZOrder		      7
 	      Value		      "4"
@@ -16736,91 +16751,91 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:691"
+	      SID		      "4:766"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator10"
-	      SID		      "4:709"
+	      SID		      "4:784"
 	      Position		      [300, 570, 340, 590]
 	      ZOrder		      20
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator11"
-	      SID		      "4:711"
+	      SID		      "4:786"
 	      Position		      [300, 630, 340, 650]
 	      ZOrder		      22
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator12"
-	      SID		      "4:713"
+	      SID		      "4:788"
 	      Position		      [300, 690, 340, 710]
 	      ZOrder		      24
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:693"
+	      SID		      "4:768"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator3"
-	      SID		      "4:695"
+	      SID		      "4:770"
 	      Position		      [300, 150, 340, 170]
 	      ZOrder		      6
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator4"
-	      SID		      "4:697"
+	      SID		      "4:772"
 	      Position		      [300, 210, 340, 230]
 	      ZOrder		      8
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator5"
-	      SID		      "4:699"
+	      SID		      "4:774"
 	      Position		      [300, 270, 340, 290]
 	      ZOrder		      10
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator6"
-	      SID		      "4:701"
+	      SID		      "4:776"
 	      Position		      [300, 330, 340, 350]
 	      ZOrder		      12
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator7"
-	      SID		      "4:703"
+	      SID		      "4:778"
 	      Position		      [300, 390, 340, 410]
 	      ZOrder		      14
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator8"
-	      SID		      "4:705"
+	      SID		      "4:780"
 	      Position		      [300, 450, 340, 470]
 	      ZOrder		      16
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator9"
-	      SID		      "4:707"
+	      SID		      "4:782"
 	      Position		      [300, 510, 340, 530]
 	      ZOrder		      18
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "TransientAmp;TransientAmp;float;Impact transient amplitude (N per unit impact speed);;;none;;"
-	      SID		      "4:710"
+	      SID		      "4:785"
 	      Position		      [200, 620, 240, 660]
 	      ZOrder		      21
 	      Value		      "11"
@@ -16828,7 +16843,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "TransientFreq;TransientFreq;float;Impact transient frequency (Hz);;;none;;"
-	      SID		      "4:712"
+	      SID		      "4:787"
 	      Position		      [200, 680, 240, 720]
 	      ZOrder		      23
 	      Value		      "12"
@@ -16910,10 +16925,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "target_table"
-	  SID			  "4:678"
+	  SID			  "4:753"
 	  Ports			  []
 	  Position		  [100, 80, 240, 120]
-	  ZOrder		  71
+	  ZOrder		  78
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -16939,7 +16954,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "Colour;Colour;colour;Target colour;;;none;;"
-	      SID		      "4:687"
+	      SID		      "4:762"
 	      Position		      [200, 260, 240, 300]
 	      ZOrder		      9
 	      Value		      "5"
@@ -16947,7 +16962,7 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "LogRadius;LogRadius;float;Hand-in-target logical radius (cm);;;none;;"
-	      SID		      "4:685"
+	      SID		      "4:760"
 	      Position		      [200, 200, 240, 240]
 	      ZOrder		      7
 	      Value		      "4"
@@ -16955,42 +16970,42 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:680"
+	      SID		      "4:755"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:682"
+	      SID		      "4:757"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator3"
-	      SID		      "4:684"
+	      SID		      "4:759"
 	      Position		      [300, 150, 340, 170]
 	      ZOrder		      6
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator4"
-	      SID		      "4:686"
+	      SID		      "4:761"
 	      Position		      [300, 210, 340, 230]
 	      ZOrder		      8
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator5"
-	      SID		      "4:688"
+	      SID		      "4:763"
 	      Position		      [300, 270, 340, 290]
 	      ZOrder		      10
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "VisRadius;VisRadius;float;Drawn radius of the target circle (cm);;;none;;"
-	      SID		      "4:683"
+	      SID		      "4:758"
 	      Position		      [200, 140, 240, 180]
 	      ZOrder		      5
 	      Value		      "3"
@@ -16998,14 +17013,14 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "col_x;X;float;X Position (cm) of the target relative to  local (0,0);;;none;;"
-	      SID		      "4:679"
+	      SID		      "4:754"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "col_y;Y;float;Y Position (cm) of the target relative to  local (0,0);;;none;;"
-	      SID		      "4:681"
+	      SID		      "4:756"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -17045,10 +17060,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "task_definition"
-	  SID			  "4:673"
+	  SID			  "4:748"
 	  Ports			  []
 	  Position		  [100, 20, 240, 60]
-	  ZOrder		  70
+	  ZOrder		  77
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -17074,14 +17089,14 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "INSTRUCTIONS="
-	      SID		      "4:674"
+	      SID		      "4:749"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Constant
 	      Name		      "LOAD_FOR=EITHER"
-	      SID		      "4:676"
+	      SID		      "4:751"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -17089,14 +17104,14 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:675"
+	      SID		      "4:750"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:677"
+	      SID		      "4:752"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
@@ -17117,10 +17132,10 @@ Model {
 	Block {
 	  BlockType		  SubSystem
 	  Name			  "task_wide"
-	  SID			  "4:729"
+	  SID			  "4:804"
 	  Ports			  []
 	  Position		  [100, 260, 240, 300]
-	  ZOrder		  74
+	  ZOrder		  81
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -17147,7 +17162,7 @@ Model {
 	      BlockType		      Constant
 	      Name		      "ApproachDir;ApproachDir;float;Ball approach direction (deg) with 90 = lateral from +X and 0 = towa"
 	      "rd body;;;none;;"
-	      SID		      "4:732"
+	      SID		      "4:807"
 	      Position		      [200, 80, 240, 120]
 	      ZOrder		      3
 	      Value		      "2"
@@ -17155,21 +17170,21 @@ Model {
 	    Block {
 	      BlockType		      Constant
 	      Name		      "HandRadius;HandRadius;float;Hand contact (paddle) radius (cm);;;none;;"
-	      SID		      "4:730"
+	      SID		      "4:805"
 	      Position		      [200, 20, 240, 60]
 	      ZOrder		      1
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator1"
-	      SID		      "4:731"
+	      SID		      "4:806"
 	      Position		      [300, 30, 340, 50]
 	      ZOrder		      2
 	    }
 	    Block {
 	      BlockType		      Terminator
 	      Name		      "Terminator2"
-	      SID		      "4:733"
+	      SID		      "4:808"
 	      Position		      [300, 90, 340, 110]
 	      ZOrder		      4
 	    }
@@ -17835,9 +17850,17 @@ Model {
     Line {
       SrcBlock		      "Ball_Engine"
       SrcPort		      2
-      Points		      [40, 0]
-      DstBlock		      "Forces_to_Torques"
-      DstPort		      1
+      Points		      [0, 0]
+      Branch {
+	Points			[40, 0]
+	DstBlock		"Forces_to_Torques"
+	DstPort			1
+      }
+      Branch {
+	Points			[90, 0; 0, 25]
+	DstBlock		"KINARM_EP_Apply_Loads"
+	DstPort			1
+      }
     }
     Line {
       SrcBlock		      "Forces_to_Torques"
@@ -19003,8 +19026,8 @@ Stateflow {
   }
   transition {
     id			    41
-    labelString		    "after(2500, e_clk)"
-    labelPosition	    [621.231 589 95.5 17]
+    labelString		    "after(300, e_clk)[speed_fb < 0.02]"
+    labelPosition	    [621.231 589 182 17]
     fontSize		    12
     src {
       id		      8
@@ -19022,13 +19045,13 @@ Stateflow {
     slide {
       sticky		      BOTH_STICK
     }
-    executionOrder	    3
-    ssIdNumber		    89
+    executionOrder	    2
+    ssIdNumber		    88
   }
   transition {
     id			    42
-    labelString		    "after(300, e_clk)[speed_fb < 0.02]"
-    labelPosition	    [621.231 589 182 17]
+    labelString		    "after(2500, e_clk)"
+    labelPosition	    [621.231 589 95.5 17]
     fontSize		    12
     src {
       id		      8
@@ -19046,8 +19069,8 @@ Stateflow {
     slide {
       sticky		      BOTH_STICK
     }
-    executionOrder	    2
-    ssIdNumber		    88
+    executionOrder	    3
+    ssIdNumber		    89
   }
   instance {
     id			    43

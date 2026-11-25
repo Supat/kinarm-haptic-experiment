@@ -16,8 +16,11 @@ parameter tables passed at the lab):
   TransientFreq burst per new contact; full bounce (reaction decelerates the
   ball). Draws the slope line + ball circle as hand-built VCODEs. An all-zero
   Load row falls back to safe defaults with **HapticsOn=0** (visual only).
-- **Forces** go out as `hand_forces -> Forces_to_Torques ->
-  KINARM_Apply_Loads` (Exoskeleton; torque limit 12 Nm, 500 ms ramps).
+- **Forces** go out through BOTH loads chains so the task runs on either
+  robot type (only the chain matching the robot engages; the other is
+  ramp-gated to zero): `hand_forces -> KINARM_EP_Apply_Loads` (End-Point —
+  **the lab's robot**; force limit 30 N, 500 ms ramps) and `hand_forces ->
+  Forces_to_Torques -> KINARM_Apply_Loads` (Exoskeleton; 12 Nm, 500 ms).
 - **Events** (defined in the PTD events tab): BALL_RELEASE, CONTACT_START,
   CONTACT_END, HAND_LEFT_HOME (error). **Analog channels** logged per trial:
   ball x, y, v, pen, Fx, Fy, phase, s.
@@ -25,8 +28,10 @@ parameter tables passed at the lab):
 Scripts, in build order (all rerunnable; run from `task/`):
 `build_task_model.m` (original skeleton — retired), then
 `define_param_tables.m` (embeds tables/buttons/events into Parameter Table
-Defn), then `build_trial_logic.m` (installs chart + Ball_Engine + loads chain
-+ wiring), then `buildxpc('ball_impact.mdl')`.
+Defn), then `build_trial_logic.m` (installs chart + Ball_Engine + Exo loads
+chain + wiring), then `add_debug_taps.m` (logs the torque-gate signals as
+analog channels 9-16), then `add_ep_loads.m` (adds the End-Point loads chain
+— required for the lab robot), then `buildxpc('ball_impact.mdl')`.
 
 ## First haptic test protocol (suggested `impact_v1`)
 
@@ -137,3 +142,20 @@ the Dexterit-E custom tasks folder on the lab PC. Do not rename the `.dlm`.
     four analog channels as measured motor torques — rename them in the
     protocol's Analog Inputs tab and tick Save? on every channel, or they
     are dropped from the .c3d.
+12. **THE LAB ROBOT IS A KINARM END-POINT, NOT AN EXOSKELETON** (found
+    2026-11-25 after three lab sessions of "no haptic feedback"). Dexterit-E
+    writes `a1_robot_type = 1` (EP) at task load, and the Exo
+    `KINARM_Apply_Loads` ramp chart only engages for robot_type 0 (Exo) or
+    2 (NHP) — on an EP robot it silently multiplies every torque by 0, with
+    no warning anywhere. Symptom: physics/events perfect, forces commanded,
+    `KINARMScalingRobot1/2 = 0` forever, `TorCMD = 0`, no felt force,
+    while Monitor_status, Run_Status and the motor-status bits all look
+    healthy. Fix: `add_ep_loads.m` — feed `hand_forces` (already the EP
+    format, 1x4 `[a1Fx a1Fy a2Fx a2Fy]` N at the handle) into
+    `KINARM_EP_Apply_Loads` and swap `ZeroEPTorque -> From
+    KINARMEPTorqueCMD` on AddTorques port 2 (the EP mirror of gotcha 11).
+    Keep both chains in the model — Victor's working task does — so the
+    task runs on either robot type. EP tells, for the record: FT sensors in
+    the handle (zeroing dialog at exam start), the grip sensor that keeps
+    motors disabled until the handle is fully grasped (KINdata col 37 goes
+    3 -> 0), and the subject holding a handle rather than wearing troughs.
