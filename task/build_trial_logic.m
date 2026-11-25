@@ -92,6 +92,7 @@ for i = 1:numel(dlg_in), fprintf('  %d: %s\n', i, dlg_in{i}); end
 %% 2. Remove custom blocks from a previous run (rerunnability)
 for b = {'Ball_Engine', 'Forces_to_Torques', 'KINARM_Apply_Loads', ...
          'UD_pen', 'UD_speed', 'UD_delay', 'UD_timeout', 'UD_hand', ...
+         'KINARM_HandInTarget2', 'HIT_any', ...
          'From_KINdata', 'From_LoadTable', 'From_TargetTable', ...
          'From_TaskWide', 'From_TPTable', 'From_TPRow', 'From_Seed', ...
          'C_pen', 'C_speed', 'C_alog'}
@@ -243,6 +244,17 @@ add_block('built-in/UnitDelay', [name '/UD_timeout'], 'SampleTime', '0.001', ...
 add_block('built-in/UnitDelay', [name '/UD_hand'], 'SampleTime', '0.001', ...
     'Position', [620 760 660 790]);
 
+% Either hand counts as "at home": the library HandInTarget tracks exactly
+% one hand (use_dominant_hand on = active arm, off = the other arm), so a
+% second instance watches the other hand and a max() ORs the two vectors.
+% Feeds the chart (trial start/hold) and the ring colour alike.
+add_block('KINARM_general/KINARM_HandInTarget', [name '/KINARM_HandInTarget2'], ...
+    'Position', [60 330 160 370]);
+set_param([name '/KINARM_HandInTarget2'], 'use_dominant_hand', 'off', ...
+    'attribcol1', '[4]');
+add_block('built-in/MinMax', [name '/HIT_any'], 'Function', 'max', ...
+    'Inputs', '2', 'Position', [200 340 230 370]);
+
 %% 5. Rewire the root level from scratch
 for h = find_system(name, 'SearchDepth', 1, 'FindAll', 'on', 'Type', 'line')'
     try, delete_line(h); catch, end %#ok<CTCH>
@@ -274,9 +286,14 @@ fSD  = get_param([name '/From_Seed'],           'PortHandles');
 fprintf('Ports: chart %d out, DataLogging %d in\n', numel(chrt.Outport), numel(dlog.Inport));
 
 AL = {'autorouting', 'on'};
+hit2 = get_param([name '/KINARM_HandInTarget2'], 'PortHandles');
+any_ = get_param([name '/HIT_any'],              'PortHandles');
+
 add_line(name, gui.Outport(1),  chrt.Trigger(1), AL{:});  % e_clk / e_ExitTrialNow
 add_line(name, gui.Outport(2),  chrt.Inport(1),  AL{:});  % Trial_Protocol
-add_line(name, hit.Outport(1),  chrt.Inport(2),  AL{:});  % HandInTarget vector
+add_line(name, hit.Outport(1),  any_.Inport(1),  AL{:});  % active hand
+add_line(name, hit2.Outport(1), any_.Inport(2),  AL{:});  % other hand
+add_line(name, any_.Outport(1), chrt.Inport(2),  AL{:});  % either-hand InTarget
 add_line(name, udp.Outport(1),  chrt.Inport(3),  AL{:});  % pen_fb (1 ms delay)
 add_line(name, uds.Outport(1),  chrt.Inport(4),  AL{:});  % speed_fb
 add_line(name, udd.Outport(1),  chrt.Inport(5),  AL{:});  % delay_fb
@@ -300,7 +317,7 @@ add_line(name, fTP.Outport(1),  eml.Inport(9),   AL{:});
 add_line(name, fTR.Outport(1),  eml.Inport(10),  AL{:});
 add_line(name, fSD.Outport(1),  eml.Inport(11),  AL{:});
 udh = get_param([name '/UD_hand'], 'PortHandles');
-add_line(name, hit.Outport(1),  udh.Inport(1),   AL{:});  % hand_in (ring colour)
+add_line(name, any_.Outport(1), udh.Inport(1),   AL{:});  % hand_in (ring colour)
 add_line(name, udh.Outport(1),  eml.Inport(12),  AL{:});  % 1 ms delay, rate 0.001
 
 add_line(name, shw.Outport(1),  cat3.Inport(1),  AL{:});
