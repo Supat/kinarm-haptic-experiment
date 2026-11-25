@@ -104,16 +104,21 @@ the peak force stays at or below 45 N and only the single hardest case (0.5 kg, 
 See `sim/out/peak_force_map.png` and `sim/out/impact_timeseries.png`.
 
 ## 5. Trial state machine (Stateflow) (DECIDED 2026-11-24: stillness required; ball bounces)
+## (SIMPLIFIED 2026-11-25: CONTACT/POST_IMPACT merged into one IMPACT state —
+## the physics, bounces included, lives in Ball_Engine; the chart only stamps
+## events and decides when the trial is over. Per-bounce timing comes from the
+## 1 kHz analog log, not from event-code chatter.)
 
-    WAIT_HOME      hand inside home target for hold_time (random 0.5 to 1.5 s optional)
-      -> RELEASE   ball drawn at slope top, event BALL_RELEASE
-    ROLLING        integrate ball; update ball graphic each frame; haptics off
-      -> CONTACT   when pen > 0, event CONTACT_START
-    CONTACT        apply F as above; integrate ball with -F
-      -> POST      when pen <= 0 for > 5 ms, event CONTACT_END
-    POST_IMPACT    ball rolls away; end when |v| < v_stop or ball leaves workspace
-      -> END       event TRIAL_END, inter-trial interval
-    Abort paths: hand leaves home before contact (if required still), timeout.
+    WAIT_HOME      hand inside home target
+      -> HOLD      hold for HoldTime, then
+      -> RELEASE   ball drawn at slope top; random release delay, event BALL_RELEASE
+    ROLLING        integrate ball; haptics engage on contact
+      -> IMPACT    when pen > 0, event CONTACT_START (once)
+    IMPACT         Ball_Engine applies F / bounces freely; chart waits for settle
+      -> END       settled (>=300 ms after first contact, |v| < v_stop, pen <= 0)
+                   or hard 2.5 s cap; event CONTACT_END stamped on the transition
+    Abort paths (transition actions, no dedicated states): hand leaves home
+    before contact (HAND_LEFT_HOME), trial timeout.
 
 Event codes to log: BALL_RELEASE, CONTACT_START, CONTACT_END, TRIAL_END, HAND_LEFT_HOME.
 Also log as analog channels: ball x, y, vx, vy, pen, commanded Fx, Fy, so the impact can

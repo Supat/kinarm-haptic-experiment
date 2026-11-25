@@ -4,11 +4,14 @@
 implementing the full experiment (built 2026-11-24, after the smoke test of the
 parameter tables passed at the lab):
 
-- **Trial_Control chart**: WAIT_HOME -> HOLD -> RELEASE_WAIT -> ROLLING ->
-  CONTACT <-> POST_IMPACT -> EndOfTrial. Hand must stay in the home target
-  until impact (leave during ROLLING -> HAND_LEFT_HOME error event + abort);
-  repeated CONTACT/POST cycles log each bounce. Timeouts: TP TrialTimeout
-  (0 means 10 s), post-impact window 2.5 s or |v| < 2 cm/s.
+- **Trial_Control chart** (6 states, 11 transitions): WAIT_HOME -> HOLD ->
+  RELEASE_WAIT -> ROLLING -> IMPACT -> EndOfTrial. Hand must stay in the home
+  target until impact (leaving during ROLLING stamps the HAND_LEFT_HOME error
+  event on the abort transition). IMPACT stamps CONTACT_START once at first
+  contact and CONTACT_END on exit; per-bounce timing is recovered from the
+  1 kHz analog log (pen/Fx/Fy), not from event-code chatter. Timeouts: TP
+  TrialTimeout (0 means 10 s); IMPACT ends when settled (>=300 ms after first
+  contact, |v| < 2 cm/s, no contact) or a hard 2.5 s cap after first contact.
 - **Ball_Engine** (MATLAB Function, source `ball_engine_eml.m`, 1 kHz):
   rolls the ball from the BallTarget row toward the HomeTarget row —
   a = (5/7)·g·sin(SlopeAngle) on the slope, −RollRes·g on the flat; penalty

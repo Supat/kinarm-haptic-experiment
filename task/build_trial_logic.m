@@ -1,9 +1,9 @@
 function build_trial_logic()
 %BUILD_TRIAL_LOGIC Install the real ball-impact trial logic into ball_impact.mdl.
 %
-% Replaces the placeholder two-state chart with the full trial state machine
-% (WAIT_HOME -> HOLD -> RELEASE_WAIT -> ROLLING -> CONTACT <-> POST_IMPACT ->
-% EndOfTrial, plus HAND_LEFT_HOME and timeout aborts), adds the Ball_Engine
+% Replaces the placeholder two-state chart with the trial state machine
+% (WAIT_HOME -> HOLD -> RELEASE_WAIT -> ROLLING -> IMPACT -> EndOfTrial;
+% hand-left-home and timeout aborts are transition actions), adds the Ball_Engine
 % MATLAB Function block (physics + penalty contact + ball/slope VCODEs, source
 % in ball_engine_eml.m), the Forces_to_Torques -> KINARM_Apply_Loads chain
 % (Exoskeleton), event-code and analog logging, and rewires the model.
@@ -156,14 +156,14 @@ sRoll = mkstate(ch, [X3 Y2 W H], sprintf(['ROLLING\nentry:\n' ...
     'event_code = E_BALL_RELEASE;\n' ...
     'TimeInterval = timeout_fb;']));
 
-sCont = mkstate(ch, [X3 Y3 W H], sprintf(['CONTACT\nentry:\n' ...
+% One IMPACT state replaces the old CONTACT <-> POST_IMPACT ping-pong: the
+% physics (bounces included) lives in Ball_Engine, so the chart only needs
+% to stamp contact start, then wait for the ball to settle. The penalty
+% contact can chatter at the millisecond scale; the old pair re-fired
+% E_CONTACT_START/E_CONTACT_END on every micro-bounce. Per-bounce timing is
+% still fully recoverable from the 1 kHz analog log (pen, Fx, Fy).
+sImp = mkstate(ch, [X2 Y2 W H], sprintf(['IMPACT\nentry:\n' ...
     'event_code = E_CONTACT_START;']));
-
-sPost = mkstate(ch, [X2 Y3 W H], sprintf(['POST_IMPACT\nentry:\n' ...
-    'event_code = E_CONTACT_END;']));
-
-sAbort = mkstate(ch, [X2 Y2 W H], sprintf(['ABORT_LEAVE\nentry:\n' ...
-    'event_code = E_HAND_LEFT_HOME;']));
 
 sEnd = mkstate(ch, [X1 Y4 W H], sprintf(['EndOfTrial\nentry:\n' ...
     'logging_enable = 0;\n' ...
@@ -181,15 +181,28 @@ mktrans(ch, sHold, sRel,   'after(TimeInterval, e_clk)', 1);
 mktrans(ch, sHold, sWait,  '[HandInTarget[target_row] == 0]', 2);
 mktrans(ch, sRel,  sRoll,  'after(TimeInterval, e_clk)', 1);
 mktrans(ch, sRel,  sWait,  '[HandInTarget[target_row] == 0]', 2);
-mktrans(ch, sRoll, sCont,  '[pen_fb > 0]', 1);
-mktrans(ch, sRoll, sAbort, '[HandInTarget[target_row] == 0]', 2);
-mktrans(ch, sRoll, sEnd,   'after(TimeInterval, e_clk)', 3);
-mktrans(ch, sCont, sPost,  'after(5, e_clk)[pen_fb <= 0]', 1);
-mktrans(ch, sPost, sCont,  '[pen_fb > 0]', 1);
-mktrans(ch, sPost, sEnd,   'after(300, e_clk)[speed_fb < 0.02]', 2);
-mktrans(ch, sPost, sEnd,   'after(2500, e_clk)', 3);
-mktrans(ch, sAbort, sEnd,  'after(10, e_clk)', 1);
+mktrans(ch, sRoll, sImp,   '[pen_fb > 0]', 1);
+% Hand-left-home abort: the event is stamped on the transition itself (the
+% old ABORT_LEAVE state existed only to hold it for 10 ms; the value now
+% persists until WAIT_HOME resets event_code to 0).
+tAb = mktrans(ch, sRoll, sEnd, ['[HandInTarget[target_row] == 0]' ...
+    '{event_code = E_HAND_LEFT_HOME;}'], 2);
+tTo = mktrans(ch, sRoll, sEnd, 'after(TimeInterval, e_clk)', 3);
+% Settled: >=300 ms after first contact, ball slow and out of contact; or a
+% hard 2.5 s cap after first contact. E_CONTACT_END is stamped on exit.
+tSe = mktrans(ch, sImp, sEnd, ['after(300, e_clk)' ...
+    '[speed_fb < 0.02 && pen_fb <= 0]{event_code = E_CONTACT_END;}'], 1);
+tCa = mktrans(ch, sImp, sEnd, 'after(2500, e_clk){event_code = E_CONTACT_END;}', 2);
 mktrans(ch, sEnd,  sWait,  'after(1000, e_clk)', 1);
+% Spread the four End-bound labels so the render stays readable (the
+% auto-placed positions pile up mid-chart). Cosmetic only.
+for lp = {{tAb, [860 490]}, {tTo, [860 530]}, {tSe, [240 490]}, {tCa, [240 530]}}
+    try
+        p = lp{1}{1}.LabelPosition;
+        lp{1}{1}.LabelPosition = [lp{1}{2} p(3) p(4)];
+    catch
+    end %#ok<CTCH>
+end
 
 %% 4. Custom blocks
 add_block('simulink/User-Defined Functions/MATLAB Function', ...
