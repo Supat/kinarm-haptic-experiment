@@ -85,7 +85,8 @@ and copied into the task folder.
 ### First lab test, 2026-11-21
 Skeleton `.dlm` (commit 5c75d73) loaded and ran one placeholder trial with no protocol.
 A protocol could not be made because the skeleton declares no TP/Load columns; see
-`task/REBUILD-SPEC.md`. The lab is an **Exoskeleton** (both arms drawn as linkages).
+`task/REBUILD-SPEC.md`. The lab was recorded here as an Exoskeleton; that was wrong, it is an
+**End-Point** (corrected 2026-11-25, see `task/README.md` gotcha 12).
 
 ## 4. First run: safety ladder
 

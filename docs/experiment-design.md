@@ -140,9 +140,14 @@ response, EMG onset relative to CONTACT_START if EMG is recorded.
 
 ## 8. Open questions
 
-1. ~~End-Point or Exoskeleton lab?~~ **Exoskeleton** (observed in Dexterit-E on
-   2026-11-21: both arms drawn as two-link linkages). Forces are rendered as joint torques
-   via the `KINARM_loads` library; limits 5.1 Nm continuous / 15.3 Nm intermittent per joint.
+1. ~~End-Point or Exoskeleton lab?~~ **End-Point** (corrected 2026-11-25). The 2026-11-21
+   reading of the Dexterit-E arm drawing as an Exoskeleton was wrong; three lab sessions
+   of zero torque traced to the Exo loads chain being gated off because Dexterit-E
+   reports `a1_robot_type = 1` (End-Point). Tells: force sensors in the handle (zeroing
+   dialog), grip sensor that holds motors disabled until the handle is grasped, subject
+   holds a handle. Forces are now rendered at the handle via `KINARM_EP_Apply_Loads`
+   (force limit 30 N); the Exo chain stays in the model so the task runs on either robot.
+   See `task/README.md` gotcha 12.
 2. What is manipulated: ball mass, speed, visual-haptic congruence, predictability of
    release timing, haptics on/off catch trials?
 3. ~~Must the hand stay still until impact, or may the subject catch or dodge?~~
