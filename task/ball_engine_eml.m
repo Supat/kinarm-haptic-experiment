@@ -1,4 +1,4 @@
-function [vcodes, hand_forces, ball_log, pen_out, speed_out, delay_ms, timeout_ms] = ball_engine(phase, home_row, ball_row, load_row, KINdata, Load_Table, Target_Table, Task_Wide, TP_Table, tp_row, seed) %#codegen
+function [vcodes, hand_forces, ball_log, pen_out, speed_out, delay_ms, timeout_ms] = ball_engine(phase, home_row, ball_row, load_row, KINdata, Load_Table, Target_Table, Task_Wide, TP_Table, tp_row, seed, hand_in) %#codegen
 %BALL_ENGINE Ball physics, penalty contact force, and ball/slope VCODEs.
 %
 % Runs every 1 ms. The Trial_Control chart sequences the trial and sets:
@@ -18,7 +18,8 @@ function [vcodes, hand_forces, ball_log, pen_out, speed_out, delay_ms, timeout_m
 
 persistent s v prev_pen t_contact have_contact initd rngstate
 if isempty(initd)
-    s = 0; v = 0; prev_pen = 0; t_contact = 1e9; have_contact = 0; initd = 1;
+    s = 0; v = 0; initd = 1;
+    prev_pen = [0 0]; t_contact = [1e9 1e9]; have_contact = [0 0];
     rngstate = mod(abs(seed), 4294967296);
     if rngstate <= 0; rngstate = 12345; end
 end
@@ -44,7 +45,7 @@ if delay_ms < 0; delay_ms = 0; end
 timeout_ms = TP_Table(tr, 7);
 if timeout_ms <= 0; timeout_ms = 10000; end
 
-vcodes      = zeros(2, 70);
+vcodes      = zeros(9, 70);
 hand_forces = zeros(4, 1);
 
 % ---- parameters ------------------------------------------------------------
@@ -86,17 +87,18 @@ dd = sqrt(dx*dx + dy*dy);
 if dd < 1e-6; dd = 1; end
 ux = dx / dd; uy = dy / dd;
 
-% ---- hand state (active = dominant arm; row 1 = right on bilateral) --------
-arm = KINdata(3, 1);
-if arm ~= 2; arm = 1; end
-phx = KINdata(arm, 23);
-phy = KINdata(arm, 24);
+% ---- hand state: BOTH hands can strike the ball (row 1 = robot 1, row 2 =
+% robot 2; an absent robot reads position (0,0), far from the track, so its
+% penetration never goes positive) ---------------------------------------
+hpx = [KINdata(1, 23) KINdata(2, 23)];
+hpy = [KINdata(1, 24) KINdata(2, 24)];
 
 % ---- physics ----------------------------------------------------------------
-Fx = 0; Fy = 0; pen = 0;
+Fxh = [0 0]; Fyh = [0 0]; pen = 0;
 if phase < 1.5
     % phase 0: hidden/reset. phase 1: parked at slope top.
-    s = 0; v = 0; prev_pen = 0; have_contact = 0; t_contact = 1e9;
+    s = 0; v = 0;
+    prev_pen = [0 0]; have_contact = [0 0]; t_contact = [1e9 1e9];
 else
     a = 0;
     if s < Lslope
@@ -109,33 +111,36 @@ else
     end
 
     bxp = tx + ux * s; byp = ty + uy * s;
-    rx = phx - bxp; ry = phy - byp;
-    dist = sqrt(rx*rx + ry*ry);
-    if dist < 1e-6; dist = 1e-6; end
-    pen = (r_b + r_h) - dist;
+    for h = 1:2
+        rx = hpx(h) - bxp; ry = hpy(h) - byp;
+        dist = sqrt(rx*rx + ry*ry);
+        if dist < 1e-6; dist = 1e-6; end
+        penh = (r_b + r_h) - dist;
 
-    if pen > 0
-        dpen = (pen - prev_pen) / dt;
-        fmag = kc * pen + bc * dpen;
-        if fmag < 0; fmag = 0; end
-        if have_contact == 0
-            have_contact = 1;
-            t_contact = 0;    % new contact: restart transient
-        end
-        if t_contact < 0.03 && tamp > 0
-            fmag = fmag + tamp * exp(-t_contact / 0.01) * sin(2 * pi * tfreq * t_contact);
+        if penh > 0
+            dpen = (penh - prev_pen(h)) / dt;
+            fmag = kc * penh + bc * dpen;
             if fmag < 0; fmag = 0; end
+            if have_contact(h) == 0
+                have_contact(h) = 1;
+                t_contact(h) = 0;    % new contact: restart transient
+            end
+            if t_contact(h) < 0.03 && tamp > 0
+                fmag = fmag + tamp * exp(-t_contact(h) / 0.01) * sin(2 * pi * tfreq * t_contact(h));
+                if fmag < 0; fmag = 0; end
+            end
+            if fmag > Fmax; fmag = Fmax; end
+            nx = rx / dist; ny = ry / dist;
+            Fxh(h) = fmag * nx; Fyh(h) = fmag * ny;
+            % equal and opposite on the ball, projected on the rail
+            a = a - (Fxh(h) * ux + Fyh(h) * uy) / m_b;
+        else
+            have_contact(h) = 0;
         end
-        if fmag > Fmax; fmag = Fmax; end
-        nx = rx / dist; ny = ry / dist;
-        Fx = fmag * nx; Fy = fmag * ny;
-        % equal and opposite on the ball, projected on the rail
-        a = a - (Fx * ux + Fy * uy) / m_b;
-    else
-        have_contact = 0;
+        t_contact(h) = t_contact(h) + dt;
+        prev_pen(h) = penh;
+        if penh > pen; pen = penh; end
     end
-    t_contact = t_contact + dt;
-    prev_pen = pen;
 
     v = v + a * dt;
     s = s + v * dt;
@@ -146,41 +151,115 @@ end
 
 % ---- haptics gate (visual bounce unaffected) --------------------------------
 if hapt < 0.5
-    Fx = 0; Fy = 0;
+    Fxh = [0 0]; Fyh = [0 0];
 end
-if arm == 1
-    hand_forces(1) = Fx; hand_forces(2) = Fy;
-else
-    hand_forces(3) = Fx; hand_forces(4) = Fy;
-end
+hand_forces(1) = Fxh(1); hand_forces(2) = Fyh(1);
+hand_forces(3) = Fxh(2); hand_forces(4) = Fyh(2);
+Fx = Fxh(1) + Fxh(2);               % total contact force, for the log
+Fy = Fyh(1) + Fyh(2);
 
-% ---- VCODEs: row 1 slope line, row 2 ball circle ----------------------------
+% ---- VCODEs (subject display mock, lateral slope) ---------------------------
+% Rows: 1 flat run-out (darkest), 2-5 slope bar (4 shaded segments, lightest
+% at the top), 6 slope-foot tick, 7 home ring (hollow; green when the hand is
+% inside the home target), 8 ball (yellow; flashes white during contact),
+% 9 ball highlight. Track and ring are always visible; the ball exists only
+% during RELEASE_WAIT/ROLLING (phase > 0). The home target's filled circle is
+% suppressed in the protocol via VisRadius = 0 (LogRadius still defines the
+% logical zone and this ring's radius).
 show = 0;
 if phase > 0.5; show = 1; end
 
-vcodes(1, 1)  = 4;                 % line
-vcodes(1, 2)  = show;
-vcodes(1, 3)  = tx;
-vcodes(1, 4)  = ty;
-vcodes(1, 5)  = 5921370;           % 0x5A5A5A grey
-vcodes(1, 6)  = 5921370;
-vcodes(1, 7)  = 0.004;             % 4 mm stroke
+ringr = Target_Table(hr, 4) * 0.01;
+if ringr <= 0; ringr = 0.015; end
+
+footx = tx + ux * Lslope;  footy = ty + uy * Lslope;
+flat_len = (dd - ringr - 0.005) - Lslope;
+if flat_len < 0; flat_len = 0; end
+
+barw = 0.02;
+
+vcodes(1, 1)  = 4;                 % flat run-out: foot -> ring edge
+vcodes(1, 2)  = 1;
+vcodes(1, 3)  = footx;
+vcodes(1, 4)  = footy;
+vcodes(1, 5)  = 3158064;           % 0x303030
+vcodes(1, 6)  = 3158064;
+vcodes(1, 7)  = barw;
 vcodes(1, 9)  = 100;
-vcodes(1, 10) = ux * Lslope;       % endpoint relative to start (m)
-vcodes(1, 11) = uy * Lslope;
+vcodes(1, 10) = ux * flat_len;
+vcodes(1, 11) = uy * flat_len;
+
+segc = [5921370 5197647 4473924 3750201];   % 0x5A5A5A -> 0x393939
+seg  = Lslope / 4;
+for i = 1:4
+    vcodes(1+i, 1)  = 4;
+    vcodes(1+i, 2)  = 1;
+    vcodes(1+i, 3)  = tx + ux * seg * (i - 1);
+    vcodes(1+i, 4)  = ty + uy * seg * (i - 1);
+    vcodes(1+i, 5)  = segc(i);
+    vcodes(1+i, 6)  = segc(i);
+    vcodes(1+i, 7)  = barw;
+    vcodes(1+i, 9)  = 100;
+    vcodes(1+i, 10) = ux * seg;
+    vcodes(1+i, 11) = uy * seg;
+end
+
+px = -uy; py = ux;                 % slope-foot tick, perpendicular to rail
+vcodes(6, 1)  = 4;
+vcodes(6, 2)  = 1;
+vcodes(6, 3)  = footx - px * 0.014;
+vcodes(6, 4)  = footy - py * 0.014;
+vcodes(6, 5)  = 13158600;          % 0xC8C8C8
+vcodes(6, 6)  = 13158600;
+vcodes(6, 7)  = 0.0025;
+vcodes(6, 9)  = 100;
+vcodes(6, 10) = px * 0.028;
+vcodes(6, 11) = py * 0.028;
+
+ringc = 16777215;                  % white; green while the hand is at home
+if hand_in(hr) > 0.5
+    ringc = 3066993;               % 0x2ECC71
+end
+vcodes(7, 1)  = 1;                 % home ring (hollow circle)
+vcodes(7, 2)  = 1;
+vcodes(7, 3)  = hx0;
+vcodes(7, 4)  = hy0;
+vcodes(7, 5)  = 16777216;          % no fill
+vcodes(7, 6)  = ringc;
+vcodes(7, 7)  = 0.003;
+vcodes(7, 9)  = 100;
+vcodes(7, 10) = ringr;
 
 bx = tx + ux * s; by = ty + uy * s;
-vcodes(2, 1)  = 1;                 % circle
-vcodes(2, 2)  = show;
-vcodes(2, 3)  = bx;
-vcodes(2, 4)  = by;
-vcodes(2, 5)  = 16777215;          % 0xFFFFFF white fill
-vcodes(2, 6)  = -2147483648;       % no stroke colour
-vcodes(2, 7)  = 0;
-vcodes(2, 9)  = 100;
-vcodes(2, 10) = r_b;
+ballc = 16106818;                  % 0xF5C542 yellow
+hilc  = 16774080;                  % 0xFFF3C0 warm white highlight
+if pen > 0
+    ballc = 16777215;              % contact flash: white ball,
+    hilc  = 16113824;              % 0xF5E0A0 pale yellow highlight
+end
+vcodes(8, 1)  = 1;                 % ball
+vcodes(8, 2)  = show;
+vcodes(8, 3)  = bx;
+vcodes(8, 4)  = by;
+vcodes(8, 5)  = ballc;
+vcodes(8, 6)  = -2147483648;       % no stroke colour
+vcodes(8, 7)  = 0;
+vcodes(8, 9)  = 100;
+vcodes(8, 10) = r_b;
+
+vcodes(9, 1)  = 1;                 % highlight, upper-left of the ball centre
+vcodes(9, 2)  = show;
+vcodes(9, 3)  = bx - 0.35 * r_b;
+vcodes(9, 4)  = by + 0.35 * r_b;
+vcodes(9, 5)  = hilc;
+vcodes(9, 6)  = -2147483648;
+vcodes(9, 7)  = 0;
+vcodes(9, 9)  = 100;
+vcodes(9, 10) = 0.3 * r_b;
+
 if s > dd + 0.6
-    vcodes(2, 2) = 0;              % rolled far out of the scene
+    vcodes(8, 2) = 0;              % rolled far out of the scene
+    vcodes(9, 2) = 0;
 end
 
 ball_log  = [bx; by; v; pen; Fx; Fy; phase; s];

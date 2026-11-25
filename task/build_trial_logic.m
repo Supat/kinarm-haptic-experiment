@@ -91,7 +91,7 @@ for i = 1:numel(dlg_in), fprintf('  %d: %s\n', i, dlg_in{i}); end
 
 %% 2. Remove custom blocks from a previous run (rerunnability)
 for b = {'Ball_Engine', 'Forces_to_Torques', 'KINARM_Apply_Loads', ...
-         'UD_pen', 'UD_speed', 'UD_delay', 'UD_timeout', ...
+         'UD_pen', 'UD_speed', 'UD_delay', 'UD_timeout', 'UD_hand', ...
          'From_KINdata', 'From_LoadTable', 'From_TargetTable', ...
          'From_TaskWide', 'From_TPTable', 'From_TPRow', 'From_Seed', ...
          'C_pen', 'C_speed', 'C_alog'}
@@ -202,6 +202,12 @@ try
 catch e
     fprintf('NOTE: Ball_Engine sample time: %s (will inherit)\n', e.message);
 end
+% R2013a's EMChart API has no sample-time property, and inheritance put the
+% block in the 0.0005 s base-rate section once hand_in was added (breaking
+% dt = 0.001). Pin the rate on the block itself, the way BKIN pins its own
+% EML charts (e.g. Monitor_status has SystemSampleTime ".001").
+set_param([name '/Ball_Engine'], 'SystemSampleTime', '0.001');
+fprintf('Ball_Engine SystemSampleTime pinned to 0.001 s\n');
 
 add_block('built-in/From', [name '/From_KINdata'], 'GotoTag', 'KINdata', ...
     'Position', [180 430 280 450]);
@@ -231,6 +237,11 @@ add_block('built-in/UnitDelay', [name '/UD_delay'], 'SampleTime', '0.001', ...
     'Position', [620 660 660 690]);
 add_block('built-in/UnitDelay', [name '/UD_timeout'], 'SampleTime', '0.001', ...
     'Position', [620 710 660 740]);
+% hand_in goes through a 1 kHz UnitDelay: keeps Ball_Engine's inherited rate
+% at 0.001 s (wired straight from HandInTarget it inherits the 0.0005 s base
+% rate and the physics dt breaks).
+add_block('built-in/UnitDelay', [name '/UD_hand'], 'SampleTime', '0.001', ...
+    'Position', [620 760 660 790]);
 
 %% 5. Rewire the root level from scratch
 for h = find_system(name, 'SearchDepth', 1, 'FindAll', 'on', 'Type', 'line')'
@@ -288,6 +299,9 @@ add_line(name, fTW.Outport(1),  eml.Inport(8),   AL{:});
 add_line(name, fTP.Outport(1),  eml.Inport(9),   AL{:});
 add_line(name, fTR.Outport(1),  eml.Inport(10),  AL{:});
 add_line(name, fSD.Outport(1),  eml.Inport(11),  AL{:});
+udh = get_param([name '/UD_hand'], 'PortHandles');
+add_line(name, hit.Outport(1),  udh.Inport(1),   AL{:});  % hand_in (ring colour)
+add_line(name, udh.Outport(1),  eml.Inport(12),  AL{:});  % 1 ms delay, rate 0.001
 
 add_line(name, shw.Outport(1),  cat3.Inport(1),  AL{:});
 add_line(name, hfb.Outport(1),  cat3.Inport(2),  AL{:});
