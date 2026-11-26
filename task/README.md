@@ -4,14 +4,21 @@
 implementing the full experiment (built 2026-11-24, after the smoke test of the
 parameter tables passed at the lab):
 
-- **Trial_Control chart** (6 states, 11 transitions): WAIT_HOME -> HOLD ->
-  RELEASE_WAIT -> ROLLING -> IMPACT -> EndOfTrial. Hand must stay in the home
-  target until impact (leaving during ROLLING stamps the HAND_LEFT_HOME error
-  event on the abort transition). IMPACT stamps CONTACT_START once at first
-  contact and CONTACT_END on exit; per-bounce timing is recovered from the
-  1 kHz analog log (pen/Fx/Fy), not from event-code chatter. Timeouts: TP
-  TrialTimeout (0 means 10 s); IMPACT ends when settled (>=300 ms after first
-  contact, |v| < 2 cm/s, no contact) or a hard 2.5 s cap after first contact.
+- **Trial_Control chart** (7 states, 12 transitions): WAIT_HOME -> HOLD ->
+  RELEASE_WAIT -> ROLLING -> IMPACT -> RINGDOWN -> EndOfTrial. Hand must stay
+  in the home target until impact (leaving during ROLLING stamps the
+  HAND_LEFT_HOME error event on the abort transition). IMPACT stamps
+  CONTACT_START once at first contact; RINGDOWN's entry stamps CONTACT_END
+  once when that first contact episode ends, while logging is still on
+  (stamping on the exit transition raced the same-tick logging-off and the
+  event never reached the data). There is no transition back, so bounces
+  re-fire nothing; per-bounce timing is recovered from the 1 kHz analog log
+  (pen/Fx/Fy). Timeouts: TP TrialTimeout (0 means 10 s); RINGDOWN ends when
+  settled (>=300 ms after contact end, |v| < 2 cm/s, no contact) or a hard
+  2.5 s cap; IMPACT itself caps at 2.5 s for a contact that never releases.
+  Gotcha: the chart is C action language - if-statements in state actions
+  are a tlc_c parse error, so conditional event logic must be states or
+  transition actions.
 - **Ball_Engine** (MATLAB Function, source `ball_engine_eml.m`, 1 kHz):
   rolls the ball from the BallTarget row toward the HomeTarget row —
   a = (5/7)·g·sin(SlopeAngle) on the slope, −RollRes·g on the flat; penalty
@@ -19,6 +26,11 @@ parameter tables passed at the lab):
   TransientFreq burst per new contact; full bounce (reaction decelerates the
   ball). Draws the slope line + ball circle as hand-built VCODEs. An all-zero
   Load row falls back to safe defaults with **HapticsOn=0** (visual only).
+  **DrawRadius** (Load col 13) draws the ball at a different size than the
+  contact radius (0 = draw at BallRadius) — visuo-haptic decoupling for the
+  SPIDAR port; physics always uses BallRadius. The established visual design
+  (gradient slope, run-out, foot tick, green-when-home ring, yellow ball +
+  highlight, white contact flash) is unchanged.
 - **Forces** go out through BOTH loads chains so the task runs on either
   robot type (only the chain matching the robot engages; the other is
   ramp-gated to zero): `hand_forces -> KINARM_EP_Apply_Loads` (End-Point —

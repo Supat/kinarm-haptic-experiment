@@ -104,19 +104,24 @@ the peak force stays at or below 45 N and only the single hardest case (0.5 kg, 
 See `sim/out/peak_force_map.png` and `sim/out/impact_timeseries.png`.
 
 ## 5. Trial state machine (Stateflow) (DECIDED 2026-11-24: stillness required; ball bounces)
-## (SIMPLIFIED 2026-11-25: CONTACT/POST_IMPACT merged into one IMPACT state —
-## the physics, bounces included, lives in Ball_Engine; the chart only stamps
-## events and decides when the trial is over. Per-bounce timing comes from the
-## 1 kHz analog log, not from event-code chatter.)
+## (SIMPLIFIED 2026-11-25; REVISED 2026-11-26: one-way IMPACT -> RINGDOWN pair
+## instead of the CONTACT<->POST_IMPACT ping-pong — the physics, bounces
+## included, lives in Ball_Engine; the chart stamps each contact event exactly
+## once and decides when the trial is over. Per-bounce timing comes from the
+## 1 kHz analog log, not from event-code chatter. CONTACT_END must be stamped
+## by a state ENTRY while logging is on: stamping it on the exit transition
+## races the same-tick logging-off and never reaches the data.)
 
     WAIT_HOME      hand inside home target
       -> HOLD      hold for HoldTime, then
       -> RELEASE   ball drawn at slope top; random release delay, event BALL_RELEASE
     ROLLING        integrate ball; haptics engage on contact
       -> IMPACT    when pen > 0, event CONTACT_START (once)
-    IMPACT         Ball_Engine applies F / bounces freely; chart waits for settle
-      -> END       settled (>=300 ms after first contact, |v| < v_stop, pen <= 0)
-                   or hard 2.5 s cap; event CONTACT_END stamped on the transition
+    IMPACT         first contact episode; 2.5 s cap if contact never releases
+      -> RINGDOWN  when pen <= 0, event CONTACT_END (once; no way back)
+    RINGDOWN       ball rings down / bounces freely, no further events
+      -> END       settled (>=300 ms after contact end, |v| < v_stop, pen <= 0)
+                   or hard 2.5 s cap
     Abort paths (transition actions, no dedicated states): hand leaves home
     before contact (HAND_LEFT_HOME), trial timeout.
 

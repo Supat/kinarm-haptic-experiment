@@ -2,8 +2,9 @@ function build_trial_logic()
 %BUILD_TRIAL_LOGIC Install the real ball-impact trial logic into ball_impact.mdl.
 %
 % Replaces the placeholder two-state chart with the trial state machine
-% (WAIT_HOME -> HOLD -> RELEASE_WAIT -> ROLLING -> IMPACT -> EndOfTrial;
-% hand-left-home and timeout aborts are transition actions), adds the Ball_Engine
+% (WAIT_HOME -> HOLD -> RELEASE_WAIT -> ROLLING -> IMPACT -> RINGDOWN ->
+% EndOfTrial; hand-left-home and timeout aborts are transition actions),
+% adds the Ball_Engine
 % MATLAB Function block (physics + penalty contact + ball/slope VCODEs, source
 % in ball_engine_eml.m), the Forces_to_Torques -> KINARM_Apply_Loads chain
 % (Exoskeleton), event-code and analog logging, and rewires the model.
@@ -156,14 +157,20 @@ sRoll = mkstate(ch, [X3 Y2 W H], sprintf(['ROLLING\nentry:\n' ...
     'event_code = E_BALL_RELEASE;\n' ...
     'TimeInterval = timeout_fb;']));
 
-% One IMPACT state replaces the old CONTACT <-> POST_IMPACT ping-pong: the
-% physics (bounces included) lives in Ball_Engine, so the chart only needs
-% to stamp contact start, then wait for the ball to settle. The penalty
-% contact can chatter at the millisecond scale; the old pair re-fired
-% E_CONTACT_START/E_CONTACT_END on every micro-bounce. Per-bounce timing is
-% still fully recoverable from the 1 kHz analog log (pen, Fx, Fy).
-sImp = mkstate(ch, [X2 Y2 W H], sprintf(['IMPACT\nentry:\n' ...
+% IMPACT -> RINGDOWN replaces the old CONTACT <-> POST_IMPACT ping-pong:
+% physics (bounces included) lives in Ball_Engine; the chart stamps
+% E_CONTACT_START once at first contact and E_CONTACT_END once at the end
+% of the FIRST contact episode (RINGDOWN's entry, while logging is still
+% on - stamping on the exit transition raced the same-tick logging-off and
+% the event never reached the data; 2026-11-26 verification). There is NO
+% transition back: later bounces re-fire nothing, and per-bounce timing is
+% recovered from the 1 kHz analog log (pen, Fx, Fy). A during-action 'if'
+% is not an option: this chart uses C action language, where if-statements
+% in state actions are a parse error (tlc_c "syntax error").
+sImp = mkstate(ch, [X3 Y3 W H], sprintf(['IMPACT\nentry:\n' ...
     'event_code = E_CONTACT_START;']));
+sRing = mkstate(ch, [X2 Y3 W H], sprintf(['RINGDOWN\nentry:\n' ...
+    'event_code = E_CONTACT_END;']));
 
 sEnd = mkstate(ch, [X1 Y4 W H], sprintf(['EndOfTrial\nentry:\n' ...
     'logging_enable = 0;\n' ...
@@ -188,15 +195,21 @@ mktrans(ch, sRoll, sImp,   '[pen_fb > 0]', 1);
 tAb = mktrans(ch, sRoll, sEnd, ['[HandInTarget[target_row] == 0]' ...
     '{event_code = E_HAND_LEFT_HOME;}'], 2);
 tTo = mktrans(ch, sRoll, sEnd, 'after(TimeInterval, e_clk)', 3);
-% Settled: >=300 ms after first contact, ball slow and out of contact; or a
-% hard 2.5 s cap after first contact. E_CONTACT_END is stamped on exit.
-tSe = mktrans(ch, sImp, sEnd, ['after(300, e_clk)' ...
-    '[speed_fb < 0.02 && pen_fb <= 0]{event_code = E_CONTACT_END;}'], 1);
-tCa = mktrans(ch, sImp, sEnd, 'after(2500, e_clk){event_code = E_CONTACT_END;}', 2);
+% First contact episode ends -> RINGDOWN (stamps E_CONTACT_END on entry).
+mktrans(ch, sImp, sRing, '[pen_fb <= 0]', 1);
+% Cap for a contact that never releases (rare): exit stamps the code too;
+% the same-tick race may swallow it there, but the analog log has the truth.
+tCp = mktrans(ch, sImp, sEnd, 'after(2500, e_clk){event_code = E_CONTACT_END;}', 2);
+% Settled: >=300 ms after the first contact ended, ball slow and out of
+% contact; or a hard 2.5 s cap after the first contact ended.
+tSe = mktrans(ch, sRing, sEnd, ['after(300, e_clk)' ...
+    '[speed_fb < 0.02 && pen_fb <= 0]'], 1);
+tCa = mktrans(ch, sRing, sEnd, 'after(2500, e_clk)', 2);
 mktrans(ch, sEnd,  sWait,  'after(1000, e_clk)', 1);
-% Spread the four End-bound labels so the render stays readable (the
+% Spread the End-bound labels so the render stays readable (the
 % auto-placed positions pile up mid-chart). Cosmetic only.
-for lp = {{tAb, [860 490]}, {tTo, [860 530]}, {tSe, [240 490]}, {tCa, [240 530]}}
+for lp = {{tAb, [60 378]}, {tTo, [60 404]}, {tSe, [150 545]}, ...
+          {tCa, [150 585]}, {tCp, [460 660]}}
     try
         p = lp{1}{1}.LabelPosition;
         lp{1}{1}.LabelPosition = [lp{1}{2} p(3) p(4)];

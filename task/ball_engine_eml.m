@@ -64,10 +64,13 @@ Fmax   = Load_Table(lr, 9);
 hapt   = Load_Table(lr, 10);
 tamp   = Load_Table(lr, 11);
 tfreq  = Load_Table(lr, 12);
+rdraw  = Load_Table(lr, 13) * 0.01;   % drawn radius; 0 -> same as physics
 
 % Defaults so an all-zero Load row stays safe and visible
 if m_b <= 0;    m_b = 0.2;     end
 if r_b <= 0;    r_b = 0.03;    end
+if rdraw <= 0;  rdraw = r_b;   end   % SPIDAR-style size illusion: the drawn
+                                     % ball may differ from the contact ball
 if Lslope <= 0; Lslope = 0.20; end
 if kc <= 0;     kc = 2000;     end
 if Fmax <= 0;   Fmax = 20;     end
@@ -237,7 +240,7 @@ if pen > 0
     ballc = 16777215;              % contact flash: white ball,
     hilc  = 16113824;              % 0xF5E0A0 pale yellow highlight
 end
-vcodes(8, 1)  = 1;                 % ball
+vcodes(8, 1)  = 1;                 % ball (drawn radius; physics stays r_b)
 vcodes(8, 2)  = show;
 vcodes(8, 3)  = bx;
 vcodes(8, 4)  = by;
@@ -245,17 +248,17 @@ vcodes(8, 5)  = ballc;
 vcodes(8, 6)  = -2147483648;       % no stroke colour
 vcodes(8, 7)  = 0;
 vcodes(8, 9)  = 100;
-vcodes(8, 10) = r_b;
+vcodes(8, 10) = rdraw;
 
 vcodes(9, 1)  = 1;                 % highlight, upper-left of the ball centre
 vcodes(9, 2)  = show;
-vcodes(9, 3)  = bx - 0.35 * r_b;
-vcodes(9, 4)  = by + 0.35 * r_b;
+vcodes(9, 3)  = bx - 0.35 * rdraw;
+vcodes(9, 4)  = by + 0.35 * rdraw;
 vcodes(9, 5)  = hilc;
 vcodes(9, 6)  = -2147483648;
 vcodes(9, 7)  = 0;
 vcodes(9, 9)  = 100;
-vcodes(9, 10) = 0.3 * r_b;
+vcodes(9, 10) = 0.3 * rdraw;
 
 if s > dd + 0.6
     vcodes(8, 2) = 0;              % rolled far out of the scene
