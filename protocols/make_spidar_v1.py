@@ -69,7 +69,9 @@ for _ in range(REPS):
     for k in order:
         seq += [1, k]
     prev = order[-1]
-blockseq = " ".join(str(n) for n in seq)                # 90 trials
+# Dexterit-E's get_tp_list_from_expr splits ONLY on commas; a space-separated
+# list is one giant token and fails task load with "contains invalid value".
+blockseq = ", ".join(str(n) for n in seq)               # 90 trials
 
 blocktable = [[blockseq, 1, "", False, 1]]
 blocktable += [["", 0, "", False, 0] for _ in range(50 - len(blocktable))]
