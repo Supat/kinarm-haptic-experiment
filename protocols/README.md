@@ -15,7 +15,12 @@
   - 90 trials: a standard (TP 1) before every test trial, test order
     shuffled per repetition block with a fixed seed (reproducible).
   - Random release delay 500–1500 ms per trial; HoldTime 1000 ms.
-  - Requires the DrawRadius-aware build (Load Table col 13) on the robot.
+  - Error trials re-queue (`use_repeat_trial_flag = 1`): a dodged trial
+    (HAND_LEFT_HOME abort) is re-run at the **end of the block** — BKIN
+    semantics, so the repeat is not preceded by a fresh standard trial.
+    Trial timeouts do not re-queue (no error event).
+  - Requires the 2026-11-27 build on the robot (DrawRadius col 13 +
+    ABORT/repeat_trial chart).
 
 Improvements over the original SPIDAR implementation, for the record:
 automatic condition sequencing (vs. manually enabling spheres), anticipation

@@ -125,7 +125,11 @@ parts.append(tag("tptable_defs",
     "[['HomeTarget', 'target'], ['BallTarget', 'target'], ['Load', 'load'], "
     "['HoldTime', 'int'], ['ReleaseDelayMin', 'int'], ['ReleaseDelayMax', 'int'], "
     "['TrialTimeout', 'int']]"))
-parts.append(tag("use_repeat_trial_flag", "0"))
+# 1 = error trials (hand-left-home aborts) are re-queued: the task raises
+# Repeat_Trial_Flag in its ABORT state and Dexterit-E re-runs that TP at the
+# END of the block (BKIN semantics - the repeat is not paired with a fresh
+# standard trial). Needs the repeat-aware build (2026-11-27) on the robot.
+parts.append(tag("use_repeat_trial_flag", "1"))
 parts.append(tag("version", "3.5"))
 parts.append(tag("video", "''"))
 parts.append("</task_protocol>\n")

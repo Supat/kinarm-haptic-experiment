@@ -77,6 +77,34 @@ else
     fprintf('GUI Control: ZeroTorque not found (already rewired)\n');
 end
 
+% Repeat_Trial_Flag: swap GUI Control's masked-off 0-Constant for an Inport
+% so the chart can request a re-queue of error trials (ABORT sets it; the
+% TP is re-run at the END of the block, gated by the protocol's
+% use_repeat_trial_flag). The mask's show_repeat_trial_flag branch does
+% this swap, but mask inits never run under -nodesktop (gotcha 7/11), so
+% replicate it. The flag goes through a one-sample Delay inside GUI
+% Control before it is ANDed with use_repeat_trial_flag, so it must be
+% raised at least one tick before e_Trial_End - ABORT's 50 ms dwell
+% covers that. With the Constant gone, Dexterit-E's load_task_protocol
+% starts writing the protocol's use_repeat_trial_flag to the model (it
+% skips that write when the legacy 'repeat_trial_flag' Constant exists).
+gcp = [name '/GUI Control'];
+if strcmp(get_param([gcp '/Repeat_Trial_Flag'], 'BlockType'), 'Constant')
+    pos = get_param([gcp '/Repeat_Trial_Flag'], 'Position');
+    delete_line(gcp, 'Repeat_Trial_Flag/1', 'Task Execution Control Subsystem/1');
+    delete_block([gcp '/Repeat_Trial_Flag']);
+    add_block('built-in/Inport', [gcp '/Repeat_Trial_Flag'], ...
+        'Position', mat2str(pos));
+    add_line(gcp, 'Repeat_Trial_Flag/1', 'Task Execution Control Subsystem/1');
+    set_param([gcp '/Repeat_Trial_Flag'], 'Port', '1');
+    % keep the mask dialog consistent with the structure (swap done above,
+    % so if this ever fires the init, its branch is a no-op)
+    set_param(gcp, 'show_repeat_trial_flag', 'on');
+    fprintf('GUI Control: Repeat_Trial_Flag Constant -> Inport 1 (e_End_Trial becomes 2)\n');
+else
+    fprintf('GUI Control: Repeat_Trial_Flag already an Inport\n');
+end
+
 %% 1. Block settings
 % Hand-in-target uses the logical radius column (4), not the drawn one (3)
 set_param([name '/KINARM_HandInTarget'], 'attribcol1', '[4]');
@@ -120,7 +148,7 @@ for i = 1:numel(addin)
         d = Stateflow.Data(ch); d.Name = addin{i}; d.Scope = 'Input';
     end
 end
-addout = {'event_code', 'phase', 'load_row', 'ball_row'};
+addout = {'event_code', 'phase', 'load_row', 'ball_row', 'repeat_trial'};
 for i = 1:numel(addout)
     if isempty(ch.find('-isa', 'Stateflow.Data', 'Name', addout{i}))
         d = Stateflow.Data(ch); d.Name = addout{i}; d.Scope = 'Output';
@@ -139,7 +167,7 @@ sWait = mkstate(ch, [X1 Y1 W H], sprintf(['WAIT_HOME\nentry:\n' ...
     'target_state = 1;\n' ...
     'load_row = Trial_Protocol[Load];\n' ...
     'ball_row = Trial_Protocol[BallTarget];\n' ...
-    'phase = 0;\nevent_code = 0;']));
+    'phase = 0;\nevent_code = 0;\nrepeat_trial = 0;']));
 
 sHold = mkstate(ch, [X2 Y1 W H], sprintf(['HOLD\nentry:\n' ...
     'TimeInterval = Trial_Protocol[HoldTime];']));
@@ -164,7 +192,8 @@ sRoll = mkstate(ch, [X3 Y2 W H], sprintf(['ROLLING\nentry:\n' ...
 % Dexterit-E flagged IS_ERROR, but HAND_LEFT_HOME never reached the c3d.
 % 50 ms in ABORT keeps logging alive long enough to capture the event.
 sAbt = mkstate(ch, [X1 Y2 W H], sprintf(['ABORT\nentry:\n' ...
-    'event_code = E_HAND_LEFT_HOME;']));
+    'event_code = E_HAND_LEFT_HOME;\n' ...
+    'repeat_trial = 1;']));
 
 % IMPACT -> RINGDOWN replaces the old CONTACT <-> POST_IMPACT ping-pong:
 % physics (bounces included) lives in Ball_Engine; the chart stamps
@@ -343,7 +372,8 @@ add_line(name, chrt.Outport(4), dlog.Inport(2),  AL{:});  % event_code
 add_line(name, chrt.Outport(5), eml.Inport(1),   AL{:});  % phase
 add_line(name, chrt.Outport(6), eml.Inport(4),   AL{:});  % load_row
 add_line(name, chrt.Outport(7), eml.Inport(3),   AL{:});  % ball_row
-add_line(name, chrt.Outport(8), gui.Inport(1),   AL{:});  % e_Trial_End
+add_line(name, chrt.Outport(8), gui.Inport(1),   AL{:});  % repeat_trial -> Repeat_Trial_Flag
+add_line(name, chrt.Outport(9), gui.Inport(2),   AL{:});  % e_Trial_End
 
 add_line(name, fKIN.Outport(1), eml.Inport(5),   AL{:});
 add_line(name, fLT.Outport(1),  eml.Inport(6),   AL{:});
