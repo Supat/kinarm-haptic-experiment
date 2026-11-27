@@ -139,3 +139,21 @@ ROLLING when the design requires a stationary hand.
 ![Display storyboard mock](mockups/display_storyboard.png)
 
 Rendered by `sim/mock_display.py`.
+
+### spidar_v1 mocks (2026-11-27)
+
+The SPIDAR port uses the same scene with the protocol's own geometry (home ring at
+-22.25, 10 cm; slope top at 7.75, 10 cm; ball rolls right to left). Rendered by
+`sim/mock_spidar.py` from the values in `protocols/make_spidar_v1.py`:
+
+![spidar_v1 storyboard](mockups/spidar_storyboard.png)
+
+![spidar_v1 condition matrix](mockups/spidar_conditions.png)
+
+The dashed circle in the matrix is the 3 cm contact ball the hand feels; only the drawn
+radius (2.1 / 3.0 / 4.2 cm) and the slope length (10 / 15 / 25 cm, giving roughly 0.75 /
+0.93 / 1.21 m/s at the hand) change between conditions.
+
+Interactive version: `sim/spidar_preview.html` (open in a browser; follows the protocol's
+90-trial sequence or any chosen condition, shows the chart phases and event stamps).
+Published copy: https://claude.ai/artifact/JWubs3bAvenuGE9iM5NqCq

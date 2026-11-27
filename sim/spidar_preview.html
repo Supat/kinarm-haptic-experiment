@@ -1,0 +1,274 @@
+<title>spidar_v1 Preview</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: instrument panel left, true-scale subject screen right; stacks at phone width.
+   Same visual system as sim/display_preview.html so the two previews read as one set. */
+:root{
+  --bg:#f2f3f1; --fg:#20242a; --muted:#6a7076; --panel:#ffffff; --line:#d8dbd6;
+  --accent:#0f766e; --accent-soft:#0f766e22; --good:#1a7f37; --warn:#b45309;
+  --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#16181c; --fg:#e8eae6; --muted:#9aa09a; --panel:#1f2227; --line:#32363c;
+  --accent:#2dd4bf; --accent-soft:#2dd4bf22; --good:#3ddc84; --warn:#f59e0b; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#16181c; --fg:#e8eae6; --muted:#9aa09a; --panel:#1f2227; --line:#32363c;
+  --accent:#2dd4bf; --accent-soft:#2dd4bf22; --good:#3ddc84; --warn:#f59e0b; color-scheme:dark;
+}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);margin:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:20px;}
+h1{font-size:19px;margin:0 0 2px}
+.sub{color:var(--muted);font-size:13px;margin:0 0 16px;max-width:72ch}
+.wrap{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;max-width:1240px;margin:0 auto}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:14px 16px;
+  flex:0 1 320px;min-width:260px;display:flex;flex-direction:column;gap:12px}
+.screenbox{flex:1 1 560px;min-width:0}
+.screen-outer{background:#000;border-radius:6px;padding:2.2%;border:1px solid var(--line)}
+canvas{display:block;width:100%;height:auto;background:#000;border-radius:2px}
+.caption{color:var(--muted);font-size:12px;margin-top:8px;font-family:var(--mono)}
+label{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;gap:8px}
+label b{font-weight:600}
+label .v{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-size:13px;padding:6px 14px;border-radius:6px;border:1px solid var(--line);
+  background:var(--panel);color:var(--fg);cursor:pointer}
+button.primary{background:var(--accent);border-color:var(--accent);color:#06302c}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;border-radius:0;flex:1;padding:6px 4px}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+.check{display:flex;align-items:center;gap:8px;font-size:13px}
+.readouts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ro{border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0}
+.ro .k{font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.ro .n{font-family:var(--mono);font-size:16px;font-variant-numeric:tabular-nums}
+.phase{font-family:var(--mono);font-size:13px;color:var(--accent);min-height:1.2em}
+fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+legend{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:0;margin-bottom:2px}
+hr{border:0;border-top:1px solid var(--line);margin:2px 0}
+.log{border:1px solid var(--line);border-radius:6px;padding:7px 9px;min-width:0}
+.log .k{font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.events{font-family:var(--mono);font-size:12px;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;
+  align-content:start;font-variant-numeric:tabular-nums;height:4.1em;overflow:hidden}
+.events .t{color:var(--muted)}
+.events .empty{color:var(--muted);grid-column:1/-1}
+.cond{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.cond b{color:var(--fg)}
+.std{color:var(--warn)}
+</style>
+
+<div class="wrap">
+<div class="screenbox">
+  <h1>spidar_v1 Preview</h1>
+  <p class="sub">What the subject sees for the SPIDAR port: top-down through the mirror, the ball rolls from the right
+  into the resting hand. Geometry, state machine and contact physics follow <code>task/ball_engine_eml.m</code> and
+  <code>protocols/make_spidar_v1.py</code>. Three drawn sizes and three slope lengths; the contact ball is always 3 cm.</p>
+  <div class="screen-outer"><canvas id="cv" width="1250" height="750" aria-label="Animated subject display preview"></canvas></div>
+  <div class="caption" id="cap">home ring (-22.25, 10) cm · slope top (7.75, 10) cm · 30 cm track · phase: <span id="phname">—</span></div>
+</div>
+
+<div class="panel">
+  <div class="phase" id="phase2">&nbsp;</div>
+  <div class="cond" id="condline">&nbsp;</div>
+  <div class="row">
+    <button class="primary" id="btnRestart">Restart trial</button>
+    <button id="btnPause" aria-pressed="false">Pause</button>
+  </div>
+  <hr>
+  <fieldset><legend>Condition</legend>
+    <label class="check"><input type="checkbox" id="cSeq" checked> follow the protocol's 90-trial sequence (standard before every test)</label>
+    <div><label><b>Drawn size</b><span class="v" id="vSize">normal, 3.0 cm</span></label>
+      <div class="seg" role="group" aria-label="Drawn ball size">
+        <button data-size="small" aria-pressed="false">small 2.1</button>
+        <button data-size="normal" aria-pressed="true">normal 3.0</button>
+        <button data-size="big" aria-pressed="false">big 4.2</button>
+      </div></div>
+    <div><label><b>Approach speed</b><span class="v" id="vSpeed">normal, slope 15 cm</span></label>
+      <div class="seg" role="group" aria-label="Approach speed">
+        <button data-speed="low" aria-pressed="false">low 10</button>
+        <button data-speed="normal" aria-pressed="true">normal 15</button>
+        <button data-speed="high" aria-pressed="false">high 25</button>
+      </div></div>
+  </fieldset>
+  <hr>
+  <fieldset><legend>View</legend>
+    <label class="check"><input type="checkbox" id="cGhost"> outline the 3 cm contact ball and the 2 cm hand disk</label>
+    <label class="check"><input type="checkbox" id="c60" checked> simulate 60 Hz display sampling</label>
+    <label class="check"><input type="checkbox" id="cHapt" checked> haptics on (HapticsOn = 1)</label>
+  </fieldset>
+  <hr>
+  <fieldset><legend>This trial</legend>
+    <div class="readouts">
+      <div class="ro"><div class="k">trial</div><div class="n" id="rN">—</div></div>
+      <div class="ro"><div class="k">load row</div><div class="n" id="rL">—</div></div>
+      <div class="ro"><div class="k">v at contact</div><div class="n" id="rV">—</div></div>
+      <div class="ro"><div class="k">peak force</div><div class="n" id="rF">—</div></div>
+      <div class="ro"><div class="k">first contact</div><div class="n" id="rT">—</div></div>
+      <div class="ro"><div class="k">hand moved</div><div class="n" id="rX">—</div></div>
+    </div>
+    <div class="log"><div class="k">event log</div>
+      <div class="events" id="events" aria-live="polite"></div></div>
+  </fieldset>
+</div>
+</div>
+
+<script>
+'use strict';
+// ---- protocol values (make_spidar_v1.py) and engine constants (ball_engine_eml.m) ----
+const HOME=[-22.25,10], TOP=[7.75,10];                  // cm, global
+const RING_R=1.5, HAND_R=2.0, BALL_R=3.0;               // cm: LogRadius, HandRadius, BallRadius
+const THETA=25*Math.PI/180, CRR=0.01, KC=2000, BC=10, FMAX=20, MB=0.2;
+const G=9.81, M_H=1.5, K_H=300, B_H=15;                 // SI; arm impedance from the simulator
+const BAR_W=2.0, DT=0.001;
+const SPEED={low:10, normal:15, high:25};               // SlopeLength cm
+const SIZE={small:2.1, normal:3.0, big:4.2};            // DrawRadius cm
+// Load rows 1..10 as generated: 1 = standard, 2..10 = SPIDAR conditions 1..9
+const LOADS=[null,['normal','normal'],['big','low'],['big','normal'],['big','high'],
+  ['small','low'],['small','normal'],['small','high'],['normal','low'],['normal','normal'],['normal','high']];
+const SEQ=[1,5,1,7,1,3,1,4,1,8,1,6,1,2,1,10,1,9,1,2,1,8,1,7,1,10,1,9,1,4,1,5,1,3,1,6,1,9,1,6,1,10,1,2,1,5,1,3,1,4,1,7,1,8,1,9,1,2,1,10,1,8,1,4,1,5,1,6,1,7,1,3,1,7,1,9,1,10,1,4,1,5,1,3,1,2,1,6,1,8];
+const DD=TOP[0]-HOME[0];                                // 30 cm
+const XL=[-34,16], YL=[-5,25];                          // 50 x 30 cm window, 5:3 like the canvas
+
+const P={seq:true, size:'normal', speed:'normal', ghost:false, hz60:true, hapt:true};
+let trialIdx=0, st;
+
+function loadFor(){
+  if(P.seq){ const row=SEQ[trialIdx%SEQ.length]; const [sz,sp]=LOADS[row]; return {row,sz,sp}; }
+  const sz=P.size, sp=P.speed;
+  const row=LOADS.findIndex((l,i)=>i>=2 && l[0]===sz && l[1]===sp);
+  return {row: row>0?row:1, sz, sp};
+}
+function newTrial(){
+  const {row,sz,sp}=loadFor();
+  st={row, L:SPEED[sp], rd:SIZE[sz], sz, sp, phase:'WAIT_HOME', t:0, tPhase:0,
+      delay:0.5+Math.random(), s:0, v:0, hx:0, hv:0, penPrev:0, inContact:false,
+      tRel:null, tc0:null, tc1:null, vImp:null, Fpk:0, xMax:0, F:0, pen:0,
+      ringGreen:false, frameS:null, frameT:0, events:[]};
+  ui.rN.textContent=P.seq?`${trialIdx%SEQ.length+1} / ${SEQ.length}`:'free';
+  ui.rL.textContent=row+(row===1?' (std)':'');
+  ui.rV.textContent=ui.rF.textContent=ui.rT.textContent=ui.rX.textContent='—';
+  ui.condline.innerHTML=(row===1?'<span class="std">standard</span>':`cond ${row-1}`)+
+    ` · <b>${sz}</b> drawn ${st.rd.toFixed(1)} cm · <b>${sp}</b> slope ${st.L} cm`;
+  renderEvents();
+}
+function stamp(code){ st.events.push([st.t, code]); renderEvents(); }
+function renderEvents(){
+  ui.events.innerHTML=st.events.length
+    ? st.events.map(([t,c])=>`<span class="t">${(t*1000).toFixed(0).padStart(5)} ms</span><span>${c}</span>`).join('')
+    : '<span class="empty">no events yet</span>';
+}
+function nextPhase(p){ st.phase=p; st.tPhase=0; }
+
+function stepPhysics(){
+  st.t+=DT; st.tPhase+=DT;
+  switch(st.phase){
+    case 'WAIT_HOME': if(st.tPhase>0.8){ st.ringGreen=true; nextPhase('HOLD'); } break;
+    case 'HOLD': if(st.tPhase>1.0){ nextPhase('RELEASE_WAIT'); } break;          // HoldTime 1000 ms
+    case 'RELEASE_WAIT': if(st.tPhase>st.delay){ st.tRel=st.t; stamp('BALL_RELEASE'); nextPhase('ROLLING'); } break;
+    case 'ROLLING': case 'IMPACT': case 'RINGDOWN': {
+      // ball along the track: s from the slope top toward home (cm); v in m/s (+ toward home)
+      let a = st.s < st.L ? (5/7)*G*Math.sin(THETA) : 0;
+      if(st.v>1e-4) a-=CRR*G; else if(st.v<-1e-4) a+=CRR*G;
+      // penalty contact against the hand disk, hand displaced away from the ball by hx (m)
+      const gap=(DD - st.s)/100 + st.hx;                 // ball centre to hand centre (m)
+      const pen=(BALL_R+HAND_R)/100 - gap;
+      let F=0;
+      if(pen>0){
+        const dpen=(pen-st.penPrev)/DT;
+        F=Math.max(0, Math.min(KC*pen + BC*dpen, FMAX));
+        if(!st.inContact){ st.inContact=true;
+          if(st.tc0===null){ st.tc0=st.t; st.vImp=st.v; stamp('CONTACT_START'); nextPhase('IMPACT'); } }
+      } else if(st.inContact){ st.inContact=false; }
+      st.penPrev=Math.max(pen,0); st.pen=pen; st.F=F;
+      // ball reacts to the full force (bounce) even when haptics are off; the hand only feels it when on
+      st.v += (a - F/MB)*DT;
+      st.s += st.v*DT*100;
+      const Fh = P.hapt ? F : 0;
+      const ah=(Fh - K_H*st.hx - B_H*st.hv)/M_H;
+      st.hv+=ah*DT; st.hx+=st.hv*DT; st.xMax=Math.max(st.xMax,st.hx);
+      if(st.phase==='IMPACT'){
+        st.Fpk=Math.max(st.Fpk,F);
+        if(pen<=0 || st.tPhase>2.5){ st.tc1=st.t; stamp('CONTACT_END'); nextPhase('RINGDOWN');
+          ui.rV.textContent=st.vImp.toFixed(2)+' m/s'; ui.rF.textContent=st.Fpk.toFixed(1)+' N';
+          ui.rT.textContent=((st.tc1-st.tc0)*1000).toFixed(0)+' ms'; }
+      } else if(st.phase==='RINGDOWN'){
+        const settled = st.tPhase>0.3 && Math.abs(st.v)<0.02 && pen<=0;
+        if(settled || st.tPhase>2.5){ ui.rX.textContent=(st.xMax*1000).toFixed(0)+' mm'; nextPhase('EndOfTrial'); }
+      } else if(st.phase==='ROLLING' && st.tPhase>10){ nextPhase('EndOfTrial'); }   // TrialTimeout 0 -> 10 s
+      break; }
+    case 'EndOfTrial': if(st.tPhase>1.0){ trialIdx++; newTrial(); } break;
+  }
+}
+
+// ---- drawing: canvas in global cm, same primitives as the engine's VCODE rows ----
+const cv=document.getElementById('cv'), cx=cv.getContext('2d');
+const SX=cv.width/(XL[1]-XL[0]), SY=cv.height/(YL[1]-YL[0]);
+function toPx(x,y){ return [(x-XL[0])*SX, (YL[1]-y)*SY]; }
+function circle(x,y,r,fill,stroke,lw,dash){ const [px,py]=toPx(x,y);
+  cx.beginPath(); cx.arc(px,py,r*SX,0,7); cx.setLineDash(dash||[]);
+  if(fill){cx.fillStyle=fill;cx.fill();}
+  if(stroke){cx.strokeStyle=stroke;cx.lineWidth=lw||2;cx.stroke();} cx.setLineDash([]); }
+function bar(x0,x1,fill){ const [ax,ay]=toPx(Math.min(x0,x1),TOP[1]+BAR_W/2), [bx,by]=toPx(Math.max(x0,x1),TOP[1]-BAR_W/2);
+  cx.fillStyle=fill; cx.fillRect(ax,ay,bx-ax,by-ay); }
+const SEGC=['#5A5A5A','#4F4F4F','#444444','#393939'];
+function draw(){
+  cx.fillStyle='#000'; cx.fillRect(0,0,cv.width,cv.height);
+  const L=st.L, foot=TOP[0]-L, flat=Math.max((DD-RING_R-0.5)-L,0);
+  bar(foot, foot-flat, '#303030');                                   // run-out
+  for(let i=0;i<4;i++) bar(TOP[0]-L*i/4, TOP[0]-L*(i+1)/4, SEGC[i]);  // slope, lightest at the top
+  { const [fx,fy]=toPx(foot,TOP[1]); cx.strokeStyle='#C8C8C8'; cx.lineWidth=3;
+    cx.beginPath(); cx.moveTo(fx,fy-1.4*SY); cx.lineTo(fx,fy+1.4*SY); cx.stroke(); }
+  const hand=[HOME[0]-st.hx*100, HOME[1]];
+  circle(HOME[0],HOME[1],RING_R,null, st.ringGreen?'#2ECC71':'#ffffff',3);
+  if(P.ghost) circle(hand[0],hand[1],HAND_R,null,'rgba(255,255,255,.45)',1.5,[6,6]);
+  circle(hand[0],hand[1],0.5,'#fff');
+  const show = st.phase!=='WAIT_HOME' && st.phase!=='HOLD' && st.phase!=='EndOfTrial';
+  if(show){
+    let s=st.s;
+    if(P.hz60){ if(st.frameS===null || st.t-st.frameT>=1/60){ st.frameS=st.s; st.frameT=st.t; } s=st.frameS; }
+    const bx=TOP[0]-s, hit=st.pen>0, rd=st.rd;
+    circle(bx,TOP[1],rd, hit?'#ffffff':'#F5C542');
+    circle(bx-0.35*rd, TOP[1]+0.35*rd, 0.3*rd, hit?'#F5E0A0':'#FFF3C0');
+    if(P.ghost) circle(bx,TOP[1],BALL_R,null,'rgba(255,255,255,.45)',1.5,[6,6]);
+  }
+}
+
+// ---- loop ----
+let paused=false, last=null, acc=0;
+function loop(ts){
+  if(!paused){
+    if(last===null) last=ts;
+    acc+=Math.min((ts-last)/1000,0.1); last=ts;
+    while(acc>DT){ stepPhysics(); acc-=DT; }
+    draw();
+    ui.phname.textContent=st.phase; ui.phase2.textContent='phase: '+st.phase;
+  } else last=ts;
+  requestAnimationFrame(loop);
+}
+
+// ---- UI ----
+const $=id=>document.getElementById(id);
+const ui={phname:$('phname'),phase2:$('phase2'),condline:$('condline'),events:$('events'),
+  rN:$('rN'),rL:$('rL'),rV:$('rV'),rF:$('rF'),rT:$('rT'),rX:$('rX')};
+function setSeg(attr,val){
+  document.querySelectorAll(`[data-${attr}]`).forEach(b=>b.setAttribute('aria-pressed', b.dataset[attr]===val));
+}
+document.querySelectorAll('[data-size]').forEach(b=>b.addEventListener('click',()=>{
+  P.size=b.dataset.size; setSeg('size',P.size); $('vSize').textContent=`${P.size}, ${SIZE[P.size].toFixed(1)} cm`;
+  P.seq=false; $('cSeq').checked=false; newTrial(); }));
+document.querySelectorAll('[data-speed]').forEach(b=>b.addEventListener('click',()=>{
+  P.speed=b.dataset.speed; setSeg('speed',P.speed); $('vSpeed').textContent=`${P.speed}, slope ${SPEED[P.speed]} cm`;
+  P.seq=false; $('cSeq').checked=false; newTrial(); }));
+$('cSeq').addEventListener('change',e=>{ P.seq=e.target.checked; newTrial(); });
+$('cGhost').addEventListener('change',e=>P.ghost=e.target.checked);
+$('c60').addEventListener('change',e=>P.hz60=e.target.checked);
+$('cHapt').addEventListener('change',e=>P.hapt=e.target.checked);
+$('btnRestart').addEventListener('click',()=>newTrial());
+$('btnPause').addEventListener('click',e=>{ paused=!paused;
+  e.currentTarget.textContent=paused?'Resume':'Pause'; e.currentTarget.setAttribute('aria-pressed',paused); });
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){ paused=true; $('btnPause').textContent='Resume'; }
+newTrial(); draw(); requestAnimationFrame(loop);
+</script>
