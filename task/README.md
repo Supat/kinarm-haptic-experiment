@@ -7,8 +7,10 @@ parameter tables passed at the lab):
 - **Trial_Control chart** (8 states, 13 transitions): WAIT_HOME -> HOLD ->
   RELEASE_WAIT -> ROLLING -> IMPACT -> RINGDOWN -> EndOfTrial, plus ABORT.
   Hand must stay in the home target until impact: leaving during ROLLING
-  enters ABORT, whose entry stamps the HAND_LEFT_HOME error event and holds
-  50 ms before EndOfTrial. IMPACT stamps CONTACT_START once at first
+  enters ABORT, whose entry stamps the HAND_LEFT_HOME error event, raises
+  the repeat_trial output (-> GUI Control's Repeat_Trial_Flag inport, so
+  the TP re-queues at the END of the block when the protocol sets
+  use_repeat_trial_flag = 1) and holds 50 ms before EndOfTrial. IMPACT stamps CONTACT_START once at first
   contact; RINGDOWN's entry stamps CONTACT_END once when that first contact
   episode ends. Both stamps happen in state ENTRIES while logging is still
   on - an event stamped on a transition into EndOfTrial races the same-tick
