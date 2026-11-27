@@ -157,6 +157,15 @@ sRoll = mkstate(ch, [X3 Y2 W H], sprintf(['ROLLING\nentry:\n' ...
     'event_code = E_BALL_RELEASE;\n' ...
     'TimeInterval = timeout_fb;']));
 
+% Hand-left-home abort state: the event MUST be stamped by a state entry
+% while logging is on. Stamping it on the ROLLING -> EndOfTrial transition
+% raced the same-tick logging-off (the CONTACT_END race all over again):
+% in the 2026-11-27 spidar_v1 exam, trial 68's dodge aborted the trial and
+% Dexterit-E flagged IS_ERROR, but HAND_LEFT_HOME never reached the c3d.
+% 50 ms in ABORT keeps logging alive long enough to capture the event.
+sAbt = mkstate(ch, [X1 Y2 W H], sprintf(['ABORT\nentry:\n' ...
+    'event_code = E_HAND_LEFT_HOME;']));
+
 % IMPACT -> RINGDOWN replaces the old CONTACT <-> POST_IMPACT ping-pong:
 % physics (bounces included) lives in Ball_Engine; the chart stamps
 % E_CONTACT_START once at first contact and E_CONTACT_END once at the end
@@ -189,17 +198,18 @@ mktrans(ch, sHold, sWait,  '[HandInTarget[target_row] == 0]', 2);
 mktrans(ch, sRel,  sRoll,  'after(TimeInterval, e_clk)', 1);
 mktrans(ch, sRel,  sWait,  '[HandInTarget[target_row] == 0]', 2);
 mktrans(ch, sRoll, sImp,   '[pen_fb > 0]', 1);
-% Hand-left-home abort: the event is stamped on the transition itself (the
-% old ABORT_LEAVE state existed only to hold it for 10 ms; the value now
-% persists until WAIT_HOME resets event_code to 0).
-tAb = mktrans(ch, sRoll, sEnd, ['[HandInTarget[target_row] == 0]' ...
-    '{event_code = E_HAND_LEFT_HOME;}'], 2);
+% Hand-left-home abort routes through ABORT (entry stamps the event while
+% logging is on; a transition action into EndOfTrial is swallowed by the
+% same-tick logging-off - see the ABORT state comment above).
+tAb = mktrans(ch, sRoll, sAbt, '[HandInTarget[target_row] == 0]', 2);
+tAe = mktrans(ch, sAbt, sEnd, 'after(50, e_clk)', 1);
 tTo = mktrans(ch, sRoll, sEnd, 'after(TimeInterval, e_clk)', 3);
 % First contact episode ends -> RINGDOWN (stamps E_CONTACT_END on entry).
 mktrans(ch, sImp, sRing, '[pen_fb <= 0]', 1);
-% Cap for a contact that never releases (rare): exit stamps the code too;
-% the same-tick race may swallow it there, but the analog log has the truth.
-tCp = mktrans(ch, sImp, sEnd, 'after(2500, e_clk){event_code = E_CONTACT_END;}', 2);
+% Cap for a contact that never releases (rare): route to RINGDOWN so the
+% entry stamps E_CONTACT_END race-free (an exit-transition stamp would be
+% swallowed, same race). RINGDOWN's own exits then end the trial.
+tCp = mktrans(ch, sImp, sRing, 'after(2500, e_clk)', 2);
 % Settled: >=300 ms after the first contact ended, ball slow and out of
 % contact; or a hard 2.5 s cap after the first contact ended.
 tSe = mktrans(ch, sRing, sEnd, ['after(300, e_clk)' ...
@@ -208,8 +218,8 @@ tCa = mktrans(ch, sRing, sEnd, 'after(2500, e_clk)', 2);
 mktrans(ch, sEnd,  sWait,  'after(1000, e_clk)', 1);
 % Spread the End-bound labels so the render stays readable (the
 % auto-placed positions pile up mid-chart). Cosmetic only.
-for lp = {{tAb, [60 378]}, {tTo, [60 404]}, {tSe, [150 545]}, ...
-          {tCa, [150 585]}, {tCp, [460 660]}}
+for lp = {{tAb, [430 260]}, {tAe, [210 480]}, {tTo, [60 404]}, ...
+          {tSe, [150 545]}, {tCa, [150 585]}, {tCp, [740 600]}}
     try
         p = lp{1}{1}.LabelPosition;
         lp{1}{1}.LabelPosition = [lp{1}{2} p(3) p(4)];

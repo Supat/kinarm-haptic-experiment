@@ -117,13 +117,17 @@ See `sim/out/peak_force_map.png` and `sim/out/impact_timeseries.png`.
       -> RELEASE   ball drawn at slope top; random release delay, event BALL_RELEASE
     ROLLING        integrate ball; haptics engage on contact
       -> IMPACT    when pen > 0, event CONTACT_START (once)
-    IMPACT         first contact episode; 2.5 s cap if contact never releases
+      -> ABORT     hand leaves home before contact; ABORT's ENTRY stamps
+                   HAND_LEFT_HOME, 50 ms later -> END. (A transition-action
+                   stamp into END is swallowed by the same-tick logging-off:
+                   proven twice, CONTACT_END 2026-11-26 and HAND_LEFT_HOME
+                   in the 2026-11-27 dodge test.)
+    IMPACT         first contact episode; 2.5 s cap routes to RINGDOWN
       -> RINGDOWN  when pen <= 0, event CONTACT_END (once; no way back)
     RINGDOWN       ball rings down / bounces freely, no further events
       -> END       settled (>=300 ms after contact end, |v| < v_stop, pen <= 0)
                    or hard 2.5 s cap
-    Abort paths (transition actions, no dedicated states): hand leaves home
-    before contact (HAND_LEFT_HOME), trial timeout.
+    Trial timeout: ROLLING -> END directly (no event).
 
 Event codes to log: BALL_RELEASE, CONTACT_START, CONTACT_END, TRIAL_END, HAND_LEFT_HOME.
 Also log as analog channels: ball x, y, vx, vy, pen, commanded Fx, Fy, so the impact can

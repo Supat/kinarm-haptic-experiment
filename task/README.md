@@ -4,21 +4,24 @@
 implementing the full experiment (built 2026-11-24, after the smoke test of the
 parameter tables passed at the lab):
 
-- **Trial_Control chart** (7 states, 12 transitions): WAIT_HOME -> HOLD ->
-  RELEASE_WAIT -> ROLLING -> IMPACT -> RINGDOWN -> EndOfTrial. Hand must stay
-  in the home target until impact (leaving during ROLLING stamps the
-  HAND_LEFT_HOME error event on the abort transition). IMPACT stamps
-  CONTACT_START once at first contact; RINGDOWN's entry stamps CONTACT_END
-  once when that first contact episode ends, while logging is still on
-  (stamping on the exit transition raced the same-tick logging-off and the
-  event never reached the data). There is no transition back, so bounces
-  re-fire nothing; per-bounce timing is recovered from the 1 kHz analog log
-  (pen/Fx/Fy). Timeouts: TP TrialTimeout (0 means 10 s); RINGDOWN ends when
-  settled (>=300 ms after contact end, |v| < 2 cm/s, no contact) or a hard
-  2.5 s cap; IMPACT itself caps at 2.5 s for a contact that never releases.
-  Gotcha: the chart is C action language - if-statements in state actions
-  are a tlc_c parse error, so conditional event logic must be states or
-  transition actions.
+- **Trial_Control chart** (8 states, 13 transitions): WAIT_HOME -> HOLD ->
+  RELEASE_WAIT -> ROLLING -> IMPACT -> RINGDOWN -> EndOfTrial, plus ABORT.
+  Hand must stay in the home target until impact: leaving during ROLLING
+  enters ABORT, whose entry stamps the HAND_LEFT_HOME error event and holds
+  50 ms before EndOfTrial. IMPACT stamps CONTACT_START once at first
+  contact; RINGDOWN's entry stamps CONTACT_END once when that first contact
+  episode ends. Both stamps happen in state ENTRIES while logging is still
+  on - an event stamped on a transition into EndOfTrial races the same-tick
+  logging-off and never reaches the data (this bit CONTACT_END in the 2026-11-26
+  exams and HAND_LEFT_HOME in the 2026-11-27 dodge test). There is no
+  transition back from RINGDOWN, so bounces re-fire nothing; per-bounce
+  timing is recovered from the 1 kHz analog log (pen/Fx/Fy). Timeouts: TP
+  TrialTimeout (0 means 10 s); RINGDOWN ends when settled (>=300 ms after
+  contact end, |v| < 2 cm/s, no contact) or a hard 2.5 s cap; a contact
+  that never releases caps at 2.5 s in IMPACT and routes through RINGDOWN
+  (race-free CONTACT_END). Gotcha: the chart is C action language -
+  if-statements in state actions are a tlc_c parse error, so conditional
+  event logic must be states or transition actions.
 - **Ball_Engine** (MATLAB Function, source `ball_engine_eml.m`, 1 kHz):
   rolls the ball from the BallTarget row toward the HomeTarget row —
   a = (5/7)·g·sin(SlopeAngle) on the slope, −RollRes·g on the flat; penalty
